@@ -4,6 +4,7 @@ import DiscoveryHub from './components/DiscoveryHub';
 import ClubDetail from './components/ClubDetail';
 import OwnerDashboard from './components/OwnerDashboard';
 import AdminControlPanel from './components/AdminControlPanel';
+import TalkyTalki from './components/TalkyTalki';
 import Footer from './components/Footer';
 import { 
   TableBookingModal, 
@@ -15,7 +16,7 @@ import {
   AdvancedFilterModal
 } from './components/Modals';
 import { mockClubs, initialChatMessages } from './data/mockData';
-import { Compass, Calendar, LayoutDashboard, ShieldCheck, User, Building2 } from 'lucide-react';
+import { Compass, Calendar, LayoutDashboard, ShieldCheck, User, Building2, MessageSquare } from 'lucide-react';
 
 export default function App() {
   // Onboarding & Mandatory Gate State
@@ -26,7 +27,7 @@ export default function App() {
 
   // Role Access Control: 'customer' | 'owner' | 'admin'
   const [activeRole, setActiveRole] = useState('customer');
-  const [currentView, setCurrentView] = useState('discovery'); // 'discovery' | 'club-detail'
+  const [currentView, setCurrentView] = useState('events'); // 'events' | 'clubs' | 'talky-talki' | 'club-detail'
   const [selectedClub, setSelectedClub] = useState(mockClubs[0]);
   
   // Modals & Notifications
@@ -168,7 +169,8 @@ export default function App() {
         {/* CUSTOMER PORTAL VIEWS */}
         {activeRole === 'customer' && (
           <>
-            {currentView === 'discovery' && (
+            {/* Events View: All kinds of events, programs, dance parties, treks, shows */}
+            {currentView === 'events' && (
               <DiscoveryHub 
                 clubs={mockClubs}
                 onSelectClub={handleSelectClub}
@@ -180,6 +182,28 @@ export default function App() {
               />
             )}
 
+            {/* Clubs View: Exclusive Nightlife Clubs & Lounges Only */}
+            {currentView === 'clubs' && (
+              <DiscoveryHub 
+                clubs={mockClubs.filter(c => c.vibe === 'Techno' || c.vibe === 'Speakeasy' || c.vibe === 'House' || c.vibe === 'RnB' || c.vibe === 'Bollywood Night')}
+                onSelectClub={handleSelectClub}
+                onOpenGuestlistModal={handleOpenGuestlistModal}
+                selectedCity={selectedCity}
+                onOpenFilterModal={() => setIsFilterModalOpen(true)}
+                selectedFilters={selectedFilters}
+                onClearFilters={() => setSelectedFilters({ dates: [], locations: [], categories: [], tags: [] })}
+              />
+            )}
+
+            {/* Talky Talki View: Club-wise members joined + live chat room */}
+            {currentView === 'talky-talki' && (
+              <TalkyTalki 
+                selectedCity={selectedCity}
+                onSelectClub={handleSelectClub}
+              />
+            )}
+
+            {/* Club / Event Detail View */}
             {currentView === 'club-detail' && (
               <ClubDetail 
                 club={selectedClub}
@@ -210,37 +234,52 @@ export default function App() {
       </div>
 
       {/* Bottom Navigation for Mobile Devices */}
-      <nav className="md:hidden fixed bottom-0 left-0 w-full z-50 bg-surface/30 backdrop-blur-[30px] border-t border-white/10 shadow-2xl flex justify-around items-center px-4 pb-6 pt-2">
+      <nav className="md:hidden fixed bottom-0 left-0 w-full z-50 bg-surface/30 backdrop-blur-[30px] border-t border-white/10 shadow-2xl flex justify-around items-center px-2 pb-6 pt-2">
         {activeRole === 'customer' ? (
           <>
             <button
               onClick={() => {
-                setCurrentView('discovery');
+                setCurrentView('events');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
               className={`flex flex-col items-center justify-center p-2 rounded-xl transition-all duration-150 ${
-                currentView === 'discovery'
-                  ? 'bg-primary-container/20 text-primary-fixed shadow-[0_0_10px_rgba(0,240,255,0.15)] font-bold'
-                  : 'text-on-surface-variant hover:bg-white/10'
-              }`}
-            >
-              <Compass className="w-5 h-5 mb-0.5" />
-              <span className="font-label-sm text-[10px]">Discover</span>
-            </button>
-
-            <button
-              onClick={() => {
-                setCurrentView('club-detail');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              className={`flex flex-col items-center justify-center p-2 rounded-xl transition-all duration-150 ${
-                currentView === 'club-detail'
+                currentView === 'events'
                   ? 'bg-primary-container/20 text-primary-fixed shadow-[0_0_10px_rgba(0,240,255,0.15)] font-bold'
                   : 'text-on-surface-variant hover:bg-white/10'
               }`}
             >
               <Calendar className="w-5 h-5 mb-0.5" />
-              <span className="font-label-sm text-[10px]">The Void Room</span>
+              <span className="font-label-sm text-[10px]">Events</span>
+            </button>
+
+            <button
+              onClick={() => {
+                setCurrentView('clubs');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className={`flex flex-col items-center justify-center p-2 rounded-xl transition-all duration-150 ${
+                currentView === 'clubs'
+                  ? 'bg-primary-container/20 text-primary-fixed shadow-[0_0_10px_rgba(0,240,255,0.15)] font-bold'
+                  : 'text-on-surface-variant hover:bg-white/10'
+              }`}
+            >
+              <Building2 className="w-5 h-5 mb-0.5" />
+              <span className="font-label-sm text-[10px]">Clubs</span>
+            </button>
+
+            <button
+              onClick={() => {
+                setCurrentView('talky-talki');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className={`flex flex-col items-center justify-center p-2 rounded-xl transition-all duration-150 ${
+                currentView === 'talky-talki'
+                  ? 'bg-secondary-container/20 text-secondary shadow-[0_0_10px_rgba(255,36,228,0.15)] font-bold'
+                  : 'text-on-surface-variant hover:bg-white/10'
+              }`}
+            >
+              <MessageSquare className="w-5 h-5 mb-0.5" />
+              <span className="font-label-sm text-[10px]">Talky Talki</span>
             </button>
           </>
         ) : (

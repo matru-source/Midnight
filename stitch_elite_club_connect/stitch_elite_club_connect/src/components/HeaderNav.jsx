@@ -14,7 +14,8 @@ import {
   User,
   LogOut,
   ExternalLink,
-  RotateCcw
+  RotateCcw,
+  MessageSquare
 } from 'lucide-react';
 
 export default function HeaderNav({ 
@@ -43,7 +44,7 @@ export default function HeaderNav({
         <div className="flex items-center gap-2 sm:gap-4">
           <div 
             onClick={() => {
-              if (activeRole === 'customer') setCurrentView('discovery');
+              if (activeRole === 'customer') setCurrentView('events');
             }}
             className="cursor-pointer group flex items-center gap-1.5 sm:gap-2"
           >
@@ -82,32 +83,49 @@ export default function HeaderNav({
           )}
         </div>
 
-        {/* CUSTOMER PORTAL NAVIGATION */}
+        {/* CUSTOMER PORTAL NAVIGATION: Events | Clubs | Talky Talki */}
         {activeRole === 'customer' && (
-          <nav className="hidden md:flex items-center gap-2 bg-surface-container-lowest/40 p-1.5 rounded-full border border-white/10">
+          <nav className="hidden md:flex items-center gap-1.5 bg-surface-container-lowest/40 p-1.5 rounded-full border border-white/10">
+            
+            {/* Events Tab */}
             <button
-              onClick={() => setCurrentView('discovery')}
-              className={`flex items-center gap-2 px-5 py-2 rounded-full font-label-md text-sm transition-all duration-200 ${
-                currentView === 'discovery'
-                  ? 'bg-primary-container/20 text-primary-fixed font-bold border border-primary-fixed/40 neon-glow shadow-[0_0_15px_rgba(0,240,255,0.2)]'
-                  : 'text-on-surface-variant hover:text-white hover:bg-white/5'
-              }`}
-            >
-              <Compass className="w-4 h-4 text-primary-fixed" />
-              <span>Discover</span>
-            </button>
-
-            <button
-              onClick={() => setCurrentView('club-detail')}
-              className={`flex items-center gap-2 px-5 py-2 rounded-full font-label-md text-sm transition-all duration-200 ${
-                currentView === 'club-detail'
+              onClick={() => setCurrentView('events')}
+              className={`flex items-center gap-2 px-4.5 py-2 rounded-full font-label-md text-sm transition-all duration-200 ${
+                currentView === 'events'
                   ? 'bg-primary-container/20 text-primary-fixed font-bold border border-primary-fixed/40 neon-glow shadow-[0_0_15px_rgba(0,240,255,0.2)]'
                   : 'text-on-surface-variant hover:text-white hover:bg-white/5'
               }`}
             >
               <Calendar className="w-4 h-4 text-primary-fixed" />
-              <span>The Void Room</span>
+              <span>Events</span>
             </button>
+
+            {/* Clubs Tab */}
+            <button
+              onClick={() => setCurrentView('clubs')}
+              className={`flex items-center gap-2 px-4.5 py-2 rounded-full font-label-md text-sm transition-all duration-200 ${
+                currentView === 'clubs'
+                  ? 'bg-primary-container/20 text-primary-fixed font-bold border border-primary-fixed/40 neon-glow shadow-[0_0_15px_rgba(0,240,255,0.2)]'
+                  : 'text-on-surface-variant hover:text-white hover:bg-white/5'
+              }`}
+            >
+              <Building2 className="w-4 h-4 text-primary-fixed" />
+              <span>Clubs</span>
+            </button>
+
+            {/* Talky Talki Tab */}
+            <button
+              onClick={() => setCurrentView('talky-talki')}
+              className={`flex items-center gap-2 px-4.5 py-2 rounded-full font-label-md text-sm transition-all duration-200 ${
+                currentView === 'talky-talki'
+                  ? 'bg-secondary-container/20 text-secondary font-bold border border-secondary/40 shadow-[0_0_15px_rgba(255,36,228,0.2)]'
+                  : 'text-on-surface-variant hover:text-white hover:bg-white/5'
+              }`}
+            >
+              <MessageSquare className="w-4 h-4 text-secondary" />
+              <span>Talky Talki</span>
+            </button>
+
           </nav>
         )}
 
@@ -281,52 +299,52 @@ export default function HeaderNav({
           </div>
 
           <div className="text-xs uppercase tracking-widest text-on-surface-variant font-bold mb-1">
-            Switch Portal Role
+            Customer Navigation
           </div>
 
           <button
             onClick={() => {
-              onSwitchRole('customer');
+              setCurrentView('events');
               setIsMobileMenuOpen(false);
             }}
             className={`flex items-center gap-4 px-5 py-3.5 rounded-xl font-label-md text-sm transition-all ${
-              activeRole === 'customer'
-                ? 'bg-primary-container/20 text-primary-fixed border border-primary-fixed/50 font-bold shadow-[0_0_15px_rgba(0,240,255,0.15)]'
+              currentView === 'events'
+                ? 'bg-primary-container/20 text-primary-fixed border border-primary-fixed/50 font-bold'
                 : 'text-on-surface-variant hover:bg-white/5'
             }`}
           >
-            <User className="w-5 h-5" />
-            <span>Customer Web Portal</span>
+            <Calendar className="w-5 h-5" />
+            <span>Events (Parties & Shows)</span>
           </button>
 
           <button
             onClick={() => {
-              onSwitchRole('owner');
+              setCurrentView('clubs');
               setIsMobileMenuOpen(false);
             }}
             className={`flex items-center gap-4 px-5 py-3.5 rounded-xl font-label-md text-sm transition-all ${
-              activeRole === 'owner'
-                ? 'bg-secondary-container/20 text-secondary border border-secondary/50 font-bold shadow-[0_0_15px_rgba(255,36,228,0.15)]'
+              currentView === 'clubs'
+                ? 'bg-primary-container/20 text-primary-fixed border border-primary-fixed/50 font-bold'
                 : 'text-on-surface-variant hover:bg-white/5'
             }`}
           >
             <Building2 className="w-5 h-5" />
-            <span>Club Owner Console</span>
+            <span>Clubs & Lounges</span>
           </button>
 
           <button
             onClick={() => {
-              onSwitchRole('admin');
+              setCurrentView('talky-talki');
               setIsMobileMenuOpen(false);
             }}
             className={`flex items-center gap-4 px-5 py-3.5 rounded-xl font-label-md text-sm transition-all ${
-              activeRole === 'admin'
-                ? 'bg-error-container/30 text-error border border-error/50 font-bold'
+              currentView === 'talky-talki'
+                ? 'bg-secondary-container/20 text-secondary border border-secondary/50 font-bold'
                 : 'text-on-surface-variant hover:bg-white/5'
             }`}
           >
-            <ShieldCheck className="w-5 h-5" />
-            <span>Admin Command HQ</span>
+            <MessageSquare className="w-5 h-5" />
+            <span>Talky Talki (Live Chat)</span>
           </button>
 
           <div className="pt-4 border-t border-white/10 mt-auto">
