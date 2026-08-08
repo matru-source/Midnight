@@ -12,7 +12,8 @@ import {
   User,
   ExternalLink,
   RotateCcw,
-  MessageSquare
+  MessageSquare,
+  UserPlus
 } from 'lucide-react';
 
 export default function HeaderNav({ 
@@ -82,14 +83,14 @@ export default function HeaderNav({
           )}
         </div>
 
-        {/* CUSTOMER PORTAL NAVIGATION: Events | Clubs | Talky Talky */}
+        {/* CUSTOMER PORTAL NAVIGATION: Events | Clubs | Talky Talky | Mate Finder */}
         {activeRole === 'customer' && (
-          <nav className="hidden md:flex items-center gap-2 bg-[#121316] p-1.5 rounded-full border border-white/10 shadow-inner">
+          <nav className="hidden md:flex items-center gap-1.5 bg-[#121316] p-1.5 rounded-full border border-white/10 shadow-inner">
             
             {/* Events Tab */}
             <button
               onClick={() => setCurrentView('events')}
-              className={`inline-flex items-center gap-2 px-5 py-2 rounded-full font-label-md text-xs sm:text-sm whitespace-nowrap transition-all duration-200 ${
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full font-label-md text-xs sm:text-sm whitespace-nowrap transition-all duration-200 ${
                 currentView === 'events'
                   ? 'bg-primary-container/30 text-primary-fixed font-bold border border-primary-fixed/50 shadow-[0_0_15px_rgba(0,240,255,0.25)]'
                   : 'text-on-surface-variant hover:text-white hover:bg-white/5'
@@ -102,7 +103,7 @@ export default function HeaderNav({
             {/* Clubs Tab */}
             <button
               onClick={() => setCurrentView('clubs')}
-              className={`inline-flex items-center gap-2 px-5 py-2 rounded-full font-label-md text-xs sm:text-sm whitespace-nowrap transition-all duration-200 ${
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full font-label-md text-xs sm:text-sm whitespace-nowrap transition-all duration-200 ${
                 currentView === 'clubs'
                   ? 'bg-primary-container/30 text-primary-fixed font-bold border border-primary-fixed/50 shadow-[0_0_15px_rgba(0,240,255,0.25)]'
                   : 'text-on-surface-variant hover:text-white hover:bg-white/5'
@@ -115,7 +116,7 @@ export default function HeaderNav({
             {/* Talky Talky Tab */}
             <button
               onClick={() => setCurrentView('talky-talky')}
-              className={`inline-flex items-center gap-2 px-5 py-2 rounded-full font-label-md text-xs sm:text-sm whitespace-nowrap transition-all duration-200 ${
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full font-label-md text-xs sm:text-sm whitespace-nowrap transition-all duration-200 ${
                 currentView === 'talky-talky'
                   ? 'bg-secondary-container/30 text-secondary font-bold border border-secondary/50 shadow-[0_0_15px_rgba(255,36,228,0.25)]'
                   : 'text-on-surface-variant hover:text-white hover:bg-white/5'
@@ -123,6 +124,19 @@ export default function HeaderNav({
             >
               <MessageSquare className="w-4 h-4 text-secondary shrink-0" />
               <span>Talky Talky</span>
+            </button>
+
+            {/* Mate Finder Tab */}
+            <button
+              onClick={() => setCurrentView('mate-finder')}
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full font-label-md text-xs sm:text-sm whitespace-nowrap transition-all duration-200 ${
+                currentView === 'mate-finder'
+                  ? 'bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-400/50 shadow-[0_0_15px_rgba(52,211,153,0.25)]'
+                  : 'text-on-surface-variant hover:text-white hover:bg-white/5'
+              }`}
+            >
+              <UserPlus className="w-4 h-4 text-emerald-400 shrink-0" />
+              <span>Mate Finder</span>
             </button>
 
           </nav>
@@ -348,6 +362,21 @@ export default function HeaderNav({
           >
             <MessageSquare className="w-5 h-5" />
             <span>Talky Talky (Live Chat)</span>
+          </button>
+
+          <button
+            onClick={() => {
+              setCurrentView('mate-finder');
+              setIsMobileMenuOpen(false);
+            }}
+            className={`flex items-center gap-4 px-5 py-3.5 rounded-xl font-label-md text-sm transition-all ${
+              currentView === 'mate-finder'
+                ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/50 font-bold'
+                : 'text-on-surface-variant hover:bg-white/5'
+            }`}
+          >
+            <UserPlus className="w-5 h-5 text-emerald-400" />
+            <span>Mate Finder (Active Mates)</span>
           </button>
 
           <div className="pt-4 border-t border-white/10 mt-auto">

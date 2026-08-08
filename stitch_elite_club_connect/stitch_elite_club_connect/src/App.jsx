@@ -5,6 +5,7 @@ import ClubDetail from './components/ClubDetail';
 import OwnerDashboard from './components/OwnerDashboard';
 import AdminControlPanel from './components/AdminControlPanel';
 import TalkyTalki from './components/TalkyTalki';
+import MateFinder from './components/MateFinder';
 import Footer from './components/Footer';
 import { 
   TableBookingModal, 
@@ -17,7 +18,7 @@ import {
   TalkyProfileSetupModal
 } from './components/Modals';
 import { mockClubs, initialChatMessages } from './data/mockData';
-import { Compass, Calendar, LayoutDashboard, ShieldCheck, User, Building2, MessageSquare } from 'lucide-react';
+import { Compass, Calendar, LayoutDashboard, ShieldCheck, User, Building2, MessageSquare, UserPlus } from 'lucide-react';
 
 export default function App() {
   // Onboarding & Mandatory Gate State
@@ -28,10 +29,10 @@ export default function App() {
 
   // Role Access Control: 'customer' | 'owner' | 'admin'
   const [activeRole, setActiveRole] = useState('customer');
-  const [currentView, setCurrentView] = useState('events'); // 'events' | 'clubs' | 'talky-talky' | 'club-detail'
+  const [currentView, setCurrentView] = useState('events'); // 'events' | 'clubs' | 'talky-talky' | 'mate-finder' | 'club-detail'
   const [selectedClub, setSelectedClub] = useState(mockClubs[0]);
   
-  // Talky Talky Profile State
+  // Talky Talky & Mate Finder Profile State
   const [talkyProfile, setTalkyProfile] = useState(null);
   const [isTalkyProfileModalOpen, setIsTalkyProfileModalOpen] = useState(false);
 
@@ -58,7 +59,7 @@ export default function App() {
   // Handle Navigation View Changes
   const handleSetCurrentView = (view) => {
     setCurrentView(view);
-    if (view === 'talky-talky' && !talkyProfile) {
+    if ((view === 'talky-talky' || view === 'mate-finder') && !talkyProfile) {
       setIsTalkyProfileModalOpen(true);
     }
   };
@@ -101,7 +102,7 @@ export default function App() {
   // Save Talky Profile
   const handleSaveTalkyProfile = (profileData) => {
     setTalkyProfile(profileData);
-    showNotification(`Talky Talky Profile Updated for ${profileData.name}! ✨`);
+    showNotification(`VIP Profile Updated for ${profileData.name}! ✨`);
   };
 
   // Reset Onboarding (Sign Out / Change Location)
@@ -181,7 +182,7 @@ export default function App() {
         onContinueAsGuest={handleContinueAsGuest}
       />
 
-      {/* Talky Profile Gate Modal */}
+      {/* Talky / Mate Profile Gate Modal */}
       <TalkyProfileSetupModal 
         isOpen={isTalkyProfileModalOpen}
         onClose={() => setIsTalkyProfileModalOpen(false)}
@@ -239,6 +240,15 @@ export default function App() {
               <TalkyTalki 
                 selectedCity={selectedCity}
                 onSelectClub={handleSelectClub}
+                talkyProfile={talkyProfile}
+                onOpenProfileSetup={() => setIsTalkyProfileModalOpen(true)}
+              />
+            )}
+
+            {/* Mate Finder View: Active People Attending Today + Connection Requests + Direct Chat */}
+            {currentView === 'mate-finder' && (
+              <MateFinder 
+                selectedCity={selectedCity}
                 talkyProfile={talkyProfile}
                 onOpenProfileSetup={() => setIsTalkyProfileModalOpen(true)}
               />
@@ -321,6 +331,21 @@ export default function App() {
             >
               <MessageSquare className="w-5 h-5 mb-0.5" />
               <span className="font-label-sm text-[10px]">Talky Talky</span>
+            </button>
+
+            <button
+              onClick={() => {
+                handleSetCurrentView('mate-finder');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className={`flex flex-col items-center justify-center p-2 rounded-xl transition-all duration-150 ${
+                currentView === 'mate-finder'
+                  ? 'bg-emerald-500/20 text-emerald-300 shadow-[0_0_10px_rgba(52,211,153,0.15)] font-bold'
+                  : 'text-on-surface-variant hover:bg-white/10'
+              }`}
+            >
+              <UserPlus className="w-5 h-5 mb-0.5" />
+              <span className="font-label-sm text-[10px]">Mate Finder</span>
             </button>
           </>
         ) : (
