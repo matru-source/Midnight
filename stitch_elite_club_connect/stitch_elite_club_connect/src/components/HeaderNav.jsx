@@ -37,17 +37,17 @@ export default function HeaderNav({
 
   return (
     <>
-      <header className="fixed top-0 w-full z-50 bg-surface/20 backdrop-blur-[40px] border-b border-white/10 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-20">
+      <header className="fixed top-0 w-full z-50 bg-surface/20 backdrop-blur-[40px] border-b border-white/10 flex justify-between items-center px-4 sm:px-margin-mobile md:px-margin-desktop h-16 sm:h-20">
         
         {/* Brand Logo & Context Header */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
           <div 
             onClick={() => {
               if (activeRole === 'customer') setCurrentView('discovery');
             }}
-            className="cursor-pointer group flex items-center gap-2"
+            className="cursor-pointer group flex items-center gap-1.5 sm:gap-2"
           >
-            <span className="font-display text-2xl md:text-3xl font-bold tracking-tighter text-primary-fixed group-hover:text-primary transition-colors">
+            <span className="font-display text-xl sm:text-2xl md:text-3xl font-bold tracking-tighter text-primary-fixed group-hover:text-primary transition-colors">
               Midnight Premium
             </span>
 
@@ -59,12 +59,12 @@ export default function HeaderNav({
             )}
             {activeRole === 'owner' && (
               <span className="hidden sm:inline-block px-2.5 py-0.5 rounded text-[10px] uppercase font-bold tracking-widest bg-secondary-container/20 text-secondary border border-secondary/40">
-                PARTNER CONSOLE
+                PARTNER
               </span>
             )}
             {activeRole === 'admin' && (
               <span className="hidden sm:inline-block px-2.5 py-0.5 rounded text-[10px] uppercase font-bold tracking-widest bg-error-container/30 text-error border border-error/40">
-                ADMIN HQ COMMAND
+                ADMIN HQ
               </span>
             )}
           </div>
@@ -73,11 +73,11 @@ export default function HeaderNav({
           {activeRole === 'customer' && (
             <div 
               onClick={() => setIsCityModalOpen(true)}
-              className="hidden lg:flex items-center gap-2 ml-6 glass-panel px-4 py-2 rounded-full cursor-pointer hover:bg-white/10 transition-all border border-white/15"
+              className="hidden lg:flex items-center gap-2 ml-4 glass-panel px-3.5 py-1.5 rounded-full cursor-pointer hover:bg-white/10 transition-all border border-white/15"
             >
-              <MapPin className="w-4 h-4 text-primary-fixed" />
-              <span className="font-label-md text-sm text-on-surface font-medium">{selectedCity || 'Select City'}</span>
-              <ChevronDown className="w-4 h-4 text-on-surface-variant" />
+              <MapPin className="w-3.5 h-3.5 text-primary-fixed" />
+              <span className="font-label-md text-xs sm:text-sm text-on-surface font-medium">{selectedCity || 'Select City'}</span>
+              <ChevronDown className="w-3.5 h-3.5 text-on-surface-variant" />
             </div>
           )}
         </div>
@@ -144,7 +144,7 @@ export default function HeaderNav({
         )}
 
         {/* Header Right Actions & Profile Badge */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           {/* Personalized Greeting Pill (Desktop) */}
           <div className="hidden xl:flex items-center gap-2 glass-panel px-3 py-1.5 rounded-full border border-white/10 text-xs">
             <span className="w-2 h-2 rounded-full bg-primary-fixed animate-pulse"></span>
@@ -157,7 +157,7 @@ export default function HeaderNav({
           {activeRole === 'customer' && (
             <button 
               onClick={() => setIsCityModalOpen(true)}
-              className="lg:hidden text-primary-fixed hover:bg-white/5 p-2 rounded-full active:scale-95 transition-all"
+              className="lg:hidden text-primary-fixed hover:bg-white/5 p-1.5 sm:p-2 rounded-full active:scale-95 transition-all"
             >
               <MapPin className="w-5 h-5 text-primary-fixed" />
             </button>
@@ -166,7 +166,7 @@ export default function HeaderNav({
           {/* Notifications Button */}
           <button 
             onClick={onOpenNotifications}
-            className="relative text-primary-fixed hover:bg-white/5 p-2 rounded-full active:scale-95 transition-all"
+            className="relative text-primary-fixed hover:bg-white/5 p-1.5 sm:p-2 rounded-full active:scale-95 transition-all"
           >
             <Bell className="w-5 h-5 text-primary-fixed" />
             {notificationCount > 0 && (
@@ -178,7 +178,7 @@ export default function HeaderNav({
           <div className="relative">
             <div 
               onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
-              className="h-10 w-10 rounded-full overflow-hidden border-2 border-primary-fixed/50 cursor-pointer hover:border-primary-fixed transition-colors flex items-center justify-center bg-primary-container/20 font-bold text-primary-fixed text-sm shadow-[0_0_10px_rgba(0,240,255,0.2)]"
+              className="h-9 w-9 sm:h-10 sm:w-10 rounded-full overflow-hidden border-2 border-primary-fixed/50 cursor-pointer hover:border-primary-fixed transition-colors flex items-center justify-center bg-primary-container/20 font-bold text-primary-fixed text-xs sm:text-sm shadow-[0_0_10px_rgba(0,240,255,0.2)]"
             >
               {userInitials || 'VIP'}
             </div>
@@ -244,7 +244,7 @@ export default function HeaderNav({
                     className="w-full flex items-center gap-2 px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-white/5 text-left"
                   >
                     <MapPin className="w-3.5 h-3.5 text-primary-fixed" />
-                    <span>Change City ({selectedCity})</span>
+                    <span>Change City ({selectedCity || 'Mumbai'})</span>
                   </button>
 
                   <button
@@ -265,7 +265,7 @@ export default function HeaderNav({
           {/* Mobile Menu Toggle Button */}
           <button 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-primary-fixed p-2 rounded-full hover:bg-white/5"
+            className="md:hidden text-primary-fixed p-1.5 sm:p-2 rounded-full hover:bg-white/5"
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -274,7 +274,7 @@ export default function HeaderNav({
 
       {/* Mobile Drawer Navigation */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 top-20 bg-surface/95 backdrop-blur-2xl z-40 md:hidden flex flex-col p-6 space-y-4 border-b border-white/10 animate-fadeIn">
+        <div className="fixed inset-0 top-16 sm:top-20 bg-surface/95 backdrop-blur-2xl z-40 md:hidden flex flex-col p-6 space-y-4 border-b border-white/10 animate-fadeIn">
           <div className="p-3 rounded-xl bg-surface-container-high border border-white/10 text-xs mb-2">
             <p className="text-on-surface-variant">Logged in as: <span className="text-primary-fixed font-bold">{userName}</span></p>
             <p className="text-on-surface-variant">Active City: <span className="text-white font-bold">{selectedCity || 'Mumbai'}</span></p>
@@ -289,7 +289,7 @@ export default function HeaderNav({
               onSwitchRole('customer');
               setIsMobileMenuOpen(false);
             }}
-            className={`flex items-center gap-4 px-5 py-4 rounded-xl font-label-md text-base transition-all ${
+            className={`flex items-center gap-4 px-5 py-3.5 rounded-xl font-label-md text-sm transition-all ${
               activeRole === 'customer'
                 ? 'bg-primary-container/20 text-primary-fixed border border-primary-fixed/50 font-bold shadow-[0_0_15px_rgba(0,240,255,0.15)]'
                 : 'text-on-surface-variant hover:bg-white/5'
@@ -304,7 +304,7 @@ export default function HeaderNav({
               onSwitchRole('owner');
               setIsMobileMenuOpen(false);
             }}
-            className={`flex items-center gap-4 px-5 py-4 rounded-xl font-label-md text-base transition-all ${
+            className={`flex items-center gap-4 px-5 py-3.5 rounded-xl font-label-md text-sm transition-all ${
               activeRole === 'owner'
                 ? 'bg-secondary-container/20 text-secondary border border-secondary/50 font-bold shadow-[0_0_15px_rgba(255,36,228,0.15)]'
                 : 'text-on-surface-variant hover:bg-white/5'
@@ -319,7 +319,7 @@ export default function HeaderNav({
               onSwitchRole('admin');
               setIsMobileMenuOpen(false);
             }}
-            className={`flex items-center gap-4 px-5 py-4 rounded-xl font-label-md text-base transition-all ${
+            className={`flex items-center gap-4 px-5 py-3.5 rounded-xl font-label-md text-sm transition-all ${
               activeRole === 'admin'
                 ? 'bg-error-container/30 text-error border border-error/50 font-bold'
                 : 'text-on-surface-variant hover:bg-white/5'
