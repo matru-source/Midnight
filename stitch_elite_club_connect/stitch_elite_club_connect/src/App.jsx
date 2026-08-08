@@ -13,7 +13,8 @@ import {
   NotificationToast,
   MandatoryLocationGateModal,
   AuthGateModal,
-  AdvancedFilterModal
+  AdvancedFilterModal,
+  TalkyProfileSetupModal
 } from './components/Modals';
 import { mockClubs, initialChatMessages } from './data/mockData';
 import { Compass, Calendar, LayoutDashboard, ShieldCheck, User, Building2, MessageSquare } from 'lucide-react';
@@ -27,9 +28,13 @@ export default function App() {
 
   // Role Access Control: 'customer' | 'owner' | 'admin'
   const [activeRole, setActiveRole] = useState('customer');
-  const [currentView, setCurrentView] = useState('events'); // 'events' | 'clubs' | 'talky-talki' | 'club-detail'
+  const [currentView, setCurrentView] = useState('events'); // 'events' | 'clubs' | 'talky-talky' | 'club-detail'
   const [selectedClub, setSelectedClub] = useState(mockClubs[0]);
   
+  // Talky Talky Profile State
+  const [talkyProfile, setTalkyProfile] = useState(null);
+  const [isTalkyProfileModalOpen, setIsTalkyProfileModalOpen] = useState(false);
+
   // Modals & Notifications
   const [isCityModalOpen, setIsCityModalOpen] = useState(false);
   const [isTableModalOpen, setIsTableModalOpen] = useState(false);
@@ -50,6 +55,14 @@ export default function App() {
     }, 4500);
   };
 
+  // Handle Navigation View Changes
+  const handleSetCurrentView = (view) => {
+    setCurrentView(view);
+    if (view === 'talky-talky' && !talkyProfile) {
+      setIsTalkyProfileModalOpen(true);
+    }
+  };
+
   // Onboarding Step 1: Location Gate Selection (District, State)
   const handleSelectMandatoryLocation = (locationString) => {
     setSelectedCity(locationString);
@@ -62,6 +75,17 @@ export default function App() {
     setUserAuth(authData);
     setActiveRole(authData.role || 'customer');
     setAuthStep('authenticated');
+
+    // Auto seed initial talky profile
+    setTalkyProfile({
+      name: authData.name,
+      instaId: '@' + authData.name.toLowerCase().replace(/\s+/g, '_') + '_vip',
+      designation: 'VIP Nightlife Enthusiast',
+      passion: 'Melodic Techno & Single Malts',
+      drinkType: 'Alcoholic',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80'
+    });
+
     showNotification(`Namaste & Welcome, ${authData.name}! Exploring ${selectedCity} Nightlife ✨`);
   };
 
@@ -74,12 +98,19 @@ export default function App() {
     showNotification(`Welcome, Guest VIP! Exploring ${selectedCity} Nightlife ✨`);
   };
 
+  // Save Talky Profile
+  const handleSaveTalkyProfile = (profileData) => {
+    setTalkyProfile(profileData);
+    showNotification(`Talky Talky Profile Updated for ${profileData.name}! ✨`);
+  };
+
   // Reset Onboarding (Sign Out / Change Location)
   const handleResetOnboarding = () => {
     setHasSelectedLocation(false);
     setAuthStep('location');
     setSelectedCity('');
     setUserAuth(null);
+    setTalkyProfile(null);
     setActiveRole('customer');
   };
 
@@ -150,6 +181,14 @@ export default function App() {
         onContinueAsGuest={handleContinueAsGuest}
       />
 
+      {/* Talky Profile Gate Modal */}
+      <TalkyProfileSetupModal 
+        isOpen={isTalkyProfileModalOpen}
+        onClose={() => setIsTalkyProfileModalOpen(false)}
+        existingProfile={talkyProfile}
+        onSaveProfile={handleSaveTalkyProfile}
+      />
+
       {/* Global Context Header */}
       <HeaderNav 
         activeRole={activeRole}
@@ -157,7 +196,7 @@ export default function App() {
         userAuth={userAuth}
         onResetOnboarding={handleResetOnboarding}
         currentView={currentView} 
-        setCurrentView={setCurrentView}
+        setCurrentView={handleSetCurrentView}
         selectedCity={selectedCity}
         setIsCityModalOpen={setIsCityModalOpen}
         notificationCount={2}
@@ -195,11 +234,13 @@ export default function App() {
               />
             )}
 
-            {/* Talky Talki View: Club-wise members joined + live chat room */}
-            {currentView === 'talky-talki' && (
+            {/* Talky Talky View: Club-wise members joined + live chat room + profile gate */}
+            {currentView === 'talky-talky' && (
               <TalkyTalki 
                 selectedCity={selectedCity}
                 onSelectClub={handleSelectClub}
+                talkyProfile={talkyProfile}
+                onOpenProfileSetup={() => setIsTalkyProfileModalOpen(true)}
               />
             )}
 
@@ -239,7 +280,7 @@ export default function App() {
           <>
             <button
               onClick={() => {
-                setCurrentView('events');
+                handleSetCurrentView('events');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
               className={`flex flex-col items-center justify-center p-2 rounded-xl transition-all duration-150 ${
@@ -254,7 +295,7 @@ export default function App() {
 
             <button
               onClick={() => {
-                setCurrentView('clubs');
+                handleSetCurrentView('clubs');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
               className={`flex flex-col items-center justify-center p-2 rounded-xl transition-all duration-150 ${
@@ -269,17 +310,17 @@ export default function App() {
 
             <button
               onClick={() => {
-                setCurrentView('talky-talki');
+                handleSetCurrentView('talky-talky');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
               className={`flex flex-col items-center justify-center p-2 rounded-xl transition-all duration-150 ${
-                currentView === 'talky-talki'
+                currentView === 'talky-talky'
                   ? 'bg-secondary-container/20 text-secondary shadow-[0_0_10px_rgba(255,36,228,0.15)] font-bold'
                   : 'text-on-surface-variant hover:bg-white/10'
               }`}
             >
               <MessageSquare className="w-5 h-5 mb-0.5" />
-              <span className="font-label-sm text-[10px]">Talky Talki</span>
+              <span className="font-label-sm text-[10px]">Talky Talky</span>
             </button>
           </>
         ) : (

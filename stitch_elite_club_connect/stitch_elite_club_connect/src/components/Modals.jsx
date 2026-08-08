@@ -18,9 +18,196 @@ import {
   ChevronRight,
   ArrowLeft,
   Filter,
-  Check
+  Check,
+  Instagram,
+  Briefcase,
+  Heart,
+  Camera
 } from 'lucide-react';
 import { INDIAN_STATES_AND_DISTRICTS } from '../data/mockData';
+
+/* Talky Talky VIP Member Profile Setup Modal */
+export function TalkyProfileSetupModal({ 
+  isOpen, 
+  onClose, 
+  existingProfile, 
+  onSaveProfile 
+}) {
+  if (!isOpen) return null;
+
+  const [name, setName] = useState(existingProfile?.name || '');
+  const [instaId, setInstaId] = useState(existingProfile?.instaId || '');
+  const [designation, setDesignation] = useState(existingProfile?.designation || '');
+  const [passion, setPassion] = useState(existingProfile?.passion || '');
+  const [drinkType, setDrinkType] = useState(existingProfile?.drinkType || 'Alcoholic'); // 'Alcoholic' | 'Non-Alcoholic'
+  const [selectedAvatar, setSelectedAvatar] = useState(existingProfile?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80');
+
+  const avatarPresets = [
+    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300&auto=format&fit=crop&q=80'
+  ];
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!name.trim()) return;
+
+    onSaveProfile({
+      name: name.trim(),
+      instaId: instaId.trim() ? (instaId.startsWith('@') ? instaId.trim() : `@${instaId.trim()}`) : '',
+      designation: designation.trim() || 'VIP Nightlife Enthusiast',
+      passion: passion.trim() || 'Melodic Techno & Cocktails',
+      drinkType,
+      avatar: selectedAvatar
+    });
+    onClose();
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-2xl flex items-center justify-center p-4 overflow-y-auto animate-fadeIn">
+      <div className="glass-card rounded-3xl max-w-md w-full p-6 sm:p-8 border border-white/20 relative shadow-2xl my-auto">
+        <button 
+          onClick={onClose}
+          className="absolute top-4 right-4 text-on-surface-variant hover:text-white p-1 rounded-full hover:bg-white/10"
+        >
+          <X className="w-5 h-5" />
+        </button>
+
+        <div className="text-center mb-6">
+          <div className="w-12 h-12 rounded-full bg-secondary-container/20 border border-secondary/40 flex items-center justify-center mx-auto mb-2 text-secondary">
+            <Sparkles className="w-6 h-6" />
+          </div>
+          <h2 className="font-headline text-2xl font-bold text-white">Create Talky Talky Profile</h2>
+          <p className="text-xs text-on-surface-variant mt-1">
+            Introduce yourself to club members & unlock live chat rooms.
+          </p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          
+          {/* Avatar Preset Selector */}
+          <div>
+            <label className="block text-xs font-semibold text-on-surface mb-2">Profile Image / Avatar</label>
+            <div className="flex justify-center gap-3">
+              {avatarPresets.map((img, i) => (
+                <img
+                  key={i}
+                  src={img}
+                  alt={`Avatar ${i}`}
+                  onClick={() => setSelectedAvatar(img)}
+                  className={`w-12 h-12 rounded-full object-cover cursor-pointer border-2 transition-all ${
+                    selectedAvatar === img
+                      ? 'border-primary-fixed scale-110 shadow-[0_0_12px_rgba(0,240,255,0.4)]'
+                      : 'border-white/20 opacity-60 hover:opacity-100'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Full Name */}
+          <div>
+            <label className="block text-xs font-semibold text-on-surface mb-1">Full Name *</label>
+            <input 
+              type="text" 
+              placeholder="e.g. Rohan Sharma"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full bg-surface-container-high/60 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:border-primary-fixed focus:ring-0"
+              required
+            />
+          </div>
+
+          {/* Instagram ID (Optional) */}
+          <div>
+            <label className="block text-xs font-semibold text-on-surface mb-1 flex items-center gap-1">
+              <Instagram className="w-3.5 h-3.5 text-secondary" />
+              <span>Instagram Handle / Username (Optional)</span>
+            </label>
+            <input 
+              type="text" 
+              placeholder="e.g. @rohan_sharma_vip"
+              value={instaId}
+              onChange={(e) => setInstaId(e.target.value)}
+              className="w-full bg-surface-container-high/60 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:border-secondary focus:ring-0 placeholder-on-surface-variant/50"
+            />
+          </div>
+
+          {/* Designation */}
+          <div>
+            <label className="block text-xs font-semibold text-on-surface mb-1 flex items-center gap-1">
+              <Briefcase className="w-3.5 h-3.5 text-primary-fixed" />
+              <span>Designation / Profession</span>
+            </label>
+            <input 
+              type="text" 
+              placeholder="e.g. Tech Founder, DJ, Architect, Product Manager"
+              value={designation}
+              onChange={(e) => setDesignation(e.target.value)}
+              className="w-full bg-surface-container-high/60 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:border-primary-fixed focus:ring-0 placeholder-on-surface-variant/50"
+            />
+          </div>
+
+          {/* Passion */}
+          <div>
+            <label className="block text-xs font-semibold text-on-surface mb-1 flex items-center gap-1">
+              <Heart className="w-3.5 h-3.5 text-secondary" />
+              <span>Passion / Music Vibe</span>
+            </label>
+            <input 
+              type="text" 
+              placeholder="e.g. Melodic Techno, Single Malts, Deep House"
+              value={passion}
+              onChange={(e) => setPassion(e.target.value)}
+              className="w-full bg-surface-container-high/60 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:border-secondary focus:ring-0 placeholder-on-surface-variant/50"
+            />
+          </div>
+
+          {/* Drink Preference (Alcoholic vs Non-Alcoholic) */}
+          <div>
+            <label className="block text-xs font-semibold text-on-surface mb-1.5 flex items-center gap-1">
+              <Wine className="w-3.5 h-3.5 text-tertiary-fixed-dim" />
+              <span>Drink Preference</span>
+            </label>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={() => setDrinkType('Alcoholic')}
+                className={`py-2.5 px-3 rounded-xl border text-xs font-bold transition-all flex items-center justify-center gap-2 ${
+                  drinkType === 'Alcoholic'
+                    ? 'bg-secondary-container/30 border-secondary text-secondary shadow-[0_0_12px_rgba(255,36,228,0.2)]'
+                    : 'bg-surface-container-high/40 border-white/10 text-on-surface-variant hover:bg-white/5'
+                }`}
+              >
+                <span>🍷 Alcoholic</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setDrinkType('Non-Alcoholic')}
+                className={`py-2.5 px-3 rounded-xl border text-xs font-bold transition-all flex items-center justify-center gap-2 ${
+                  drinkType === 'Non-Alcoholic'
+                    ? 'bg-emerald-500/20 border-emerald-400 text-emerald-300 shadow-[0_0_12px_rgba(52,211,153,0.2)]'
+                    : 'bg-surface-container-high/40 border-white/10 text-on-surface-variant hover:bg-white/5'
+                }`}
+              >
+                <span>🍹 Non-Alcoholic</span>
+              </button>
+            </div>
+          </div>
+
+          <button 
+            type="submit"
+            className="w-full gradient-btn py-3.5 rounded-xl font-bold text-xs shadow-[0_0_20px_rgba(0,240,255,0.3)] hover:opacity-90 transition-opacity mt-2"
+          >
+            Save & Join Talky Talky
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
 
 /* Advanced Filters Modal matching user design screenshots */
 export function AdvancedFilterModal({ 
