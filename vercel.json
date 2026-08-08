@@ -1,0 +1,5 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "stitch_elite_club_connect/stitch_elite_club_connect/dist",
+  "framework": "vite"
+}

@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
+    "postinstall": "npm --prefix stitch_elite_club_connect/stitch_elite_club_connect install",
     "dev": "npm --prefix stitch_elite_club_connect/stitch_elite_club_connect run dev",
     "build": "npm --prefix stitch_elite_club_connect/stitch_elite_club_connect run build",
     "preview": "npm --prefix stitch_elite_club_connect/stitch_elite_club_connect run preview"
