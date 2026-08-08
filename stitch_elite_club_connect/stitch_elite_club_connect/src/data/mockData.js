@@ -1,3 +1,137 @@
+export const INDIAN_STATES_AND_DISTRICTS = [
+  {
+    state: 'Maharashtra',
+    icon: '🏙️',
+    districts: [
+      { name: 'Mumbai', tag: 'BKC, Lower Parel & Bandra' },
+      { name: 'Pune', tag: 'Koregaon Park, Baner & Kalyani Nagar' },
+      { name: 'Nagpur', tag: 'Civil Lines & Dharampeth' },
+      { name: 'Nashik', tag: 'Gangapur Road & College Road' },
+      { name: 'Thane', tag: 'Ghodbunder Road & Majiwada' },
+      { name: 'Navi Mumbai', tag: 'Vashi & Palm Beach Road' },
+      { name: 'Chhatrapati Sambhajinagar', tag: 'Nirala Bazar & CIDCO' }
+    ]
+  },
+  {
+    state: 'Karnataka',
+    icon: '🌳',
+    districts: [
+      { name: 'Bengaluru', tag: 'Indiranagar, Koramangala & MG Road' },
+      { name: 'Mysuru', tag: 'Gokulam & Jayalakshmipuram' },
+      { name: 'Mangaluru', tag: 'Kadri & Bejai' },
+      { name: 'Hubballi-Dharwad', tag: 'Vidyanagar & Unkal' },
+      { name: 'Belagavi', tag: 'Tilakwadi & Camp' }
+    ]
+  },
+  {
+    state: 'Delhi NCR',
+    icon: '🏛️',
+    districts: [
+      { name: 'New Delhi', tag: 'Connaught Place & Khan Market' },
+      { name: 'Gurugram', tag: 'CyberHub & Golf Course Road' },
+      { name: 'Noida', tag: 'Sector 18 & Greater Noida Expressway' },
+      { name: 'Faridabad', tag: 'Sector 15 & Surajkund' }
+    ]
+  },
+  {
+    state: 'Goa',
+    icon: '🏖️',
+    districts: [
+      { name: 'North Goa', tag: 'Vagator, Anjuna, Baga & Panaji' },
+      { name: 'South Goa', tag: 'Palolem, Colva & Cavelossim' }
+    ]
+  },
+  {
+    state: 'Telangana',
+    icon: '💎',
+    districts: [
+      { name: 'Hyderabad', tag: 'Jubilee Hills, Banjara Hills & Gachibowli' },
+      { name: 'Warangal', tag: 'Kazipet & Hanamkonda' }
+    ]
+  },
+  {
+    state: 'Tamil Nadu',
+    icon: '🛕',
+    districts: [
+      { name: 'Chennai', tag: 'Nungambakkam, ECR & Alwarpet' },
+      { name: 'Coimbatore', tag: 'Race Course & RS Puram' },
+      { name: 'Madurai', tag: 'KK Nagar & Anna Nagar' }
+    ]
+  },
+  {
+    state: 'Rajasthan',
+    icon: 'Fort',
+    districts: [
+      { name: 'Jaipur', tag: 'C-Scheme, Malviya Nagar & Raja Park' },
+      { name: 'Udaipur', tag: 'Fateh Sagar & Sukhadia Circle' },
+      { name: 'Jodhpur', tag: 'Ratanada & Shastri Nagar' }
+    ]
+  },
+  {
+    state: 'Punjab & Chandigarh',
+    icon: '🌾',
+    districts: [
+      { name: 'Chandigarh', tag: 'Sector 26, Sector 17 & Elante' },
+      { name: 'Ludhiana', tag: 'Ferozepur Road & Sarabha Nagar' },
+      { name: 'Amritsar', tag: 'Ranjit Avenue & Mall Road' }
+    ]
+  },
+  {
+    state: 'Gujarat',
+    icon: '🦁',
+    districts: [
+      { name: 'Ahmedabad', tag: 'SG Highway & Sindhu Bhavan' },
+      { name: 'Surat', tag: 'Dumas Road & Vesu' },
+      { name: 'Vadodara', tag: 'Alkapuri & Gotri' }
+    ]
+  },
+  {
+    state: 'West Bengal',
+    icon: '🎨',
+    districts: [
+      { name: 'Kolkata', tag: 'Park Street, Salt Lake & Rajarhat' },
+      { name: 'Siliguri', tag: 'Sevoke Road & City Centre' }
+    ]
+  },
+  {
+    state: 'Kerala',
+    icon: '🌴',
+    districts: [
+      { name: 'Kochi', tag: 'MG Road, Marine Drive & Fort Kochi' },
+      { name: 'Thiruvananthapuram', tag: 'Kowdiar & Technopark' },
+      { name: 'Kozhikode', tag: 'Mavoor Road & Beach Road' }
+    ]
+  },
+  {
+    state: 'Madhya Pradesh',
+    icon: '🏰',
+    districts: [
+      { name: 'Indore', tag: 'Vijay Nagar & 56 Dukan' },
+      { name: 'Bhopal', tag: 'Arera Colony & MP Nagar' },
+      { name: 'Gwalior', tag: 'City Centre & Lashkar' }
+    ]
+  },
+  {
+    state: 'Uttar Pradesh',
+    icon: '🌆',
+    districts: [
+      { name: 'Lucknow', tag: 'Hazratganj, Gomti Nagar & Aliganj' },
+      { name: 'Agra', tag: 'Taj Ganj & Fatehabad Road' },
+      { name: 'Varanasi', tag: 'Cantonment & Assi Ghat' },
+      { name: 'Kanpur', tag: 'Swaroop Nagar & Civil Lines' }
+    ]
+  },
+  {
+    state: 'Uttarakhand & Himachal',
+    icon: '🏔️',
+    districts: [
+      { name: 'Dehradun', tag: 'Rajpur Road & EC Road' },
+      { name: 'Shimla', tag: 'Mall Road & Lakkar Bazar' },
+      { name: 'Manali', tag: 'Old Manali & Mall Road' }
+    ]
+  }
+];
+
 export const ALL_INDIAN_CITIES = [
   { name: 'Mumbai', state: 'Maharashtra', tag: 'BKC, Lower Parel & Bandra', image: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=500&auto=format&fit=crop&q=60' },
   { name: 'Bengaluru', state: 'Karnataka', tag: 'Indiranagar & Koramangala', image: 'https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=500&auto=format&fit=crop&q=60' },
@@ -5,37 +139,14 @@ export const ALL_INDIAN_CITIES = [
   { name: 'Goa', state: 'Goa', tag: 'Vagator, Anjuna & Panaji', image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=500&auto=format&fit=crop&q=60' },
   { name: 'Hyderabad', state: 'Telangana', tag: 'Jubilee Hills & Gachibowli', image: 'https://images.unsplash.com/photo-1605379399642-870262d3d051?w=500&auto=format&fit=crop&q=60' },
   { name: 'Pune', state: 'Maharashtra', tag: 'Koregaon Park & Baner', image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?w=500&auto=format&fit=crop&q=60' },
-  { name: 'Kolkata', state: 'West Bengal', tag: 'Park Street & Salt Lake', image: 'https://images.unsplash.com/photo-1558431382-27e303142255?w=500&auto=format&fit=crop&q=60' },
-  { name: 'Chennai', state: 'Tamil Nadu', tag: 'Nungambakkam & ECR', image: null },
-  { name: 'Jaipur', state: 'Rajasthan', tag: 'C-Scheme & Malviya Nagar', image: null },
-  { name: 'Chandigarh', state: 'Punjab / Haryana', tag: 'Sector 26 & Elante', image: null },
-  { name: 'Ahmedabad', state: 'Gujarat', tag: 'SG Highway & Sindhu Bhavan', image: null },
-  { name: 'Kochi', state: 'Kerala', tag: 'MG Road & Marine Drive', image: null },
-  { name: 'Indore', state: 'Madhya Pradesh', tag: 'Vijay Nagar & 56 Dukan', image: null },
-  { name: 'Lucknow', state: 'Uttar Pradesh', tag: 'Hazratganj & Gomti Nagar', image: null },
-  { name: 'Surat', state: 'Gujarat', tag: 'Dumas Road & Vesu', image: null },
-  { name: 'Nagpur', state: 'Maharashtra', tag: 'Civil Lines & Dharampeth', image: null },
-  { name: 'Visakhapatnam', state: 'Andhra Pradesh', tag: 'RK Beach & Siripuram', image: null },
-  { name: 'Vadodara', state: 'Gujarat', tag: 'Alkapuri & Gotri', image: null },
-  { name: 'Bhopal', state: 'Madhya Pradesh', tag: 'Arera Colony & MP Nagar', image: null },
-  { name: 'Coimbatore', state: 'Tamil Nadu', tag: 'Race Course & RS Puram', image: null },
-  { name: 'Ludhiana', state: 'Punjab', tag: 'Ferozepur Road & Sarabha Nagar', image: null },
-  { name: 'Agra', state: 'Uttar Pradesh', tag: 'Taj Ganj & Fatehabad Road', image: null },
-  { name: 'Nashik', state: 'Maharashtra', tag: 'Gangapur Road & College Road', image: null },
-  { name: 'Mysuru', state: 'Karnataka', tag: 'Gokulam & Jayalakshmipuram', image: null },
-  { name: 'Dehradun', state: 'Uttarakhand', tag: 'Rajpur Road & EC Road', image: null },
-  { name: 'Shimla', state: 'Himachal Pradesh', tag: 'Mall Road & Lakkar Bazar', image: null },
-  { name: 'Udaipur', state: 'Rajasthan', tag: 'Fateh Sagar & Sukhadia Circle', image: null },
-  { name: 'Amritsar', state: 'Punjab', tag: 'Ranjit Avenue & Mall Road', image: null },
-  { name: 'Mangaluru', state: 'Karnataka', tag: 'Kadri & Bejai', image: null },
-  { name: 'Thiruvananthapuram', state: 'Kerala', tag: 'Kowdiar & Technopark', image: null }
+  { name: 'Kolkata', state: 'West Bengal', tag: 'Park Street & Salt Lake', image: 'https://images.unsplash.com/photo-1558431382-27e303142255?w=500&auto=format&fit=crop&q=60' }
 ];
 
 export const mockClubs = [
   {
     id: 'void-room',
     name: 'The Void Room',
-    location: 'Mumbai',
+    location: 'Mumbai, Maharashtra',
     address: 'BKC Annex, Bandra Kurla Complex, Mumbai 400051',
     distance: '1.5 km',
     vibe: 'Techno',
@@ -59,7 +170,7 @@ export const mockClubs = [
   {
     id: 'velvet-note',
     name: 'Velvet Lounge & Speakeasy',
-    location: 'Mumbai',
+    location: 'Mumbai, Maharashtra',
     address: 'Lower Parel, Phoenix Mills, Mumbai 400013',
     distance: '0.8 km',
     vibe: 'Jazz',
@@ -83,7 +194,7 @@ export const mockClubs = [
   {
     id: 'aura',
     name: 'Aura Nightclub',
-    location: 'Bengaluru',
+    location: 'Bengaluru, Karnataka',
     address: 'Indiranagar 100ft Road, Bengaluru 560038',
     distance: '2.5 km',
     vibe: 'House',
@@ -107,7 +218,7 @@ export const mockClubs = [
   {
     id: 'skyline-deck',
     name: 'Aer Skyline Rooftop',
-    location: 'Goa',
+    location: 'North Goa, Goa',
     address: 'Vagator Cliff Edge, North Goa 403509',
     distance: '1.2 km',
     vibe: 'RnB',
@@ -164,7 +275,7 @@ export const mockPendingClubs = [
   {
     id: 'c-101',
     name: 'Bora Bora Beach Lounge',
-    city: 'Anjuna, Goa',
+    city: 'North Goa, Goa',
     capacity: 600,
     submittedTime: 'Submitted 2 hours ago',
     image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCe8Rh4RZCYCmifIOLM8lzdVzdx8IaH6L0shksTUtXGvt5xN4DntAuSnQzYBB9HxFtwi0eGlf4dfjFu0VG_O3LKBOBs4nulFo9KIAPaX3SVhbLqwqIZfmKcx8LWRFXnXXtXKuMlD6zVgRzSOm5AdeYVn4FfJpP7DaJqLt2HU1eq1dAtGSY2ALrGpGYJvii0PE1Ua61SZxt7-m-XkYEPST0ndYisGFQfkWPtNO0-xw6w4DYIiuZ05Rx8Fg'
@@ -172,7 +283,7 @@ export const mockPendingClubs = [
   {
     id: 'c-102',
     name: 'Toy Room Delhi',
-    city: 'Aerocity, New Delhi',
+    city: 'Gurugram, Delhi NCR',
     capacity: 800,
     submittedTime: 'Submitted 5 hours ago',
     image: null
@@ -180,7 +291,7 @@ export const mockPendingClubs = [
   {
     id: 'c-103',
     name: 'Rehab Gastro Bar',
-    city: 'Koramangala, Bengaluru',
+    city: 'Bengaluru, Karnataka',
     capacity: 500,
     submittedTime: 'Submitted 1 day ago',
     image: null

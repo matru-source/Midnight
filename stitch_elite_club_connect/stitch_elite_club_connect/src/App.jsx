@@ -46,9 +46,9 @@ export default function App() {
     }, 4500);
   };
 
-  // Onboarding Step 1: Location Gate Selection
-  const handleSelectMandatoryCity = (city) => {
-    setSelectedCity(city);
+  // Onboarding Step 1: Location Gate Selection (District, State)
+  const handleSelectMandatoryLocation = (locationString) => {
+    setSelectedCity(locationString);
     setHasSelectedLocation(true);
     setAuthStep('auth');
   };
@@ -133,10 +133,10 @@ export default function App() {
         onClose={() => setToastMessage(null)} 
       />
 
-      {/* Mandatory Onboarding Gate Modals */}
+      {/* Mandatory 2-Tier Onboarding Gate Modals */}
       <MandatoryLocationGateModal 
         isOpen={authStep === 'location'}
-        onSelectCity={handleSelectMandatoryCity}
+        onSelectLocation={handleSelectMandatoryLocation}
       />
 
       <AuthGateModal 
@@ -268,9 +268,9 @@ export default function App() {
         isOpen={isCityModalOpen}
         onClose={() => setIsCityModalOpen(false)}
         selectedCity={selectedCity}
-        onSelectCity={(city) => {
-          setSelectedCity(city);
-          showNotification(`Switched active city to ${city}`);
+        onSelectLocation={(locationString) => {
+          setSelectedCity(locationString);
+          showNotification(`Switched active location to ${locationString}`);
         }}
       />
     </div>

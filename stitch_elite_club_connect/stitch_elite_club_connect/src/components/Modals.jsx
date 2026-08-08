@@ -14,64 +14,86 @@ import {
   User,
   ArrowRight,
   Lock,
-  Search
+  Search,
+  ChevronRight,
+  ArrowLeft
 } from 'lucide-react';
-import { ALL_INDIAN_CITIES } from '../data/mockData';
+import { INDIAN_STATES_AND_DISTRICTS } from '../data/mockData';
 
-/* Mandatory Step 1: Location Gate Modal with Search & Autocomplete Automation */
-export function MandatoryLocationGateModal({ isOpen, onSelectCity }) {
+/* Mandatory 2-Tier Location Gate Modal (State Selection -> District Selection) */
+export function MandatoryLocationGateModal({ isOpen, onSelectLocation }) {
   if (!isOpen) return null;
 
-  const [citySearchQuery, setCitySearchQuery] = useState('');
+  const [selectedStateObj, setSelectedStateObj] = useState(null); // null = selecting state; object = selecting district
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredCities = ALL_INDIAN_CITIES.filter((city) => {
-    const q = citySearchQuery.toLowerCase().trim();
+  // Filter states or districts based on query
+  const filteredStates = INDIAN_STATES_AND_DISTRICTS.filter((s) => {
+    const q = searchQuery.toLowerCase().trim();
+    if (!q) return true;
     return (
-      city.name.toLowerCase().includes(q) ||
-      city.state.toLowerCase().includes(q) ||
-      city.tag.toLowerCase().includes(q)
+      s.state.toLowerCase().includes(q) ||
+      s.districts.some(d => d.name.toLowerCase().includes(q) || d.tag.toLowerCase().includes(q))
     );
   });
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && filteredCities.length > 0) {
-      e.preventDefault();
-      onSelectCity(filteredCities[0].name);
-    }
+  const handleStateClick = (stateObj) => {
+    setSelectedStateObj(stateObj);
+    setSearchQuery('');
+  };
+
+  const handleDistrictClick = (districtName, stateName) => {
+    onSelectLocation(`${districtName}, ${stateName}`);
   };
 
   return (
     <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl flex items-center justify-center p-4 overflow-y-auto animate-fadeIn">
-      <div className="glass-card rounded-3xl max-w-3xl w-full p-8 border border-white/20 relative shadow-2xl my-auto">
+      <div className="glass-card rounded-3xl max-w-3xl w-full p-6 sm:p-8 border border-white/20 relative shadow-2xl my-auto">
+        
+        {/* Header Breadcrumb */}
         <div className="text-center mb-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary-fixed/30 bg-primary-fixed/10 text-primary-fixed text-xs font-bold uppercase tracking-widest mb-3">
             <Lock className="w-3.5 h-3.5" />
-            Step 1 of 2 • Mandatory Access Gate
+            {selectedStateObj ? `Step 1b: Select District in ${selectedStateObj.state}` : 'Step 1a: Select Indian State'}
           </div>
-          
-          <h1 className="font-display text-3xl md:text-4xl font-bold text-white tracking-tight mb-1">
-            Select Your Indian Destination
+
+          <h1 className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight mb-1">
+            {selectedStateObj ? `Districts in ${selectedStateObj.state}` : 'Select Indian State / Region'}
           </h1>
           <p className="text-xs text-on-surface-variant max-w-md mx-auto">
-            Choose any city across India to unlock clubs, events, VIP table reservations, and guestlists.
+            {selectedStateObj 
+              ? `Choose your specific district or city in ${selectedStateObj.state} to unlock localized nightlife.`
+              : 'Select your state first, then choose your district or major city.'}
           </p>
         </div>
 
-        {/* Automated City Search Bar */}
-        <div className="relative mb-6 max-w-xl mx-auto">
+        {/* Back Button if in District Mode */}
+        {selectedStateObj && (
+          <button 
+            onClick={() => {
+              setSelectedStateObj(null);
+              setSearchQuery('');
+            }}
+            className="inline-flex items-center gap-2 text-xs font-bold text-primary-fixed hover:underline mb-4 bg-primary-container/10 px-3 py-1.5 rounded-lg border border-primary-fixed/30"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span>Back to All States</span>
+          </button>
+        )}
+
+        {/* Search Bar Automation */}
+        <div className="relative mb-5 max-w-xl mx-auto">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-primary-fixed" />
           <input
             type="text"
-            placeholder="Type any Indian city or state (e.g. Mumbai, Goa, Jaipur, Chandigarh, Kochi)..."
-            value={citySearchQuery}
-            onChange={(e) => setCitySearchQuery(e.target.value)}
-            onKeyDown={handleKeyDown}
-            autoFocus
-            className="w-full bg-surface-container-high/80 border border-white/20 focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed rounded-2xl pl-11 pr-10 py-3.5 text-sm text-white placeholder-on-surface-variant/60 shadow-inner transition-all"
+            placeholder={selectedStateObj ? `Search district in ${selectedStateObj.state}...` : "Search Indian State or District (e.g. Maharashtra, Goa, Bengaluru)..."}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full bg-surface-container-high/80 border border-white/20 focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed rounded-2xl pl-11 pr-10 py-3 text-xs sm:text-sm text-white placeholder-on-surface-variant/60 shadow-inner transition-all"
           />
-          {citySearchQuery && (
+          {searchQuery && (
             <button 
-              onClick={() => setCitySearchQuery('')}
+              onClick={() => setSearchQuery('')}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-white p-1"
             >
               <X className="w-4 h-4" />
@@ -79,56 +101,66 @@ export function MandatoryLocationGateModal({ isOpen, onSelectCity }) {
           )}
         </div>
 
-        {/* Search Suggestion Automation Banner */}
-        {citySearchQuery && filteredCities.length > 0 && (
-          <div className="bg-primary-container/10 border border-primary-fixed/30 rounded-xl p-3 mb-4 max-w-xl mx-auto flex items-center justify-between text-xs text-primary-fixed font-semibold">
-            <span>Press <kbd className="bg-surface border border-white/20 px-1.5 py-0.5 rounded text-[10px]">Enter</kbd> to select <strong>{filteredCities[0].name}</strong> ({filteredCities[0].state})</span>
-            <span className="text-[10px] text-on-surface-variant">{filteredCities.length} match(es)</span>
+        {/* VIEW 1: STATE SELECTION */}
+        {!selectedStateObj && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-h-[340px] overflow-y-auto custom-scrollbar pr-1 mb-6">
+            {filteredStates.map((s) => (
+              <div
+                key={s.state}
+                onClick={() => handleStateClick(s)}
+                className="glass-card rounded-2xl p-4 border border-white/10 hover:border-primary-fixed cursor-pointer transition-all duration-200 hover:scale-[1.02] group flex items-center justify-between"
+              >
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg">{s.icon || '📍'}</span>
+                    <span className="font-headline text-base font-bold text-white group-hover:text-primary-fixed transition-colors">
+                      {s.state}
+                    </span>
+                  </div>
+                  <p className="text-[10px] text-on-surface-variant mt-0.5">
+                    {s.districts.length} District(s) / Cities
+                  </p>
+                </div>
+                <ChevronRight className="w-4 h-4 text-on-surface-variant group-hover:text-primary-fixed transition-colors" />
+              </div>
+            ))}
           </div>
         )}
 
-        {/* City Selection Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-h-[340px] overflow-y-auto custom-scrollbar pr-1 mb-6">
-          {filteredCities.length === 0 ? (
-            <div className="col-span-full py-12 text-center text-xs text-on-surface-variant">
-              No matching Indian city found for "{citySearchQuery}". Try searching another city name or state.
-            </div>
-          ) : (
-            filteredCities.map((city) => (
-              <div
-                key={city.name}
-                onClick={() => onSelectCity(city.name)}
-                className="glass-card rounded-2xl p-4 border border-white/10 hover:border-primary-fixed cursor-pointer transition-all duration-200 hover:scale-[1.02] group relative overflow-hidden flex flex-col justify-between min-h-[90px]"
-              >
-                {city.image && (
-                  <>
-                    <div 
-                      className="absolute inset-0 bg-cover bg-center opacity-30 group-hover:opacity-50 transition-opacity"
-                      style={{ backgroundImage: `url('${city.image}')` }}
-                    ></div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/70 to-transparent"></div>
-                  </>
-                )}
-
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-0.5">
-                    <span className="font-headline text-base font-bold text-white group-hover:text-primary-fixed transition-colors">
-                      {city.name}
-                    </span>
-                    <span className="text-[10px] text-on-surface-variant font-medium bg-surface/60 px-2 py-0.5 rounded border border-white/10">
-                      {city.state}
-                    </span>
+        {/* VIEW 2: DISTRICT SELECTION */}
+        {selectedStateObj && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[340px] overflow-y-auto custom-scrollbar pr-1 mb-6">
+            {selectedStateObj.districts
+              .filter(d => {
+                const q = searchQuery.toLowerCase().trim();
+                return !q || d.name.toLowerCase().includes(q) || d.tag.toLowerCase().includes(q);
+              })
+              .map((d) => (
+                <div
+                  key={d.name}
+                  onClick={() => handleDistrictClick(d.name, selectedStateObj.state)}
+                  className="glass-card rounded-2xl p-4 border border-white/10 hover:border-primary-fixed cursor-pointer transition-all duration-200 hover:scale-[1.02] group flex items-center justify-between"
+                >
+                  <div>
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <MapPin className="w-4 h-4 text-primary-fixed" />
+                      <span className="font-headline text-base font-bold text-white group-hover:text-primary-fixed transition-colors">
+                        {d.name}
+                      </span>
+                    </div>
+                    <p className="text-[10px] text-on-surface-variant">{d.tag}</p>
                   </div>
-                  <p className="text-[10px] text-on-surface-variant line-clamp-1">{city.tag}</p>
+                  <span className="text-[10px] uppercase font-bold text-primary-fixed bg-primary-container/20 px-2 py-1 rounded border border-primary-fixed/30">
+                    Select
+                  </span>
                 </div>
-              </div>
-            ))
-          )}
-        </div>
+              ))}
+          </div>
+        )}
 
         <div className="text-center border-t border-white/10 pt-4">
           <p className="text-[11px] text-on-surface-variant">
-            🔒 Mandatory selection required. Choose a city above or type in the search bar to unlock Midnight Premium.
+            🔒 2-Tier Selection Required. Pick State first, then select your District/City.
           </p>
         </div>
       </div>
@@ -434,32 +466,16 @@ export function GuestlistModal({ club, isOpen, onClose, onConfirm, userAuth }) {
   );
 }
 
-/* City Selector Modal with Search Bar Suggestion Automation */
-export function CitySelectorModal({ isOpen, onClose, selectedCity, onSelectCity }) {
+/* 2-Tier City Selector Modal (State -> District) */
+export function CitySelectorModal({ isOpen, onClose, selectedCity, onSelectLocation }) {
   if (!isOpen) return null;
 
+  const [selectedStateObj, setSelectedStateObj] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
-
-  const filteredCities = ALL_INDIAN_CITIES.filter((city) => {
-    const q = searchQuery.toLowerCase().trim();
-    return (
-      city.name.toLowerCase().includes(q) ||
-      city.state.toLowerCase().includes(q) ||
-      city.tag.toLowerCase().includes(q)
-    );
-  });
-
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && filteredCities.length > 0) {
-      e.preventDefault();
-      onSelectCity(filteredCities[0].name);
-      onClose();
-    }
-  };
 
   return (
     <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn">
-      <div className="glass-card rounded-3xl max-w-md w-full p-6 border border-white/20 relative shadow-2xl">
+      <div className="glass-card rounded-3xl max-w-lg w-full p-6 border border-white/20 relative shadow-2xl">
         <button 
           onClick={onClose}
           className="absolute top-4 right-4 text-on-surface-variant hover:text-white p-1 rounded-full hover:bg-white/10"
@@ -467,59 +483,92 @@ export function CitySelectorModal({ isOpen, onClose, selectedCity, onSelectCity 
           <X className="w-5 h-5" />
         </button>
 
-        <div className="flex items-center gap-2 text-primary-fixed mb-4">
-          <MapPin className="w-5 h-5 text-primary-fixed" />
-          <h3 className="font-headline text-xl text-white font-bold">Select Destination City</h3>
-        </div>
-
-        {/* Search Bar Suggestion Input */}
-        <div className="relative mb-4">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant" />
-          <input
-            type="text"
-            placeholder="Type any Indian city (e.g. Goa, Jaipur, Pune, Chandigarh)..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyDown={handleKeyDown}
-            className="w-full bg-surface-container-high/80 border border-white/10 focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed rounded-xl pl-10 pr-8 py-2.5 text-xs text-white placeholder-on-surface-variant/50"
-          />
-          {searchQuery && (
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2 text-primary-fixed">
+            <MapPin className="w-5 h-5 text-primary-fixed" />
+            <h3 className="font-headline text-xl text-white font-bold">
+              {selectedStateObj ? `Districts in ${selectedStateObj.state}` : 'Select Indian State'}
+            </h3>
+          </div>
+          {selectedStateObj && (
             <button 
-              onClick={() => setSearchQuery('')}
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-white p-1"
+              onClick={() => setSelectedStateObj(null)}
+              className="text-xs text-primary-fixed hover:underline font-bold"
             >
-              <X className="w-3.5 h-3.5" />
+              ← Change State
             </button>
           )}
         </div>
 
-        {/* Suggestion Automation List */}
-        <div className="space-y-1.5 max-h-[300px] overflow-y-auto custom-scrollbar pr-1">
-          {filteredCities.length === 0 ? (
-            <div className="py-6 text-center text-xs text-on-surface-variant">No matching city found.</div>
-          ) : (
-            filteredCities.map((city) => (
-              <button
-                key={city.name}
-                onClick={() => {
-                  onSelectCity(city.name);
-                  onClose();
-                }}
-                className={`w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-semibold transition-all ${
-                  selectedCity === city.name
-                    ? 'bg-primary-container/20 text-primary-fixed border border-primary-fixed/50 font-bold'
-                    : 'bg-surface-container-high/40 text-on-surface hover:bg-white/10'
-                }`}
-              >
-                <div className="flex items-center gap-2">
-                  <span>{city.name}</span>
-                  <span className="text-[10px] text-on-surface-variant">({city.state})</span>
-                </div>
-                {selectedCity === city.name && <CheckCircle className="w-4 h-4 text-primary-fixed" />}
-              </button>
-            ))
-          )}
+        {/* Search Bar Input */}
+        <div className="relative mb-3">
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant" />
+          <input
+            type="text"
+            placeholder={selectedStateObj ? `Search district in ${selectedStateObj.state}...` : "Search State or District..."}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full bg-surface-container-high/80 border border-white/10 focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed rounded-xl pl-10 pr-8 py-2.5 text-xs text-white placeholder-on-surface-variant/50"
+          />
         </div>
+
+        {/* STATE LEVEL VIEW */}
+        {!selectedStateObj && (
+          <div className="space-y-1.5 max-h-[300px] overflow-y-auto custom-scrollbar pr-1">
+            {INDIAN_STATES_AND_DISTRICTS
+              .filter(s => !searchQuery || s.state.toLowerCase().includes(searchQuery.toLowerCase()) || s.districts.some(d => d.name.toLowerCase().includes(searchQuery.toLowerCase())))
+              .map((s) => (
+                <button
+                  key={s.state}
+                  onClick={() => {
+                    setSelectedStateObj(s);
+                    setSearchQuery('');
+                  }}
+                  className="w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-semibold bg-surface-container-high/40 text-on-surface hover:bg-white/10 transition-all"
+                >
+                  <div className="flex items-center gap-2">
+                    <span>{s.icon || '📍'}</span>
+                    <span className="font-bold">{s.state}</span>
+                    <span className="text-[10px] text-on-surface-variant">({s.districts.length} Districts)</span>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-on-surface-variant" />
+                </button>
+              ))}
+          </div>
+        )}
+
+        {/* DISTRICT LEVEL VIEW */}
+        {selectedStateObj && (
+          <div className="space-y-1.5 max-h-[300px] overflow-y-auto custom-scrollbar pr-1">
+            {selectedStateObj.districts
+              .filter(d => !searchQuery || d.name.toLowerCase().includes(searchQuery.toLowerCase()) || d.tag.toLowerCase().includes(searchQuery.toLowerCase()))
+              .map((d) => {
+                const fullLoc = `${d.name}, ${selectedStateObj.state}`;
+                const isSelected = selectedCity === fullLoc || selectedCity === d.name;
+
+                return (
+                  <button
+                    key={d.name}
+                    onClick={() => {
+                      onSelectLocation(fullLoc);
+                      onClose();
+                    }}
+                    className={`w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-semibold transition-all ${
+                      isSelected
+                        ? 'bg-primary-container/20 text-primary-fixed border border-primary-fixed/50 font-bold'
+                        : 'bg-surface-container-high/40 text-on-surface hover:bg-white/10'
+                    }`}
+                  >
+                    <div className="text-left">
+                      <p className="font-bold">{d.name}</p>
+                      <p className="text-[10px] text-on-surface-variant font-normal">{d.tag}</p>
+                    </div>
+                    {isSelected && <CheckCircle className="w-4 h-4 text-primary-fixed shrink-0" />}
+                  </button>
+                );
+              })}
+          </div>
+        )}
       </div>
     </div>
   );
