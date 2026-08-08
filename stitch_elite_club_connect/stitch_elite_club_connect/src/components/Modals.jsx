@@ -31,7 +31,6 @@ export function AdvancedFilterModal({
 }) {
   if (!isOpen) return null;
 
-  // Local state for active selections inside modal before pressing "Apply"
   const [dates, setDates] = useState(selectedFilters.dates || []);
   const [locations, setLocations] = useState(selectedFilters.locations || []);
   const [categories, setCategories] = useState(selectedFilters.categories || []);
@@ -316,6 +315,23 @@ export function MandatoryLocationGateModal({ isOpen, onSelectLocation }) {
     onSelectLocation(`${districtName}, ${stateName}`);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (!selectedStateObj && filteredStates.length > 0) {
+        handleStateClick(filteredStates[0]);
+      } else if (selectedStateObj) {
+        const matchingDistricts = selectedStateObj.districts.filter(d => {
+          const q = searchQuery.toLowerCase().trim();
+          return !q || d.name.toLowerCase().includes(q) || d.tag.toLowerCase().includes(q);
+        });
+        if (matchingDistricts.length > 0) {
+          handleDistrictClick(matchingDistricts[0].name, selectedStateObj.state);
+        }
+      }
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl flex items-center justify-center p-4 overflow-y-auto animate-fadeIn">
       <div className="glass-card rounded-3xl max-w-3xl w-full p-6 sm:p-8 border border-white/20 relative shadow-2xl my-auto">
@@ -347,7 +363,7 @@ export function MandatoryLocationGateModal({ isOpen, onSelectLocation }) {
             className="inline-flex items-center gap-2 text-xs font-bold text-primary-fixed hover:underline mb-4 bg-primary-container/10 px-3 py-1.5 rounded-lg border border-primary-fixed/30"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Back to All States</span>
+            <span>Back to All States ({INDIAN_STATES_AND_DISTRICTS.length} States & UTs)</span>
           </button>
         )}
 
@@ -356,9 +372,11 @@ export function MandatoryLocationGateModal({ isOpen, onSelectLocation }) {
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-primary-fixed" />
           <input
             type="text"
-            placeholder={selectedStateObj ? `Search district in ${selectedStateObj.state}...` : "Search Indian State or District (e.g. Maharashtra, Goa, Bengaluru)..."}
+            placeholder={selectedStateObj ? `Search district in ${selectedStateObj.state}...` : "Search any Indian State (Odisha, Maharashtra, Goa, Delhi NCR, Punjab...)"}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
+            autoFocus
             className="w-full bg-surface-container-high/80 border border-white/20 focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed rounded-2xl pl-11 pr-10 py-3 text-xs sm:text-sm text-white placeholder-on-surface-variant/60 shadow-inner transition-all"
           />
           {searchQuery && (
@@ -374,26 +392,32 @@ export function MandatoryLocationGateModal({ isOpen, onSelectLocation }) {
         {/* VIEW 1: STATE SELECTION */}
         {!selectedStateObj && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-h-[340px] overflow-y-auto custom-scrollbar pr-1 mb-6">
-            {filteredStates.map((s) => (
-              <div
-                key={s.state}
-                onClick={() => handleStateClick(s)}
-                className="glass-card rounded-2xl p-4 border border-white/10 hover:border-primary-fixed cursor-pointer transition-all duration-200 hover:scale-[1.02] group flex items-center justify-between"
-              >
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg">{s.icon || '📍'}</span>
-                    <span className="font-headline text-base font-bold text-white group-hover:text-primary-fixed transition-colors">
-                      {s.state}
-                    </span>
-                  </div>
-                  <p className="text-[10px] text-on-surface-variant mt-0.5">
-                    {s.districts.length} District(s) / Cities
-                  </p>
-                </div>
-                <ChevronRight className="w-4 h-4 text-on-surface-variant group-hover:text-primary-fixed transition-colors" />
+            {filteredStates.length === 0 ? (
+              <div className="col-span-full py-12 text-center text-xs text-on-surface-variant">
+                No matching Indian state found for "{searchQuery}".
               </div>
-            ))}
+            ) : (
+              filteredStates.map((s) => (
+                <div
+                  key={s.state}
+                  onClick={() => handleStateClick(s)}
+                  className="glass-card rounded-2xl p-4 border border-white/10 hover:border-primary-fixed cursor-pointer transition-all duration-200 hover:scale-[1.02] group flex items-center justify-between"
+                >
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-lg">{s.icon || '📍'}</span>
+                      <span className="font-headline text-base font-bold text-white group-hover:text-primary-fixed transition-colors">
+                        {s.state}
+                      </span>
+                    </div>
+                    <p className="text-[10px] text-on-surface-variant mt-0.5">
+                      {s.districts.length} District(s) / Cities
+                    </p>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-on-surface-variant group-hover:text-primary-fixed transition-colors" />
+                </div>
+              ))
+            )}
           </div>
         )}
 
@@ -430,7 +454,7 @@ export function MandatoryLocationGateModal({ isOpen, onSelectLocation }) {
 
         <div className="text-center border-t border-white/10 pt-4">
           <p className="text-[11px] text-on-surface-variant">
-            🔒 2-Tier Selection Required. Pick State first, then select your District/City.
+            🔒 33 States & UTs Loaded. Select State first, then pick District/City.
           </p>
         </div>
       </div>
@@ -774,7 +798,7 @@ export function CitySelectorModal({ isOpen, onClose, selectedCity, onSelectLocat
           <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant" />
           <input
             type="text"
-            placeholder={selectedStateObj ? `Search district in ${selectedStateObj.state}...` : "Search State or District..."}
+            placeholder={selectedStateObj ? `Search district in ${selectedStateObj.state}...` : "Search State or District (Odisha, Maharashtra, Goa...)"}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full bg-surface-container-high/80 border border-white/10 focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed rounded-xl pl-10 pr-8 py-2.5 text-xs text-white placeholder-on-surface-variant/50"

@@ -1,15 +1,30 @@
 export const INDIAN_STATES_AND_DISTRICTS = [
   {
+    state: 'Odisha',
+    icon: '🏛️',
+    districts: [
+      { name: 'Bhubaneswar', tag: 'Patia, Jaydev Vihar & Saheed Nagar' },
+      { name: 'Cuttack', tag: 'CDS, Buxi Bazar & Cantonment' },
+      { name: 'Puri', tag: 'VIP Road & Marine Drive Beach' },
+      { name: 'Rourkela', tag: 'Civil Township & Chhend' },
+      { name: 'Sambalpur', tag: 'Burla & Budharaja' },
+      { name: 'Berhampur', tag: 'Silk City & Gopalpur Beach' },
+      { name: 'Balasore', tag: 'Proof Road & Chandipur' }
+    ]
+  },
+  {
     state: 'Maharashtra',
     icon: '🏙️',
     districts: [
-      { name: 'Mumbai', tag: 'BKC, Lower Parel & Bandra' },
+      { name: 'Mumbai', tag: 'BKC, Lower Parel, Bandra & Juhu' },
       { name: 'Pune', tag: 'Koregaon Park, Baner & Kalyani Nagar' },
       { name: 'Nagpur', tag: 'Civil Lines & Dharampeth' },
       { name: 'Nashik', tag: 'Gangapur Road & College Road' },
       { name: 'Thane', tag: 'Ghodbunder Road & Majiwada' },
       { name: 'Navi Mumbai', tag: 'Vashi & Palm Beach Road' },
-      { name: 'Chhatrapati Sambhajinagar', tag: 'Nirala Bazar & CIDCO' }
+      { name: 'Chhatrapati Sambhajinagar', tag: 'Nirala Bazar & CIDCO' },
+      { name: 'Kolhapur', tag: 'Tarabai Park & Rajarampuri' },
+      { name: 'Solapur', tag: 'Saat Rasta & Civil Lines' }
     ]
   },
   {
@@ -20,7 +35,9 @@ export const INDIAN_STATES_AND_DISTRICTS = [
       { name: 'Mysuru', tag: 'Gokulam & Jayalakshmipuram' },
       { name: 'Mangaluru', tag: 'Kadri & Bejai' },
       { name: 'Hubballi-Dharwad', tag: 'Vidyanagar & Unkal' },
-      { name: 'Belagavi', tag: 'Tilakwadi & Camp' }
+      { name: 'Belagavi', tag: 'Tilakwadi & Camp' },
+      { name: 'Kalaburagi', tag: 'Super Market & Sedam Road' },
+      { name: 'Udupi', tag: 'Manipal & Malpe Beach' }
     ]
   },
   {
@@ -29,8 +46,9 @@ export const INDIAN_STATES_AND_DISTRICTS = [
     districts: [
       { name: 'New Delhi', tag: 'Connaught Place & Khan Market' },
       { name: 'Gurugram', tag: 'CyberHub & Golf Course Road' },
-      { name: 'Noida', tag: 'Sector 18 & Greater Noida Expressway' },
-      { name: 'Faridabad', tag: 'Sector 15 & Surajkund' }
+      { name: 'Noida', tag: 'Sector 18 & Greater Noida' },
+      { name: 'Faridabad', tag: 'Sector 15 & Surajkund' },
+      { name: 'Ghaziabad', tag: 'Indirapuram & Vaishali' }
     ]
   },
   {
@@ -46,7 +64,9 @@ export const INDIAN_STATES_AND_DISTRICTS = [
     icon: '💎',
     districts: [
       { name: 'Hyderabad', tag: 'Jubilee Hills, Banjara Hills & Gachibowli' },
-      { name: 'Warangal', tag: 'Kazipet & Hanamkonda' }
+      { name: 'Warangal', tag: 'Kazipet & Hanamkonda' },
+      { name: 'Nizamabad', tag: 'Khaleelwadi & Armoor' },
+      { name: 'Karimnagar', tag: 'Mukarampura & Collectorate' }
     ]
   },
   {
@@ -55,25 +75,39 @@ export const INDIAN_STATES_AND_DISTRICTS = [
     districts: [
       { name: 'Chennai', tag: 'Nungambakkam, ECR & Alwarpet' },
       { name: 'Coimbatore', tag: 'Race Course & RS Puram' },
-      { name: 'Madurai', tag: 'KK Nagar & Anna Nagar' }
+      { name: 'Madurai', tag: 'KK Nagar & Anna Nagar' },
+      { name: 'Tiruchirappalli', tag: 'Thillai Nagar & Cantonment' },
+      { name: 'Salem', tag: 'Fairlands & Hasthampatti' }
     ]
   },
   {
     state: 'Rajasthan',
-    icon: 'Fort',
+    icon: '🏰',
     districts: [
       { name: 'Jaipur', tag: 'C-Scheme, Malviya Nagar & Raja Park' },
       { name: 'Udaipur', tag: 'Fateh Sagar & Sukhadia Circle' },
-      { name: 'Jodhpur', tag: 'Ratanada & Shastri Nagar' }
+      { name: 'Jodhpur', tag: 'Ratanada & Shastri Nagar' },
+      { name: 'Kota', tag: 'Vigyan Nagar & Talwandi' },
+      { name: 'Ajmer', tag: 'Panchsheel & Vaishali Nagar' },
+      { name: 'Jaisalmer', tag: 'Fort Road & Sam Sand Dunes' }
     ]
   },
   {
-    state: 'Punjab & Chandigarh',
+    state: 'Punjab',
     icon: '🌾',
     districts: [
-      { name: 'Chandigarh', tag: 'Sector 26, Sector 17 & Elante' },
       { name: 'Ludhiana', tag: 'Ferozepur Road & Sarabha Nagar' },
-      { name: 'Amritsar', tag: 'Ranjit Avenue & Mall Road' }
+      { name: 'Amritsar', tag: 'Ranjit Avenue & Mall Road' },
+      { name: 'Jalandhar', tag: 'Model Town & PPR Market' },
+      { name: 'Patiala', tag: 'Bhupindra Road & Urban Estate' },
+      { name: 'Mohali', tag: 'Sector 70 & Phase 3B2' }
+    ]
+  },
+  {
+    state: 'Chandigarh (UT)',
+    icon: '🌇',
+    districts: [
+      { name: 'Chandigarh', tag: 'Sector 26, Sector 17 & Elante Mall' }
     ]
   },
   {
@@ -82,7 +116,9 @@ export const INDIAN_STATES_AND_DISTRICTS = [
     districts: [
       { name: 'Ahmedabad', tag: 'SG Highway & Sindhu Bhavan' },
       { name: 'Surat', tag: 'Dumas Road & Vesu' },
-      { name: 'Vadodara', tag: 'Alkapuri & Gotri' }
+      { name: 'Vadodara', tag: 'Alkapuri & Gotri' },
+      { name: 'Rajkot', tag: 'Kalawad Road & Race Course' },
+      { name: 'Gandhinagar', tag: 'Infocity & Sector 11' }
     ]
   },
   {
@@ -90,7 +126,9 @@ export const INDIAN_STATES_AND_DISTRICTS = [
     icon: '🎨',
     districts: [
       { name: 'Kolkata', tag: 'Park Street, Salt Lake & Rajarhat' },
-      { name: 'Siliguri', tag: 'Sevoke Road & City Centre' }
+      { name: 'Siliguri', tag: 'Sevoke Road & City Centre' },
+      { name: 'Asansol', tag: 'Burnpur Road & Sen Raleigh' },
+      { name: 'Durgapur', tag: 'City Centre & Benachity' }
     ]
   },
   {
@@ -99,16 +137,20 @@ export const INDIAN_STATES_AND_DISTRICTS = [
     districts: [
       { name: 'Kochi', tag: 'MG Road, Marine Drive & Fort Kochi' },
       { name: 'Thiruvananthapuram', tag: 'Kowdiar & Technopark' },
-      { name: 'Kozhikode', tag: 'Mavoor Road & Beach Road' }
+      { name: 'Kozhikode', tag: 'Mavoor Road & Beach Road' },
+      { name: 'Thrissur', tag: 'Round West & Swaraj Round' },
+      { name: 'Kannur', tag: 'Payyambalam & Thana' }
     ]
   },
   {
     state: 'Madhya Pradesh',
-    icon: '🏰',
+    icon: '🐅',
     districts: [
       { name: 'Indore', tag: 'Vijay Nagar & 56 Dukan' },
       { name: 'Bhopal', tag: 'Arera Colony & MP Nagar' },
-      { name: 'Gwalior', tag: 'City Centre & Lashkar' }
+      { name: 'Gwalior', tag: 'City Centre & Lashkar' },
+      { name: 'Jabalpur', tag: 'Civil Lines & Wright Town' },
+      { name: 'Ujjain', tag: 'Nanakheda & Freeganj' }
     ]
   },
   {
@@ -118,22 +160,161 @@ export const INDIAN_STATES_AND_DISTRICTS = [
       { name: 'Lucknow', tag: 'Hazratganj, Gomti Nagar & Aliganj' },
       { name: 'Agra', tag: 'Taj Ganj & Fatehabad Road' },
       { name: 'Varanasi', tag: 'Cantonment & Assi Ghat' },
-      { name: 'Kanpur', tag: 'Swaroop Nagar & Civil Lines' }
+      { name: 'Kanpur', tag: 'Swaroop Nagar & Civil Lines' },
+      { name: 'Prayagraj', tag: 'Civil Lines & Katra' },
+      { name: 'Meerut', tag: 'Garh Road & Shastri Nagar' }
     ]
   },
   {
-    state: 'Uttarakhand & Himachal',
+    state: 'Andhra Pradesh',
+    icon: '🌅',
+    districts: [
+      { name: 'Visakhapatnam', tag: 'RK Beach, Siripuram & MVP Colony' },
+      { name: 'Vijayawada', tag: 'MG Road & Benz Circle' },
+      { name: 'Guntur', tag: 'Broadipet & Lakshmipuram' },
+      { name: 'Tirupati', tag: 'KT Road & Alipiri' }
+    ]
+  },
+  {
+    state: 'Assam',
+    icon: '🦏',
+    districts: [
+      { name: 'Guwahati', tag: 'GS Road, Zoo Road & Christian Basti' },
+      { name: 'Silchar', tag: 'Tarapur & Goldighi' },
+      { name: 'Dibrugarh', tag: 'RBC Road & Chowkidinghee' }
+    ]
+  },
+  {
+    state: 'Bihar',
+    icon: '📜',
+    districts: [
+      { name: 'Patna', tag: 'Boring Road, Bailey Road & Kankerbagh' },
+      { name: 'Gaya', tag: 'Bodhgaya & AP Colony' },
+      { name: 'Muzaffarpur', tag: 'Kazi Mohammadpur & Club Road' }
+    ]
+  },
+  {
+    state: 'Chhattisgarh',
+    icon: '⛰️',
+    districts: [
+      { name: 'Raipur', tag: 'VIP Road & Shankar Nagar' },
+      { name: 'Bhilai', tag: 'Civic Centre & Sector 6' },
+      { name: 'Bilaspur', tag: 'Vyapar Vihar & Link Road' }
+    ]
+  },
+  {
+    state: 'Jharkhand',
+    icon: '🌲',
+    districts: [
+      { name: 'Ranchi', tag: 'Main Road, Lalpur & Kanke Road' },
+      { name: 'Jamshedpur', tag: 'Bistupur & Sakchi' },
+      { name: 'Dhanbad', tag: 'Bank More & Saraidhela' }
+    ]
+  },
+  {
+    state: 'Himachal Pradesh',
     icon: '🏔️',
     districts: [
-      { name: 'Dehradun', tag: 'Rajpur Road & EC Road' },
       { name: 'Shimla', tag: 'Mall Road & Lakkar Bazar' },
-      { name: 'Manali', tag: 'Old Manali & Mall Road' }
+      { name: 'Manali', tag: 'Old Manali & Mall Road' },
+      { name: 'Dharamshala', tag: 'McLeod Ganj & Kotwali Bazar' }
+    ]
+  },
+  {
+    state: 'Uttarakhand',
+    icon: '🌊',
+    districts: [
+      { name: 'Dehradun', tag: 'Rajpur Road & EC Road' },
+      { name: 'Rishikesh', tag: 'Laxman Jhula & Tapovan' },
+      { name: 'Haridwar', tag: 'Ranipur More & Har Ki Pauri' },
+      { name: 'Nainital', tag: 'Mall Road & Tallital' }
+    ]
+  },
+  {
+    state: 'Jammu & Kashmir',
+    icon: '❄️',
+    districts: [
+      { name: 'Srinagar', tag: 'Dal Lake Boulevard & Lal Chowk' },
+      { name: 'Jammu', tag: 'Gandhi Nagar & Residency Road' },
+      { name: 'Katra', tag: 'Main Market & Railway Road' }
+    ]
+  },
+  {
+    state: 'Puducherry (UT)',
+    icon: '🏖️',
+    districts: [
+      { name: 'Puducherry', tag: 'White Town, Heritage Town & Auroville' }
+    ]
+  },
+  {
+    state: 'Manipur',
+    icon: '🌸',
+    districts: [
+      { name: 'Imphal', tag: 'Thangal Bazar & Paona Bazar' }
+    ]
+  },
+  {
+    state: 'Meghalaya',
+    icon: '☁️',
+    districts: [
+      { name: 'Shillong', tag: 'Police Bazar & Laitumkhrah' }
+    ]
+  },
+  {
+    state: 'Mizoram',
+    icon: '🏞️',
+    districts: [
+      { name: 'Aizawl', tag: 'Zarkawt & Chanmari' }
+    ]
+  },
+  {
+    state: 'Nagaland',
+    icon: '🦅',
+    districts: [
+      { name: 'Kohima', tag: 'PR Hill & BOC' },
+      { name: 'Dimapur', tag: 'NL Road & Super Market' }
+    ]
+  },
+  {
+    state: 'Sikkim',
+    icon: '⛰️',
+    districts: [
+      { name: 'Gangtok', tag: 'MG Marg & Deorali' }
+    ]
+  },
+  {
+    state: 'Tripura',
+    icon: '🚩',
+    districts: [
+      { name: 'Agartala', tag: 'Post Office Chowmuhani & Battala' }
+    ]
+  },
+  {
+    state: 'Arunachal Pradesh',
+    icon: '☀️',
+    districts: [
+      { name: 'Itanagar', tag: 'Ganga Market & Bank Tinali' }
+    ]
+  },
+  {
+    state: 'Ladakh (UT)',
+    icon: '🏔️',
+    districts: [
+      { name: 'Leh', tag: 'Main Bazar & Changspa' }
+    ]
+  },
+  {
+    state: 'Andaman & Nicobar (UT)',
+    icon: '🏝️',
+    districts: [
+      { name: 'Port Blair', tag: 'Aberdeen Bazar & Marine Hill' }
     ]
   }
 ];
 
 export const ALL_INDIAN_CITIES = [
   { name: 'Mumbai', state: 'Maharashtra', tag: 'BKC, Lower Parel & Bandra', image: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=500&auto=format&fit=crop&q=60' },
+  { name: 'Bhubaneswar', state: 'Odisha', tag: 'Patia & Jaydev Vihar', image: null },
   { name: 'Bengaluru', state: 'Karnataka', tag: 'Indiranagar & Koramangala', image: 'https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=500&auto=format&fit=crop&q=60' },
   { name: 'Delhi NCR', state: 'Delhi / Haryana / UP', tag: 'CyberHub, Aerocity & Connaught Place', image: 'https://images.unsplash.com/photo-1587474260584-136574528ed5?w=500&auto=format&fit=crop&q=60' },
   { name: 'Goa', state: 'Goa', tag: 'Vagator, Anjuna & Panaji', image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=500&auto=format&fit=crop&q=60' },
