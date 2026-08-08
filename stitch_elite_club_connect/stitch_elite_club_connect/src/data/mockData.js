@@ -22,9 +22,7 @@ export const INDIAN_STATES_AND_DISTRICTS = [
       { name: 'Nashik', tag: 'Gangapur Road & College Road' },
       { name: 'Thane', tag: 'Ghodbunder Road & Majiwada' },
       { name: 'Navi Mumbai', tag: 'Vashi & Palm Beach Road' },
-      { name: 'Chhatrapati Sambhajinagar', tag: 'Nirala Bazar & CIDCO' },
-      { name: 'Kolhapur', tag: 'Tarabai Park & Rajarampuri' },
-      { name: 'Solapur', tag: 'Saat Rasta & Civil Lines' }
+      { name: 'Chhatrapati Sambhajinagar', tag: 'Nirala Bazar & CIDCO' }
     ]
   },
   {
@@ -34,10 +32,7 @@ export const INDIAN_STATES_AND_DISTRICTS = [
       { name: 'Bengaluru', tag: 'Indiranagar, Koramangala & MG Road' },
       { name: 'Mysuru', tag: 'Gokulam & Jayalakshmipuram' },
       { name: 'Mangaluru', tag: 'Kadri & Bejai' },
-      { name: 'Hubballi-Dharwad', tag: 'Vidyanagar & Unkal' },
-      { name: 'Belagavi', tag: 'Tilakwadi & Camp' },
-      { name: 'Kalaburagi', tag: 'Super Market & Sedam Road' },
-      { name: 'Udupi', tag: 'Manipal & Malpe Beach' }
+      { name: 'Hubballi-Dharwad', tag: 'Vidyanagar & Unkal' }
     ]
   },
   {
@@ -46,9 +41,7 @@ export const INDIAN_STATES_AND_DISTRICTS = [
     districts: [
       { name: 'New Delhi', tag: 'Connaught Place & Khan Market' },
       { name: 'Gurugram', tag: 'CyberHub & Golf Course Road' },
-      { name: 'Noida', tag: 'Sector 18 & Greater Noida' },
-      { name: 'Faridabad', tag: 'Sector 15 & Surajkund' },
-      { name: 'Ghaziabad', tag: 'Indirapuram & Vaishali' }
+      { name: 'Noida', tag: 'Sector 18 & Greater Noida' }
     ]
   },
   {
@@ -63,362 +56,241 @@ export const INDIAN_STATES_AND_DISTRICTS = [
     state: 'Telangana',
     icon: '💎',
     districts: [
-      { name: 'Hyderabad', tag: 'Jubilee Hills, Banjara Hills & Gachibowli' },
-      { name: 'Warangal', tag: 'Kazipet & Hanamkonda' },
-      { name: 'Nizamabad', tag: 'Khaleelwadi & Armoor' },
-      { name: 'Karimnagar', tag: 'Mukarampura & Collectorate' }
+      { name: 'Hyderabad', tag: 'Jubilee Hills, Banjara Hills & Gachibowli' }
     ]
   },
   {
     state: 'Tamil Nadu',
     icon: '🛕',
     districts: [
-      { name: 'Chennai', tag: 'Nungambakkam, ECR & Alwarpet' },
-      { name: 'Coimbatore', tag: 'Race Course & RS Puram' },
-      { name: 'Madurai', tag: 'KK Nagar & Anna Nagar' },
-      { name: 'Tiruchirappalli', tag: 'Thillai Nagar & Cantonment' },
-      { name: 'Salem', tag: 'Fairlands & Hasthampatti' }
+      { name: 'Chennai', tag: 'Nungambakkam, ECR & Alwarpet' }
     ]
   },
   {
     state: 'Rajasthan',
     icon: '🏰',
     districts: [
-      { name: 'Jaipur', tag: 'C-Scheme, Malviya Nagar & Raja Park' },
-      { name: 'Udaipur', tag: 'Fateh Sagar & Sukhadia Circle' },
-      { name: 'Jodhpur', tag: 'Ratanada & Shastri Nagar' },
-      { name: 'Kota', tag: 'Vigyan Nagar & Talwandi' },
-      { name: 'Ajmer', tag: 'Panchsheel & Vaishali Nagar' },
-      { name: 'Jaisalmer', tag: 'Fort Road & Sam Sand Dunes' }
+      { name: 'Jaipur', tag: 'C-Scheme, Malviya Nagar & Raja Park' }
     ]
   },
   {
     state: 'Punjab',
     icon: '🌾',
     districts: [
-      { name: 'Ludhiana', tag: 'Ferozepur Road & Sarabha Nagar' },
-      { name: 'Amritsar', tag: 'Ranjit Avenue & Mall Road' },
-      { name: 'Jalandhar', tag: 'Model Town & PPR Market' },
-      { name: 'Patiala', tag: 'Bhupindra Road & Urban Estate' },
-      { name: 'Mohali', tag: 'Sector 70 & Phase 3B2' }
-    ]
-  },
-  {
-    state: 'Chandigarh (UT)',
-    icon: '🌇',
-    districts: [
-      { name: 'Chandigarh', tag: 'Sector 26, Sector 17 & Elante Mall' }
-    ]
-  },
-  {
-    state: 'Gujarat',
-    icon: '🦁',
-    districts: [
-      { name: 'Ahmedabad', tag: 'SG Highway & Sindhu Bhavan' },
-      { name: 'Surat', tag: 'Dumas Road & Vesu' },
-      { name: 'Vadodara', tag: 'Alkapuri & Gotri' },
-      { name: 'Rajkot', tag: 'Kalawad Road & Race Course' },
-      { name: 'Gandhinagar', tag: 'Infocity & Sector 11' }
-    ]
-  },
-  {
-    state: 'West Bengal',
-    icon: '🎨',
-    districts: [
-      { name: 'Kolkata', tag: 'Park Street, Salt Lake & Rajarhat' },
-      { name: 'Siliguri', tag: 'Sevoke Road & City Centre' },
-      { name: 'Asansol', tag: 'Burnpur Road & Sen Raleigh' },
-      { name: 'Durgapur', tag: 'City Centre & Benachity' }
-    ]
-  },
-  {
-    state: 'Kerala',
-    icon: '🌴',
-    districts: [
-      { name: 'Kochi', tag: 'MG Road, Marine Drive & Fort Kochi' },
-      { name: 'Thiruvananthapuram', tag: 'Kowdiar & Technopark' },
-      { name: 'Kozhikode', tag: 'Mavoor Road & Beach Road' },
-      { name: 'Thrissur', tag: 'Round West & Swaraj Round' },
-      { name: 'Kannur', tag: 'Payyambalam & Thana' }
-    ]
-  },
-  {
-    state: 'Madhya Pradesh',
-    icon: '🐅',
-    districts: [
-      { name: 'Indore', tag: 'Vijay Nagar & 56 Dukan' },
-      { name: 'Bhopal', tag: 'Arera Colony & MP Nagar' },
-      { name: 'Gwalior', tag: 'City Centre & Lashkar' },
-      { name: 'Jabalpur', tag: 'Civil Lines & Wright Town' },
-      { name: 'Ujjain', tag: 'Nanakheda & Freeganj' }
-    ]
-  },
-  {
-    state: 'Uttar Pradesh',
-    icon: '🌆',
-    districts: [
-      { name: 'Lucknow', tag: 'Hazratganj, Gomti Nagar & Aliganj' },
-      { name: 'Agra', tag: 'Taj Ganj & Fatehabad Road' },
-      { name: 'Varanasi', tag: 'Cantonment & Assi Ghat' },
-      { name: 'Kanpur', tag: 'Swaroop Nagar & Civil Lines' },
-      { name: 'Prayagraj', tag: 'Civil Lines & Katra' },
-      { name: 'Meerut', tag: 'Garh Road & Shastri Nagar' }
-    ]
-  },
-  {
-    state: 'Andhra Pradesh',
-    icon: '🌅',
-    districts: [
-      { name: 'Visakhapatnam', tag: 'RK Beach, Siripuram & MVP Colony' },
-      { name: 'Vijayawada', tag: 'MG Road & Benz Circle' },
-      { name: 'Guntur', tag: 'Broadipet & Lakshmipuram' },
-      { name: 'Tirupati', tag: 'KT Road & Alipiri' }
-    ]
-  },
-  {
-    state: 'Assam',
-    icon: '🦏',
-    districts: [
-      { name: 'Guwahati', tag: 'GS Road, Zoo Road & Christian Basti' },
-      { name: 'Silchar', tag: 'Tarapur & Goldighi' },
-      { name: 'Dibrugarh', tag: 'RBC Road & Chowkidinghee' }
-    ]
-  },
-  {
-    state: 'Bihar',
-    icon: '📜',
-    districts: [
-      { name: 'Patna', tag: 'Boring Road, Bailey Road & Kankerbagh' },
-      { name: 'Gaya', tag: 'Bodhgaya & AP Colony' },
-      { name: 'Muzaffarpur', tag: 'Kazi Mohammadpur & Club Road' }
-    ]
-  },
-  {
-    state: 'Chhattisgarh',
-    icon: '⛰️',
-    districts: [
-      { name: 'Raipur', tag: 'VIP Road & Shankar Nagar' },
-      { name: 'Bhilai', tag: 'Civic Centre & Sector 6' },
-      { name: 'Bilaspur', tag: 'Vyapar Vihar & Link Road' }
-    ]
-  },
-  {
-    state: 'Jharkhand',
-    icon: '🌲',
-    districts: [
-      { name: 'Ranchi', tag: 'Main Road, Lalpur & Kanke Road' },
-      { name: 'Jamshedpur', tag: 'Bistupur & Sakchi' },
-      { name: 'Dhanbad', tag: 'Bank More & Saraidhela' }
-    ]
-  },
-  {
-    state: 'Himachal Pradesh',
-    icon: '🏔️',
-    districts: [
-      { name: 'Shimla', tag: 'Mall Road & Lakkar Bazar' },
-      { name: 'Manali', tag: 'Old Manali & Mall Road' },
-      { name: 'Dharamshala', tag: 'McLeod Ganj & Kotwali Bazar' }
-    ]
-  },
-  {
-    state: 'Uttarakhand',
-    icon: '🌊',
-    districts: [
-      { name: 'Dehradun', tag: 'Rajpur Road & EC Road' },
-      { name: 'Rishikesh', tag: 'Laxman Jhula & Tapovan' },
-      { name: 'Haridwar', tag: 'Ranipur More & Har Ki Pauri' },
-      { name: 'Nainital', tag: 'Mall Road & Tallital' }
-    ]
-  },
-  {
-    state: 'Jammu & Kashmir',
-    icon: '❄️',
-    districts: [
-      { name: 'Srinagar', tag: 'Dal Lake Boulevard & Lal Chowk' },
-      { name: 'Jammu', tag: 'Gandhi Nagar & Residency Road' },
-      { name: 'Katra', tag: 'Main Market & Railway Road' }
-    ]
-  },
-  {
-    state: 'Puducherry (UT)',
-    icon: '🏖️',
-    districts: [
-      { name: 'Puducherry', tag: 'White Town, Heritage Town & Auroville' }
-    ]
-  },
-  {
-    state: 'Manipur',
-    icon: '🌸',
-    districts: [
-      { name: 'Imphal', tag: 'Thangal Bazar & Paona Bazar' }
-    ]
-  },
-  {
-    state: 'Meghalaya',
-    icon: '☁️',
-    districts: [
-      { name: 'Shillong', tag: 'Police Bazar & Laitumkhrah' }
-    ]
-  },
-  {
-    state: 'Mizoram',
-    icon: '🏞️',
-    districts: [
-      { name: 'Aizawl', tag: 'Zarkawt & Chanmari' }
-    ]
-  },
-  {
-    state: 'Nagaland',
-    icon: '🦅',
-    districts: [
-      { name: 'Kohima', tag: 'PR Hill & BOC' },
-      { name: 'Dimapur', tag: 'NL Road & Super Market' }
-    ]
-  },
-  {
-    state: 'Sikkim',
-    icon: '⛰️',
-    districts: [
-      { name: 'Gangtok', tag: 'MG Marg & Deorali' }
-    ]
-  },
-  {
-    state: 'Tripura',
-    icon: '🚩',
-    districts: [
-      { name: 'Agartala', tag: 'Post Office Chowmuhani & Battala' }
-    ]
-  },
-  {
-    state: 'Arunachal Pradesh',
-    icon: '☀️',
-    districts: [
-      { name: 'Itanagar', tag: 'Ganga Market & Bank Tinali' }
-    ]
-  },
-  {
-    state: 'Ladakh (UT)',
-    icon: '🏔️',
-    districts: [
-      { name: 'Leh', tag: 'Main Bazar & Changspa' }
-    ]
-  },
-  {
-    state: 'Andaman & Nicobar (UT)',
-    icon: '🏝️',
-    districts: [
-      { name: 'Port Blair', tag: 'Aberdeen Bazar & Marine Hill' }
+      { name: 'Chandigarh', tag: 'Sector 26, Sector 17 & Elante' }
     ]
   }
 ];
 
-export const ALL_INDIAN_CITIES = [
-  { name: 'Mumbai', state: 'Maharashtra', tag: 'BKC, Lower Parel & Bandra', image: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=500&auto=format&fit=crop&q=60' },
-  { name: 'Bhubaneswar', state: 'Odisha', tag: 'Patia & Jaydev Vihar', image: null },
-  { name: 'Bengaluru', state: 'Karnataka', tag: 'Indiranagar & Koramangala', image: 'https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=500&auto=format&fit=crop&q=60' },
-  { name: 'Delhi NCR', state: 'Delhi / Haryana / UP', tag: 'CyberHub, Aerocity & Connaught Place', image: 'https://images.unsplash.com/photo-1587474260584-136574528ed5?w=500&auto=format&fit=crop&q=60' },
-  { name: 'Goa', state: 'Goa', tag: 'Vagator, Anjuna & Panaji', image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=500&auto=format&fit=crop&q=60' },
-  { name: 'Hyderabad', state: 'Telangana', tag: 'Jubilee Hills & Gachibowli', image: 'https://images.unsplash.com/photo-1605379399642-870262d3d051?w=500&auto=format&fit=crop&q=60' },
-  { name: 'Pune', state: 'Maharashtra', tag: 'Koregaon Park & Baner', image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?w=500&auto=format&fit=crop&q=60' },
-  { name: 'Kolkata', state: 'West Bengal', tag: 'Park Street & Salt Lake', image: 'https://images.unsplash.com/photo-1558431382-27e303142255?w=500&auto=format&fit=crop&q=60' }
-];
-
 export const mockClubs = [
   {
+    id: 'raghu-dixit-25',
+    name: '25 Years of The Raghu Dixit Project | Bangalore',
+    location: 'Bengaluru, Karnataka',
+    address: 'Phoenix Mall Of Asia • Sahakar Nagar',
+    venueName: 'Phoenix Mall Of Asia',
+    dateLabel: 'Aug 08',
+    dateTimeFull: 'Sat, Aug 10, 2026 • 6:00 PM - 10:00 PM',
+    price: 1699,
+    priceLabel: '₹1699',
+    attendingCount: 826,
+    vibe: 'Regional Music',
+    tag: 'Band Performance',
+    rating: 4.9,
+    coverImage: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&auto=format&fit=crop&q=80',
+    detailHeroImage: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1200&auto=format&fit=crop&q=80',
+    thumbnails: [
+      'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=300&auto=format&fit=crop&q=80'
+    ],
+    description: "Celebrate 25 years of The Raghu Dixit Project live at Phoenix Mall of Asia! Experience India's legendary folk-rock band with infectious energy, soulful vocals, and vibrant acoustic production.",
+    highlights: [
+      'Live performance by Raghu Dixit and The Raghu Dixit Project',
+      'Celebrating 25 years of iconic folk-rock anthem performances',
+      'Amplified state-of-the-art acoustic concert stage sound',
+      'High-energy folk-pop rhythm and immersive live light show'
+    ],
+    termsConditions: [
+      'Entry restricted to age 18 and above only. Valid ID required at door.',
+      'Tickets once booked cannot be exchanged, refunded, or transferred.',
+      'Re-entry is strictly prohibited once inside the concert hall.',
+      'Organisers reserve right of admission. Physical ticket barcode required for entry.'
+    ],
+    venueDetails: {
+      name: 'Phoenix Mall Of Asia',
+      area: 'Sahakar Nagar, Bellary Rd, Byatarayanapura, Bengaluru 560092',
+      description: 'Bengaluru’s finest luxury retail and live entertainment destination, hosting world-class concert tours with state-of-the-art acoustic acoustics.',
+      gallery: [
+        'https://images.unsplash.com/photo-1567449303078-57ad995bd301?w=400&auto=format&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=400&auto=format&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&auto=format&fit=crop&q=80'
+      ]
+    },
+    artist: {
+      name: 'Raghu Dixit',
+      role: 'Lead Vocalist & Acoustic Guitarist',
+      bio: "Raghu Dixit is one of India's most celebrated global folk-rock artists, combining traditional Indian melodies with Western pop and rock arrangements.",
+      photos: [
+        'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&auto=format&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&auto=format&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=400&auto=format&fit=crop&q=80'
+      ]
+    },
+    organiser: {
+      name: 'Nikhilesh Productions & Midnight VIP',
+      details: 'Premier live concert & entertainment tour management company.'
+    },
+    tags: ['Regional Music', 'Band Performance', 'Concert', 'Folk', 'Bangalore']
+  },
+  {
+    id: 'necropsycho-live',
+    name: 'Necropsycho Live In Bangalore',
+    location: 'Bengaluru, Karnataka',
+    address: 'GYLT • Visthar',
+    venueName: 'GYLT Bengaluru',
+    dateLabel: 'Aug 08',
+    dateTimeFull: 'Sat, Aug 10, 2026 • 10:00 PM - 5:00 AM',
+    price: 799,
+    priceLabel: '₹799',
+    attendingCount: 657,
+    vibe: 'PSY',
+    tag: 'Psytrance Warehouse',
+    rating: 4.8,
+    coverImage: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&auto=format&fit=crop&q=80',
+    detailHeroImage: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=1200&auto=format&fit=crop&q=80',
+    thumbnails: [
+      'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=300&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=300&auto=format&fit=crop&q=80'
+    ],
+    description: 'Direct from Brazil, dark psytrance legend Necropsycho delivers a 4-hour immersive audiovisual ritual set at GYLT Bengaluru.',
+    highlights: [
+      'Extended 4-Hour Live Set by Necropsycho (Brazil)',
+      'Underground Psychedelic visual mapping & UV installations',
+      'Funktion-One sound system precision tuning'
+    ],
+    termsConditions: ['18+ entry. Valid Govt ID mandatory.'],
+    venueDetails: {
+      name: 'GYLT Bengaluru',
+      area: 'Visthar, Off Hennur Road, Bengaluru 560077',
+      description: 'Underground electronic music haven built specifically for audiophile clubbers.',
+      gallery: ['https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=400&auto=format&fit=crop&q=80']
+    },
+    artist: {
+      name: 'Necropsycho',
+      role: 'Dark Psytrance Producer (Brazil)',
+      bio: 'Renowned globally for complex soundscapes, driving basslines, and ritualistic soundscapes.',
+      photos: ['https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&auto=format&fit=crop&q=80']
+    },
+    organiser: { name: 'Odyssey Vibes & Midnight', details: 'Psytrance event collective.' },
+    tags: ['PSY', 'Darktrance', 'GYLT', 'Bangalore']
+  },
+  {
+    id: 'mafia-madness',
+    name: 'Mafia Madness',
+    location: 'Bengaluru, Karnataka',
+    address: 'Euphoria Cafe • Koramangala',
+    venueName: 'Euphoria Cafe',
+    dateLabel: 'Aug 09 onwards',
+    dateTimeFull: 'Sun, Aug 11, 2026 • 8:00 PM - 1:00 AM',
+    price: 349,
+    priceLabel: '₹349',
+    attendingCount: 776,
+    vibe: 'Bollywood Night',
+    tag: 'Speakeasy Party',
+    rating: 4.75,
+    coverImage: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&auto=format&fit=crop&q=80',
+    detailHeroImage: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1200&auto=format&fit=crop&q=80',
+    thumbnails: [
+      'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=300&auto=format&fit=crop&q=80'
+    ],
+    description: 'Immerse in a retro mafia-themed Bollywood speakeasy party at Koramangala with secret password entry and craft cocktail menus.',
+    highlights: [
+      'Mafia Theme Dresscode & Photo Ops',
+      'Non-stop Bollywood & Bolly-Tech Hits'
+    ],
+    termsConditions: ['Couples and stag entry allowed. Club rules apply.'],
+    venueDetails: {
+      name: 'Euphoria Cafe Koramangala',
+      area: '5th Block, Koramangala, Bengaluru',
+      description: 'Chic rooftop cafe and speakeasy lounge.',
+      gallery: ['https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&auto=format&fit=crop&q=80']
+    },
+    artist: { name: 'DJ Sukant', role: 'Bollywood Remix Specialist', bio: 'Top resident DJ in Bengaluru.', photos: [] },
+    organiser: { name: 'Odyssey Entertainment', details: 'Nightlife event agency.' },
+    tags: ['Bollywood Night', 'Koramangala', 'Bangalore']
+  },
+  {
+    id: 'netravathi-trek',
+    name: 'Netravathi Trek | Namma Trip',
+    location: 'Bengaluru, Karnataka',
+    address: 'Netravathi Peak • Vidyaranyapura',
+    venueName: 'Netravathi Peak',
+    dateLabel: 'Aug 07 onwards',
+    dateTimeFull: 'Fri, Aug 09, 2026 • 10:00 PM Departure',
+    price: 2099,
+    priceLabel: '₹2099',
+    attendingCount: 466,
+    vibe: 'Outdoor Adventure',
+    tag: 'Trek & Camping',
+    rating: 4.9,
+    coverImage: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&auto=format&fit=crop&q=80',
+    detailHeroImage: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&auto=format&fit=crop&q=80',
+    thumbnails: [
+      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=300&auto=format&fit=crop&q=80'
+    ],
+    description: 'Escape the city and embark on a mesmerizing weekend trek to Netravathi Peak. Includes bus transport, forest permits, meals, and mountain camping.',
+    highlights: [
+      'Round-trip AC Bus Travel from Bangalore',
+      'Guided Mountain Trek & Western Ghats Sunrise Views',
+      'Bonfire & Overnight Stay'
+    ],
+    termsConditions: ['Fitness required. Trekking gear guidelines provided after booking.'],
+    venueDetails: {
+      name: 'Netravathi Peak',
+      area: 'Kudremukh Range, Chikmagalur',
+      description: 'Lush green Western Ghats peak offering misty clouds and pristine trails.',
+      gallery: ['https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&auto=format&fit=crop&q=80']
+    },
+    artist: { name: 'Namma Trip Guides', role: 'Certified Wilderness Instructors', bio: 'Expert trekking team.', photos: [] },
+    organiser: { name: 'Namma Trip', details: 'Adventure & travel organization.' },
+    tags: ['Trek', 'Outdoor Adventure', 'Weekend Getaway']
+  },
+  {
     id: 'void-room',
-    name: 'The Void Room',
+    name: 'The Void Room Techno Night',
     location: 'Mumbai, Maharashtra',
     address: 'BKC Annex, Bandra Kurla Complex, Mumbai 400051',
-    distance: '1.5 km',
+    venueName: 'The Void Room BKC',
+    dateLabel: 'Tonight • 10:30 PM',
+    dateTimeFull: 'Tonight • Oct 24, 2026 • 10:30 PM - 4:30 AM',
+    price: 2500,
+    priceLabel: '₹2500',
+    attendingCount: 1240,
     vibe: 'Techno',
     tag: 'Underground Bunker',
-    capacity: '1,200',
-    attendingCount: 1240,
-    rating: 4.9,
+    rating: 4.95,
     coverImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDBbn5jvtEy07pGtNZHtGhZimHhyORNO9VBnGDYyKkO46ZQpxxMpdM-o5d0K0f68EMiOizclqCAhn07r8P33l2zU34Mwe7UCDqtAW3nrD-JMD4-o55lz7TVtEr_wd6toW_i_C2xCCPZ9oqZbRI-3U9nOhXxs_ZcAIc_Yuztv_oGvSgiS15xYjx0bGhkSlZ_2Cb-GOYLWICh1YbpGZCi1Z3j2p5p3tm4MY0e1TspYZc6-V_0ltcsmPNB7A',
     detailHeroImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCjfje7d2yCw2CUXwByWBnlzqLhBIlXG2b9qsSRpt8Z7xvlN7yzGLkvVlTdROThSpgS5taCTyMqrcm6j370y5bBe-CJ8eW7gHUtEQLeWfr8f9CR7F4gTerTEGvw4v1qrLL-i_CuCZ7DJFxjR00FKNXFmPPt1_4czILpML9QPxaUafDfPrIBV8JVYORe24sbzcCOzQLvqIyamQBhbKpYn-PJjmZxHyOrHZWhpBE9Fc7N_KlS0ToQEy4B7Q',
-    description: "Descend into Mumbai's premier underground techno bunker at BKC. State-of-the-art Funktion-One sound system and minimal neon lighting for pure audio dedication.",
-    tonightEvent: {
-      title: 'Neon Pulse: Mumbai Underground Techno',
-      headliner: 'Nucleya & Anyma',
-      supporting: 'Lost Stories, Arjun Vagale',
-      date: 'Tonight • Oct 24, 2024',
-      time: '10:30 PM - 4:30 AM',
-      artistImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBXVAH90z0ojl3leZI6WVg1BCVtJ_iC6brzFnNFSmQEcSqalAQ1vBHPoTM-njuZKQ66XJBlhT-pcBPceKC9ifitgy-j3zT71uUv_noxG7mtCDzKu0CQsMVj7hbvW0dFwjCjjmDbmXiONzvJBtKCWV6nUGQO_kBaNJUNuVuqOeaJczSs1bO4Du3fdK-6QYA6hy9ndUlN-G__XmVmApvfw31wFP-H4xk-qp8b1niDZRADc9a13wA0e8o1xQ',
-      artistBio: 'Indian bass & techno powerhouse Nucleya teams up with global melodic techno visionary Anyma for an exclusive midnight warehouse set at BKC Mumbai.'
-    }
-  },
-  {
-    id: 'velvet-note',
-    name: 'Velvet Lounge & Speakeasy',
-    location: 'Mumbai, Maharashtra',
-    address: 'Lower Parel, Phoenix Mills, Mumbai 400013',
-    distance: '0.8 km',
-    vibe: 'Jazz',
-    tag: 'Speakeasy',
-    capacity: '340',
-    attendingCount: 340,
-    rating: 4.8,
-    coverImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDRTNfxVU3gct8EqDK5cZrR07taxy3lo7DeJkfu6m0dba-luSuVt4Edt1IFxVUjCq3wW3RDY3p9QII9VwmZ-ZL6uFfu7NdAm4bI7vS7GFVJ8NkxUUjdGjHuMmiiUo3rkPGnHYrR_E_ChWLEQI0SIIcUzbmvQNMNUjIY0cLn8Y3_9bzFXZyp5Z7w3Ruh_mKz7OFGKUXuZi6eLt3WOyihas5o7j9JZVgLNLWcHJr4LMBxakcNAmKoId9MNQ',
-    detailHeroImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDRTNfxVU3gct8EqDK5cZrR07taxy3lo7DeJkfu6m0dba-luSuVt4Edt1IFxVUjCq3wW3RDY3p9QII9VwmZ-ZL6uFfu7NdAm4bI7vS7GFVJ8NkxUUjdGjHuMmiiUo3rkPGnHYrR_E_ChWLEQI0SIIcUzbmvQNMNUjIY0cLn8Y3_9bzFXZyp5Z7w3Ruh_mKz7OFGKUXuZi6eLt3WOyihas5o7j9JZVgLNLWcHJr4LMBxakcNAmKoId9MNQ',
-    description: 'A hidden speakeasy behind a bookshop in Lower Parel featuring contemporary live jazz fusion, artisanal botanical cocktails, and velvet booths.',
-    tonightEvent: {
-      title: 'Midnight Fusion & Sitar Jazz',
-      headliner: 'Rishab Rikhiram Sharma',
-      supporting: 'Midival Punditz Trio',
-      date: 'Tonight • Oct 24, 2024',
-      time: '9:30 PM - 3:00 AM',
-      artistImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD22BvkvOfa1s0xqGBa0PGsacO1zwTu8WTOsK32sBTcK7yyNOQll6JpRkSi7_9i3iL46Ai-uI3eszGXR_PNKqxydIDa0Q4K9-sNei_eVovI_VKsGn1JJOb-9ylW2k4RvXuI97zeu8W1UyxZX4n4zMtXoVrm04yG-h71bxRzjZULOfkreduwM-5_wUfI2YFC11YBP9Yes6JhLJ8EW6S0AWb6E_ScDnYRSTZ8JR4hCZpw8JaTperwt7RJaQ',
-      artistBio: 'Sitar virtuoso Rishab Sharma blends classical Indian raga with smooth lounge jazz in an intimate setting.'
-    }
-  },
-  {
-    id: 'aura',
-    name: 'Aura Nightclub',
-    location: 'Bengaluru, Karnataka',
-    address: 'Indiranagar 100ft Road, Bengaluru 560038',
-    distance: '2.5 km',
-    vibe: 'House',
-    tag: 'Main Room',
-    capacity: '1,500',
-    attendingCount: 1200,
-    rating: 4.95,
-    coverImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBwcGtWp9ttAHYnnN7ufIJI4PP-Stz7_-v2JATHuti1QTtn-A_UhtWBu7jd4jQ2316kQPQ6QqS9EO1cbtXGPiEwPprJknPn9nugN3D3nJbaDY7AQ-nzNJy97QAmYdeNTbOuF1bJf7G7cUVGZIF_waEZ2hm3rvUWSAweRSkvP1EE5AhORfmn4fgmAz1XYwTX_jyDuUVSIhzRKvZg2a1QPyDF3pOwNHjMbvDbafktV1AIfLPhMeuDSB1ZDA',
-    detailHeroImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBwcGtWp9ttAHYnnN7ufIJI4PP-Stz7_-v2JATHuti1QTtn-A_UhtWBu7jd4jQ2316kQPQ6QqS9EO1cbtXGPiEwPprJknPn9nugN3D3nJbaDY7AQ-nzNJy97QAmYdeNTbOuF1bJf7G7cUVGZIF_waEZ2hm3rvUWSAweRSkvP1EE5AhORfmn4fgmAz1XYwTX_jyDuUVSIhzRKvZg2a1QPyDF3pOwNHjMbvDbafktV1AIfLPhMeuDSB1ZDA',
-    description: "Bengaluru's tech-powered nightlife hub with 360-degree LED visual dome and deep house basslines.",
-    tonightEvent: {
-      title: 'Aura Cyber Horizon',
-      headliner: 'Ritviz & Zaeden',
-      supporting: 'BLOT! (Live Set)',
-      date: 'Tonight • Oct 24, 2024',
-      time: '10:00 PM - 4:00 AM',
-      artistImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA7FiTXGo44R1vTFDt4hErgtleO14zGa3ECIQni4QadmgT7DAjSLNBr-3DlHvoKhpinZTF6wKh9cFC5-337zZuhc3eGKRkSMtMpy9tOLL0-DhpuKlx9hMWFPV8tYa8dMph-iAvVcpcCRdVdCRxbFY6fi_StAnHA9u8UQh6kbGt_wLEWwprNbm9c8E21S6eKDnDWAG3hZZ60exVX25mpgH7GpoiHLgdM8zovbHvSm-TrWyzxAYwxOLBS4g',
-      artistBio: 'Ritviz and Zaeden perform live in Bengaluru with melodic electronic hits and high-octane stage production.'
-    }
-  },
-  {
-    id: 'skyline-deck',
-    name: 'Aer Skyline Rooftop',
-    location: 'North Goa, Goa',
-    address: 'Vagator Cliff Edge, North Goa 403509',
-    distance: '1.2 km',
-    vibe: 'RnB',
-    tag: 'Rooftop Lounge',
-    capacity: '850',
-    attendingCount: 850,
-    rating: 4.9,
-    coverImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCPNNBcMtWrVYt16nX-yYM74uOyD5zveT2kTQXAn1_PNPG429keerEGBSTeQy_fnlzl46-gUNpMrzIvxOw3VfvGJyfhBeywIm5MtRm63X5pBNqtQDYDjlgJsgVLS_U1e3EhAuchFS0w_PFHw30RQQKN9phZAX3NPszz2406SgtSS1Y2Ex2PUqkEeMc-ajG-qweZw2-_WiEvNOy6ZJNRRCptK1ZS_1t7FnhnotBOunTM_LjGndhE1uULmw',
-    detailHeroImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCPNNBcMtWrVYt16nX-yYM74uOyD5zveT2kTQXAn1_PNPG429keerEGBSTeQy_fnlzl46-gUNpMrzIvxOw3VfvGJyfhBeywIm5MtRm63X5pBNqtQDYDjlgJsgVLS_U1e3EhAuchFS0w_PFHw30RQQKN9phZAX3NPszz2406SgtSS1Y2Ex2PUqkEeMc-ajG-qweZw2-_WiEvNOy6ZJNRRCptK1ZS_1t7FnhnotBOunTM_LjGndhE1uULmw',
-    description: 'Perched over Vagator Cliff with panoramic Arabian Sea views, luxury cabanas, and premium sunset-to-sunrise R&B vibes.',
-    tonightEvent: {
-      title: 'Sunburn VIP After-Hours',
-      headliner: 'KSHMR',
-      supporting: 'Prateek Kuhad (VIP Acoustic Midnight)',
-      date: 'Tonight • Oct 24, 2024',
-      time: '9:00 PM - 5:00 AM',
-      artistImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDCuobWXU2Vlg2z7ZBGL9FhuAblWiOe2aLNVkRbNbC6zLPoHrkcfJTs6nkHQV1kgaaVxaZLtklIoKubKLuRvy11b8W-v4bS30SNa67hcQ1I-q6SfWIOL8kAiZHAtAG5vE8jGjq9CQDLwK5-vHDTZnRMAxv2PVELXT9s6rUrt7ZcfDO-CvtwUPtRYu9z0k7dr2-r0qRPpWxRhjOna9wr6oiATqbeBLIejDl2LfPzxo3-0LEJ0v3Fpj9NSA',
-      artistBio: 'KSHMR headlines the exclusive cliffside after-party in North Goa with heavy bass drop orchestral arrangements.'
-    }
+    thumbnails: [
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuBXVAH90z0ojl3leZI6WVg1BCVtJ_iC6brzFnNFSmQEcSqalAQ1vBHPoTM-njuZKQ66XJBlhT-pcBPceKC9ifitgy-j3zT71uUv_noxG7mtCDzKu0CQsMVj7hbvW0dFwjCjjmDbmXiONzvJBtKCWV6nUGQO_kBaNJUNuVuqOeaJczSs1bO4Du3fdK-6QYA6hy9ndUlN-G__XmVmApvfw31wFP-H4xk-qp8b1niDZRADc9a13wA0e8o1xQ'
+    ],
+    description: "Descend into Mumbai's premier underground techno bunker at BKC. Funktion-One sound system and minimal neon lighting.",
+    highlights: [
+      'Live set by Nucleya & Anyma',
+      'VIP table bottle service available',
+      'Express queue bypass pass'
+    ],
+    termsConditions: ['Strictly 21+ entry. Club dresscode enforced.'],
+    venueDetails: {
+      name: 'The Void Room BKC',
+      area: 'BKC Annex, Bandra Kurla Complex, Mumbai',
+      description: 'Underground techno warehouse.',
+      gallery: ['https://lh3.googleusercontent.com/aida-public/AB6AXuCjfje7d2yCw2CUXwByWBnlzqLhBIlXG2b9qsSRpt8Z7xvlN7yzGLkvVlTdROThSpgS5taCTyMqrcm6j370y5bBe-CJ8eW7gHUtEQLeWfr8f9CR7F4gTerTEGvw4v1qrLL-i_CuCZ7DJFxjR00FKNXFmPPt1_4czILpML9QPxaUafDfPrIBV8JVYORe24sbzcCOzQLvqIyamQBhbKpYn-PJjmZxHyOrHZWhpBE9Fc7N_KlS0ToQEy4B7Q']
+    },
+    artist: { name: 'Nucleya & Anyma', role: 'Electronic & Melodic Techno Headliners', bio: 'International bass and melodic techno heavyweights.', photos: [] },
+    organiser: { name: 'Midnight VIP Mumbai', details: 'Elite club connect platform.' },
+    tags: ['Techno', 'BKC', 'Mumbai', 'VIP Guestlist']
   }
 ];
 
