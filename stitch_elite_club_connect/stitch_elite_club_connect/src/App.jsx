@@ -9,17 +9,24 @@ import {
   TableBookingModal, 
   GuestlistModal, 
   CitySelectorModal, 
-  NotificationToast 
+  NotificationToast,
+  MandatoryLocationGateModal,
+  AuthGateModal
 } from './components/Modals';
 import { mockClubs, initialChatMessages } from './data/mockData';
 import { Compass, Calendar, LayoutDashboard, ShieldCheck, User, Building2 } from 'lucide-react';
 
 export default function App() {
+  // Onboarding & Mandatory Gate State
+  const [hasSelectedLocation, setHasSelectedLocation] = useState(false);
+  const [authStep, setAuthStep] = useState('location'); // 'location' | 'auth' | 'authenticated'
+  const [selectedCity, setSelectedCity] = useState('');
+  const [userAuth, setUserAuth] = useState(null); // { name, email, role, isGuest }
+
   // Role Access Control: 'customer' | 'owner' | 'admin'
   const [activeRole, setActiveRole] = useState('customer');
   const [currentView, setCurrentView] = useState('discovery'); // 'discovery' | 'club-detail'
   const [selectedClub, setSelectedClub] = useState(mockClubs[0]);
-  const [selectedCity, setSelectedCity] = useState('Mumbai');
   
   // Modals & Notifications
   const [isCityModalOpen, setIsCityModalOpen] = useState(false);
@@ -36,7 +43,40 @@ export default function App() {
     setToastMessage(msg);
     setTimeout(() => {
       setToastMessage(null);
-    }, 4000);
+    }, 4500);
+  };
+
+  // Onboarding Step 1: Location Gate Selection
+  const handleSelectMandatoryCity = (city) => {
+    setSelectedCity(city);
+    setHasSelectedLocation(true);
+    setAuthStep('auth');
+  };
+
+  // Onboarding Step 2: Completed Sign-In
+  const handleCompleteAuth = (authData) => {
+    setUserAuth(authData);
+    setActiveRole(authData.role || 'customer');
+    setAuthStep('authenticated');
+    showNotification(`Namaste & Welcome, ${authData.name}! Exploring ${selectedCity} Nightlife ✨`);
+  };
+
+  // Onboarding Step 2: Continue as Guest
+  const handleContinueAsGuest = () => {
+    const guestData = { name: 'Guest VIP', email: 'guest@midnight.in', role: 'customer', isGuest: true };
+    setUserAuth(guestData);
+    setActiveRole('customer');
+    setAuthStep('authenticated');
+    showNotification(`Welcome, Guest VIP! Exploring ${selectedCity} Nightlife ✨`);
+  };
+
+  // Reset Onboarding (Sign Out / Change Location)
+  const handleResetOnboarding = () => {
+    setHasSelectedLocation(false);
+    setAuthStep('location');
+    setSelectedCity('');
+    setUserAuth(null);
+    setActiveRole('customer');
   };
 
   const handleSwitchRole = (role) => {
@@ -68,7 +108,7 @@ export default function App() {
   };
 
   const handleConfirmTableBooking = (bookingData) => {
-    showNotification(`VIP Table ${bookingData.tableId} reserved! Check-in pass sent to your profile.`);
+    showNotification(`VIP Table ${bookingData.tableId} reserved for ${userAuth?.name || 'Guest'}! Check-in pass sent.`);
   };
 
   const handleConfirmGuestlist = (guestData) => {
@@ -78,7 +118,7 @@ export default function App() {
   const handleSendMessage = (messageText) => {
     const newMessage = {
       id: Date.now(),
-      user: 'You (VIP)',
+      user: userAuth?.name ? `${userAuth.name} (VIP)` : 'Guest (VIP)',
       color: 'text-primary-fixed font-bold',
       message: messageText
     };
@@ -93,16 +133,31 @@ export default function App() {
         onClose={() => setToastMessage(null)} 
       />
 
+      {/* Mandatory Onboarding Gate Modals */}
+      <MandatoryLocationGateModal 
+        isOpen={authStep === 'location'}
+        onSelectCity={handleSelectMandatoryCity}
+      />
+
+      <AuthGateModal 
+        isOpen={authStep === 'auth'}
+        selectedCity={selectedCity}
+        onCompleteAuth={handleCompleteAuth}
+        onContinueAsGuest={handleContinueAsGuest}
+      />
+
       {/* Global Context Header */}
       <HeaderNav 
         activeRole={activeRole}
         onSwitchRole={handleSwitchRole}
+        userAuth={userAuth}
+        onResetOnboarding={handleResetOnboarding}
         currentView={currentView} 
         setCurrentView={setCurrentView}
         selectedCity={selectedCity}
         setIsCityModalOpen={setIsCityModalOpen}
         notificationCount={2}
-        onOpenNotifications={() => showNotification('Notifications: Nucleya & Anyma set starts at 11:30 PM in BKC Mumbai.')}
+        onOpenNotifications={() => showNotification(`Notifications for ${selectedCity}: Nucleya & Anyma set starts at 11:30 PM.`)}
       />
 
       {/* Role-Based Portal Router */}
@@ -206,6 +261,7 @@ export default function App() {
         onClose={() => setIsGuestlistModalOpen(false)}
         club={targetClubForGuestlist}
         onConfirm={handleConfirmGuestlist}
+        userAuth={userAuth}
       />
 
       <CitySelectorModal 

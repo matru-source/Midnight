@@ -8,8 +8,211 @@ import {
   Users, 
   Wine, 
   Sparkles, 
-  ShieldCheck 
+  ShieldCheck,
+  Building2,
+  UserCheck,
+  User,
+  ArrowRight,
+  Lock
 } from 'lucide-react';
+
+/* Mandatory Step 1: Location Gate Modal (App cannot open without picking location) */
+export function MandatoryLocationGateModal({ isOpen, onSelectCity }) {
+  if (!isOpen) return null;
+
+  const indianCities = [
+    { name: 'Mumbai', tag: 'BKC, Lower Parel & Bandra', image: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=500&auto=format&fit=crop&q=60' },
+    { name: 'Bengaluru', tag: 'Indiranagar & Koramangala', image: 'https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=500&auto=format&fit=crop&q=60' },
+    { name: 'Delhi NCR', tag: 'CyberHub & Aerocity', image: 'https://images.unsplash.com/photo-1587474260584-136574528ed5?w=500&auto=format&fit=crop&q=60' },
+    { name: 'Goa', tag: 'Vagator & Anjuna Cliffs', image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=500&auto=format&fit=crop&q=60' },
+    { name: 'Hyderabad', tag: 'Jubilee Hills & Gachibowli', image: 'https://images.unsplash.com/photo-1605379399642-870262d3d051?w=500&auto=format&fit=crop&q=60' },
+    { name: 'Pune', tag: 'Koregaon Park & Baner', image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?w=500&auto=format&fit=crop&q=60' },
+    { name: 'Kolkata', tag: 'Park Street & Salt Lake', image: 'https://images.unsplash.com/photo-1558431382-27e303142255?w=500&auto=format&fit=crop&q=60' }
+  ];
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl flex items-center justify-center p-4 overflow-y-auto animate-fadeIn">
+      <div className="glass-card rounded-3xl max-w-2xl w-full p-8 border border-white/20 relative shadow-2xl my-auto">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary-fixed/30 bg-primary-fixed/10 text-primary-fixed text-xs font-bold uppercase tracking-widest mb-3">
+            <Lock className="w-3.5 h-3.5" />
+            Step 1 of 2 • Mandatory Access Gate
+          </div>
+          
+          <h1 className="font-display text-3xl md:text-4xl font-bold text-white tracking-tight mb-2">
+            Select Your Nightlife Destination
+          </h1>
+          <p className="text-xs text-on-surface-variant max-w-md mx-auto">
+            Please choose an Indian city location to unlock venues, events, VIP table reservations, and guestlists.
+          </p>
+        </div>
+
+        {/* City Selection Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6 max-h-[380px] overflow-y-auto custom-scrollbar pr-1">
+          {indianCities.map((city) => (
+            <div
+              key={city.name}
+              onClick={() => onSelectCity(city.name)}
+              className="glass-card rounded-2xl p-4 border border-white/10 hover:border-primary-fixed cursor-pointer transition-all duration-300 hover:scale-105 group relative overflow-hidden flex flex-col justify-end min-h-[110px]"
+            >
+              <div 
+                className="absolute inset-0 bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity"
+                style={{ backgroundImage: `url('${city.image}')` }}
+              ></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/60 to-transparent"></div>
+              
+              <div className="relative z-10">
+                <div className="flex items-center gap-1.5 text-primary-fixed mb-0.5">
+                  <MapPin className="w-3.5 h-3.5" />
+                  <span className="font-headline text-lg font-bold text-white group-hover:text-primary-fixed transition-colors">{city.name}</span>
+                </div>
+                <p className="text-[10px] text-on-surface-variant line-clamp-1">{city.tag}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="text-center border-t border-white/10 pt-4">
+          <p className="text-[11px] text-on-surface-variant">
+            🔒 Location selection is required to proceed. You can change city anytime later.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* Mandatory Step 2: Auth Gate Modal (Sign In vs Guest Entry) */
+export function AuthGateModal({ isOpen, selectedCity, onCompleteAuth, onContinueAsGuest }) {
+  if (!isOpen) return null;
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [role, setRole] = useState('customer'); // 'customer' | 'owner' | 'admin'
+
+  const handleSignInSubmit = (e) => {
+    e.preventDefault();
+    if (!name.trim()) return;
+    onCompleteAuth({
+      name: name.trim(),
+      email: email.trim() || `${name.toLowerCase().replace(/\s+/g, '')}@vip.midnight.in`,
+      role,
+      isGuest: false
+    });
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl flex items-center justify-center p-4 overflow-y-auto animate-fadeIn">
+      <div className="glass-card rounded-3xl max-w-lg w-full p-8 border border-white/20 relative shadow-2xl my-auto">
+        <div className="text-center mb-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-secondary/40 bg-secondary/10 text-secondary text-xs font-bold uppercase tracking-widest mb-2">
+            <Sparkles className="w-3.5 h-3.5" />
+            Step 2 of 2 • Welcome to {selectedCity}
+          </div>
+          
+          <h2 className="font-headline text-3xl font-bold text-white tracking-tight">
+            Sign In or Access as Guest
+          </h2>
+          <p className="text-xs text-on-surface-variant mt-1">
+            Choose how you would like to experience Midnight Premium in <span className="text-primary-fixed font-bold">{selectedCity}</span>.
+          </p>
+        </div>
+
+        {/* Sign In Form */}
+        <form onSubmit={handleSignInSubmit} className="space-y-4 mb-6">
+          <div>
+            <label className="block text-xs font-semibold text-on-surface mb-1">Your Full Name</label>
+            <input 
+              type="text" 
+              placeholder="e.g. Rohan Sharma"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full bg-surface-container-high/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:border-primary-fixed focus:ring-0 placeholder-on-surface-variant/50"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-semibold text-on-surface mb-1">Email / Mobile (Optional)</label>
+            <input 
+              type="text" 
+              placeholder="e.g. rohan@gmail.com or +91 9876543210"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full bg-surface-container-high/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:border-primary-fixed focus:ring-0 placeholder-on-surface-variant/50"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-semibold text-on-surface mb-1.5">Select Account Role</label>
+            <div className="grid grid-cols-3 gap-2">
+              <button
+                type="button"
+                onClick={() => setRole('customer')}
+                className={`p-2.5 rounded-xl border text-center transition-all flex flex-col items-center gap-1 ${
+                  role === 'customer'
+                    ? 'bg-primary-container/20 border-primary-fixed text-primary-fixed font-bold shadow-[0_0_10px_rgba(0,240,255,0.2)]'
+                    : 'bg-surface-container-high/40 border-white/10 text-on-surface-variant hover:bg-white/5'
+                }`}
+              >
+                <User className="w-4 h-4" />
+                <span className="text-[11px]">VIP Guest</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setRole('owner')}
+                className={`p-2.5 rounded-xl border text-center transition-all flex flex-col items-center gap-1 ${
+                  role === 'owner'
+                    ? 'bg-secondary-container/20 border-secondary text-secondary font-bold shadow-[0_0_10px_rgba(255,36,228,0.2)]'
+                    : 'bg-surface-container-high/40 border-white/10 text-on-surface-variant hover:bg-white/5'
+                }`}
+              >
+                <Building2 className="w-4 h-4" />
+                <span className="text-[11px]">Club Owner</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setRole('admin')}
+                className={`p-2.5 rounded-xl border text-center transition-all flex flex-col items-center gap-1 ${
+                  role === 'admin'
+                    ? 'bg-error-container/30 border-error text-error font-bold'
+                    : 'bg-surface-container-high/40 border-white/10 text-on-surface-variant hover:bg-white/5'
+                }`}
+              >
+                <ShieldCheck className="w-4 h-4" />
+                <span className="text-[11px]">Super Admin</span>
+              </button>
+            </div>
+          </div>
+
+          <button 
+            type="submit"
+            className="w-full gradient-btn py-3.5 rounded-xl font-label-md text-sm font-bold shadow-[0_0_20px_rgba(0,240,255,0.3)] hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+          >
+            <span>Sign In & Unlock Nightlife</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </form>
+
+        <div className="relative my-4">
+          <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-white/10"></div></div>
+          <div className="relative flex justify-center text-[10px] uppercase font-bold text-on-surface-variant">
+            <span className="bg-surface px-3">Or Continue Without Signing In</span>
+          </div>
+        </div>
+
+        <button 
+          onClick={onContinueAsGuest}
+          className="w-full py-3 rounded-xl border border-white/20 text-on-surface hover:bg-white/10 transition-colors font-label-md text-xs font-bold"
+        >
+          Continue as Guest VIP (Limited Privileges)
+        </button>
+      </div>
+    </div>
+  );
+}
 
 export function TableBookingModal({ table, isOpen, onClose, onConfirm }) {
   if (!isOpen || !table) return null;
@@ -101,10 +304,10 @@ export function TableBookingModal({ table, isOpen, onClose, onConfirm }) {
   );
 }
 
-export function GuestlistModal({ club, isOpen, onClose, onConfirm }) {
+export function GuestlistModal({ club, isOpen, onClose, onConfirm, userAuth }) {
   if (!isOpen || !club) return null;
 
-  const [guestName, setGuestName] = useState('Aarav Kapoor');
+  const [guestName, setGuestName] = useState(userAuth?.name || 'Aarav Kapoor');
   const [ticketCount, setTicketCount] = useState(1);
 
   const handleGuestlistSubmit = (e) => {

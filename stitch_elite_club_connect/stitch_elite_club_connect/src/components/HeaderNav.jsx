@@ -13,12 +13,15 @@ import {
   ChevronDown,
   User,
   LogOut,
-  ExternalLink
+  ExternalLink,
+  RotateCcw
 } from 'lucide-react';
 
 export default function HeaderNav({ 
   activeRole,
   onSwitchRole,
+  userAuth,
+  onResetOnboarding,
   currentView, 
   setCurrentView, 
   selectedCity, 
@@ -28,6 +31,9 @@ export default function HeaderNav({
 }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+
+  const userName = userAuth?.name || (userAuth?.isGuest ? 'Guest VIP' : 'VIP Member');
+  const userInitials = userName.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
 
   return (
     <>
@@ -70,7 +76,7 @@ export default function HeaderNav({
               className="hidden lg:flex items-center gap-2 ml-6 glass-panel px-4 py-2 rounded-full cursor-pointer hover:bg-white/10 transition-all border border-white/15"
             >
               <MapPin className="w-4 h-4 text-primary-fixed" />
-              <span className="font-label-md text-sm text-on-surface font-medium">{selectedCity}</span>
+              <span className="font-label-md text-sm text-on-surface font-medium">{selectedCity || 'Select City'}</span>
               <ChevronDown className="w-4 h-4 text-on-surface-variant" />
             </div>
           )}
@@ -137,8 +143,16 @@ export default function HeaderNav({
           </div>
         )}
 
-        {/* Header Right Actions & Role Dropdown */}
+        {/* Header Right Actions & Profile Badge */}
         <div className="flex items-center gap-3">
+          {/* Personalized Greeting Pill (Desktop) */}
+          <div className="hidden xl:flex items-center gap-2 glass-panel px-3 py-1.5 rounded-full border border-white/10 text-xs">
+            <span className="w-2 h-2 rounded-full bg-primary-fixed animate-pulse"></span>
+            <span className="text-on-surface font-semibold">
+              Namaste, <span className="text-primary-fixed font-bold">{userName}</span>!
+            </span>
+          </div>
+
           {/* Mobile Location Button */}
           {activeRole === 'customer' && (
             <button 
@@ -164,21 +178,18 @@ export default function HeaderNav({
           <div className="relative">
             <div 
               onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
-              className="h-10 w-10 rounded-full overflow-hidden border-2 border-white/20 cursor-pointer hover:border-primary-fixed transition-colors flex items-center justify-center bg-surface-container-high"
+              className="h-10 w-10 rounded-full overflow-hidden border-2 border-primary-fixed/50 cursor-pointer hover:border-primary-fixed transition-colors flex items-center justify-center bg-primary-container/20 font-bold text-primary-fixed text-sm shadow-[0_0_10px_rgba(0,240,255,0.2)]"
             >
-              <img 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmCDSXEJE4iOt96ErkNxpMFoV6Qvqnb_ABlhWtum8LG0vMOJKaMxV7BBgm-q4Z3GzSKZVMqaBLd1Wdd9g3BVW3QnlaNCn7rn2xlG8tcfph-nZILbAZ-Qk3m7oLx4y_br1R-rpSb0BMDpembSvCHfGkLNJtuumLdJkIzFJn6d6-K5gzqNmsbZtD0_jSGxgD0ZlJxYj17RGARouhO2YnWXRxYFfKnDrU1_CUUIMX3pdFWeeXBCn17OLEJA" 
-                alt="VIP Profile" 
-                className="w-full h-full object-cover"
-              />
+              {userInitials || 'VIP'}
             </div>
 
             {/* Profile & Portal Role Switcher Dropdown */}
             {isProfileMenuOpen && (
               <div className="absolute right-0 top-12 w-64 glass-card rounded-2xl p-4 border border-white/20 shadow-2xl z-50 animate-fadeIn text-xs space-y-3">
                 <div className="border-b border-white/10 pb-3">
-                  <p className="font-bold text-white text-sm">Alex Mercer</p>
-                  <p className="text-on-surface-variant">Active Portal: <span className="uppercase text-primary-fixed font-bold">{activeRole}</span></p>
+                  <p className="font-bold text-white text-sm">{userName}</p>
+                  <p className="text-on-surface-variant font-medium">Location: <span className="text-primary-fixed font-bold">{selectedCity || 'Mumbai'}</span></p>
+                  <p className="text-on-surface-variant text-[11px]">Role: <span className="uppercase text-primary-fixed font-bold">{userAuth?.isGuest ? 'Guest VIP' : activeRole}</span></p>
                 </div>
 
                 <div className="space-y-1">
@@ -224,8 +235,28 @@ export default function HeaderNav({
                   </button>
                 </div>
 
-                <div className="border-t border-white/10 pt-2 text-center">
-                  <span className="text-[10px] text-on-surface-variant/70">Role-Based Access Control Enabled</span>
+                <div className="border-t border-white/10 pt-2 space-y-1">
+                  <button
+                    onClick={() => {
+                      setIsCityModalOpen(true);
+                      setIsProfileMenuOpen(false);
+                    }}
+                    className="w-full flex items-center gap-2 px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-white/5 text-left"
+                  >
+                    <MapPin className="w-3.5 h-3.5 text-primary-fixed" />
+                    <span>Change City ({selectedCity})</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      onResetOnboarding();
+                      setIsProfileMenuOpen(false);
+                    }}
+                    className="w-full flex items-center gap-2 px-3 py-1.5 rounded-lg text-error hover:bg-error-container/20 text-left font-bold"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5 text-error" />
+                    <span>Sign Out / Change Location</span>
+                  </button>
                 </div>
               </div>
             )}
@@ -244,7 +275,12 @@ export default function HeaderNav({
       {/* Mobile Drawer Navigation */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 top-20 bg-surface/95 backdrop-blur-2xl z-40 md:hidden flex flex-col p-6 space-y-4 border-b border-white/10 animate-fadeIn">
-          <div className="text-xs uppercase tracking-widest text-on-surface-variant font-bold mb-2">
+          <div className="p-3 rounded-xl bg-surface-container-high border border-white/10 text-xs mb-2">
+            <p className="text-on-surface-variant">Logged in as: <span className="text-primary-fixed font-bold">{userName}</span></p>
+            <p className="text-on-surface-variant">Active City: <span className="text-white font-bold">{selectedCity || 'Mumbai'}</span></p>
+          </div>
+
+          <div className="text-xs uppercase tracking-widest text-on-surface-variant font-bold mb-1">
             Switch Portal Role
           </div>
 
@@ -292,6 +328,19 @@ export default function HeaderNav({
             <ShieldCheck className="w-5 h-5" />
             <span>Admin Command HQ</span>
           </button>
+
+          <div className="pt-4 border-t border-white/10 mt-auto">
+            <button
+              onClick={() => {
+                onResetOnboarding();
+                setIsMobileMenuOpen(false);
+              }}
+              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-error-container/20 text-error border border-error/30 font-bold text-xs"
+            >
+              <RotateCcw className="w-4 h-4" />
+              <span>Sign Out & Change Location</span>
+            </button>
+          </div>
         </div>
       )}
     </>
