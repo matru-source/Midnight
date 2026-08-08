@@ -16,18 +16,288 @@ import {
   Lock,
   Search,
   ChevronRight,
-  ArrowLeft
+  ArrowLeft,
+  Filter,
+  Check
 } from 'lucide-react';
 import { INDIAN_STATES_AND_DISTRICTS } from '../data/mockData';
+
+/* Advanced Filters Modal matching user design screenshots */
+export function AdvancedFilterModal({ 
+  isOpen, 
+  onClose, 
+  selectedFilters, 
+  onApplyFilters 
+}) {
+  if (!isOpen) return null;
+
+  // Local state for active selections inside modal before pressing "Apply"
+  const [dates, setDates] = useState(selectedFilters.dates || []);
+  const [locations, setLocations] = useState(selectedFilters.locations || []);
+  const [categories, setCategories] = useState(selectedFilters.categories || []);
+  const [tags, setTags] = useState(selectedFilters.tags || []);
+
+  const dateOptions = [
+    { label: 'Today', count: 74 },
+    { label: 'Tomorrow', count: 89 },
+    { label: 'This Weekend', count: 146 }
+  ];
+
+  const locationOptions = [
+    { label: 'Koramangala', count: 97 },
+    { label: 'Indiranagar', count: 32 },
+    { label: 'BKC Annex', count: 45 },
+    { label: 'Lower Parel', count: 38 },
+    { label: 'CyberHub', count: 28 },
+    { label: 'Vagator Cliffs', count: 35 },
+    { label: 'Brigade Road', count: 16 },
+    { label: 'Ashok Nagar', count: 13 },
+    { label: 'HSR Layout', count: 10 },
+    { label: 'Brookefield', count: 5 },
+    { label: 'Kadubeesanahalli', count: 5 },
+    { label: 'Marathahalli', count: 5 },
+    { label: 'Jayanagar', count: 4 },
+    { label: 'J. P. Nagar', count: 3 },
+    { label: 'Malviya Nagar', count: 3 },
+    { label: 'Yelahanka', count: 3 }
+  ];
+
+  const categoryOptions = [
+    { label: 'Adventure', count: 7 },
+    { label: 'Afro', count: 6 },
+    { label: 'Arcades', count: 1 },
+    { label: 'Art & Culture', count: 4 },
+    { label: 'Band Performance', count: 6 },
+    { label: 'Bolly-Tech', count: 23 },
+    { label: 'Bollywood', count: 1 },
+    { label: 'Bollywood Night', count: 107 },
+    { label: 'Camping', count: 6 },
+    { label: 'Comedy', count: 2 },
+    { label: 'Commercial', count: 53 },
+    { label: 'Concert', count: 3 },
+    { label: 'Contemporary', count: 2 },
+    { label: 'Country', count: 1 },
+    { label: 'Dandiya', count: 4 },
+    { label: 'Day Outing', count: 14 },
+    { label: 'Dj Night', count: 115 },
+    { label: 'EDM', count: 15 },
+    { label: 'Entertainment Hubs', count: 18 },
+    { label: 'Exclusive Experience', count: 4 },
+    { label: 'Experiential Stay', count: 2 },
+    { label: 'Fitness', count: 3 },
+    { label: 'Folk', count: 1 },
+    { label: 'Food & Drinks', count: 4 },
+    { label: 'Game Zones', count: 14 },
+    { label: 'Offers', count: 54 },
+    { label: 'Outdoor Adventure', count: 21 },
+    { label: 'Premium Experience', count: 3 },
+    { label: 'PSY', count: 2 },
+    { label: 'Punjabi Night', count: 15 },
+    { label: 'Regional Music', count: 25 },
+    { label: 'Rock', count: 4 },
+    { label: 'Social Wellness', count: 6 },
+    { label: 'Sufi', count: 2 },
+    { label: 'Techno', count: 24 },
+    { label: 'Trance', count: 2 },
+    { label: 'Trek', count: 22 },
+    { label: 'Weekend Getaway', count: 10 },
+    { label: 'Workshops & Classes', count: 45 }
+  ];
+
+  const tagOptions = [
+    { label: 'Ticketed', count: 154 },
+    { label: 'Guestlist', count: 108 },
+    { label: 'Bohemians', count: 27 },
+    { label: 'Milaap Events', count: 27 },
+    { label: 'Yeda Republic', count: 23 },
+    { label: 'Namma Trip', count: 17 },
+    { label: 'Lets Getaway', count: 14 },
+    { label: 'Ticketed Experiences', count: 14 },
+    { label: 'Escape2Explore', count: 11 },
+    { label: 'DJ Sukant', count: 10 },
+    { label: 'Sky High Entertainment', count: 10 },
+    { label: 'Free Entry', count: 9 },
+    { label: 'NoLimmits Lounge', count: 9 },
+    { label: 'Urban NS Events', count: 9 },
+    { label: 'BudBee Restobar 104', count: 8 },
+    { label: 'Dj Revibe', count: 8 },
+    { label: 'Friday', count: 8 },
+    { label: 'Cafe De Verde', count: 7 }
+  ];
+
+  const toggleFilter = (list, setList, item) => {
+    if (list.includes(item)) {
+      setList(list.filter(i => i !== item));
+    } else {
+      setList([...list, item]);
+    }
+  };
+
+  const handleClearAll = () => {
+    setDates([]);
+    setLocations([]);
+    setCategories([]);
+    setTags([]);
+  };
+
+  const handleApply = () => {
+    onApplyFilters({ dates, locations, categories, tags });
+    onClose();
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex items-center justify-center p-4 animate-fadeIn">
+      <div className="bg-[#0f0f11] rounded-3xl max-w-xl w-full border border-white/10 shadow-2xl flex flex-col max-h-[85vh] relative overflow-hidden">
+        
+        {/* Modal Header */}
+        <div className="flex items-center justify-between p-6 border-b border-white/10 shrink-0">
+          <h2 className="font-headline text-xl font-bold text-white tracking-tight">Filters</h2>
+          <button 
+            onClick={onClose}
+            className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-on-surface-variant hover:text-white transition-colors"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+
+        {/* Modal Scrollable Body */}
+        <div className="p-6 overflow-y-auto space-y-6 custom-scrollbar flex-1">
+          
+          {/* Section 1: Dates */}
+          <div>
+            <h3 className="text-xs font-semibold text-on-surface-variant mb-3 uppercase tracking-wider">Dates</h3>
+            <div className="flex flex-wrap gap-2.5">
+              {dateOptions.map((item) => {
+                const isSelected = dates.includes(item.label);
+                return (
+                  <button
+                    key={item.label}
+                    onClick={() => toggleFilter(dates, setDates, item.label)}
+                    className={`px-4 py-2 rounded-full text-xs font-medium border transition-all flex items-center gap-2 ${
+                      isSelected
+                        ? 'bg-white/15 border-white text-white font-bold shadow-[0_0_10px_rgba(255,255,255,0.2)]'
+                        : 'bg-surface-container-high/40 border-white/10 text-on-surface hover:bg-white/10'
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                    <span className="px-1.5 py-0.2 rounded-full bg-white/10 text-[10px] text-on-surface-variant">
+                      {item.count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Section 2: Locations */}
+          <div>
+            <h3 className="text-xs font-semibold text-on-surface-variant mb-3 uppercase tracking-wider">Locations</h3>
+            <div className="flex flex-wrap gap-2.5">
+              {locationOptions.map((item) => {
+                const isSelected = locations.includes(item.label);
+                return (
+                  <button
+                    key={item.label}
+                    onClick={() => toggleFilter(locations, setLocations, item.label)}
+                    className={`px-4 py-2 rounded-full text-xs font-medium border transition-all flex items-center gap-2 ${
+                      isSelected
+                        ? 'bg-white/15 border-white text-white font-bold shadow-[0_0_10px_rgba(255,255,255,0.2)]'
+                        : 'bg-surface-container-high/40 border-white/10 text-on-surface hover:bg-white/10'
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                    <span className="px-1.5 py-0.2 rounded-full bg-white/10 text-[10px] text-on-surface-variant">
+                      {item.count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Section 3: Categories (A-Z) */}
+          <div>
+            <h3 className="text-xs font-semibold text-on-surface-variant mb-3 uppercase tracking-wider">Categories (A-Z)</h3>
+            <div className="flex flex-wrap gap-2.5">
+              {categoryOptions.map((item) => {
+                const isSelected = categories.includes(item.label);
+                return (
+                  <button
+                    key={item.label}
+                    onClick={() => toggleFilter(categories, setCategories, item.label)}
+                    className={`px-4 py-2 rounded-full text-xs font-medium border transition-all flex items-center gap-2 ${
+                      isSelected
+                        ? 'bg-white/15 border-white text-white font-bold shadow-[0_0_10px_rgba(255,255,255,0.2)]'
+                        : 'bg-surface-container-high/40 border-white/10 text-on-surface hover:bg-white/10'
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                    <span className="px-1.5 py-0.2 rounded-full bg-white/10 text-[10px] text-on-surface-variant">
+                      {item.count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Section 4: Tags or Features */}
+          <div>
+            <h3 className="text-xs font-semibold text-on-surface-variant mb-3 uppercase tracking-wider">Tags or Features</h3>
+            <div className="flex flex-wrap gap-2.5">
+              {tagOptions.map((item) => {
+                const isSelected = tags.includes(item.label);
+                return (
+                  <button
+                    key={item.label}
+                    onClick={() => toggleFilter(tags, setTags, item.label)}
+                    className={`px-4 py-2 rounded-full text-xs font-medium border transition-all flex items-center gap-2 ${
+                      isSelected
+                        ? 'bg-white/15 border-white text-white font-bold shadow-[0_0_10px_rgba(255,255,255,0.2)]'
+                        : 'bg-surface-container-high/40 border-white/10 text-on-surface hover:bg-white/10'
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                    <span className="px-1.5 py-0.2 rounded-full bg-white/10 text-[10px] text-on-surface-variant">
+                      {item.count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+        </div>
+
+        {/* Modal Footer */}
+        <div className="p-4 sm:p-6 border-t border-white/10 flex items-center justify-between gap-4 shrink-0 bg-[#0f0f11]">
+          <button
+            onClick={handleClearAll}
+            className="flex-1 py-3 px-6 rounded-full border border-white/20 text-white font-bold text-xs hover:bg-white/10 transition-colors"
+          >
+            Clear All
+          </button>
+          
+          <button
+            onClick={handleApply}
+            className="flex-1 py-3 px-6 rounded-full bg-white text-black font-bold text-xs hover:bg-white/90 transition-all shadow-lg text-center"
+          >
+            Apply
+          </button>
+        </div>
+
+      </div>
+    </div>
+  );
+}
 
 /* Mandatory 2-Tier Location Gate Modal (State Selection -> District Selection) */
 export function MandatoryLocationGateModal({ isOpen, onSelectLocation }) {
   if (!isOpen) return null;
 
-  const [selectedStateObj, setSelectedStateObj] = useState(null); // null = selecting state; object = selecting district
+  const [selectedStateObj, setSelectedStateObj] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Filter states or districts based on query
   const filteredStates = INDIAN_STATES_AND_DISTRICTS.filter((s) => {
     const q = searchQuery.toLowerCase().trim();
     if (!q) return true;
@@ -174,7 +444,7 @@ export function AuthGateModal({ isOpen, selectedCity, onCompleteAuth, onContinue
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [role, setRole] = useState('customer'); // 'customer' | 'owner' | 'admin'
+  const [role, setRole] = useState('customer');
 
   const handleSignInSubmit = (e) => {
     e.preventDefault();
@@ -204,7 +474,6 @@ export function AuthGateModal({ isOpen, selectedCity, onCompleteAuth, onContinue
           </p>
         </div>
 
-        {/* Sign In Form */}
         <form onSubmit={handleSignInSubmit} className="space-y-4 mb-6">
           <div>
             <label className="block text-xs font-semibold text-on-surface mb-1">Your Full Name</label>

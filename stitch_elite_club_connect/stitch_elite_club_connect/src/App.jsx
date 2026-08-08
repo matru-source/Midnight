@@ -11,7 +11,8 @@ import {
   CitySelectorModal, 
   NotificationToast,
   MandatoryLocationGateModal,
-  AuthGateModal
+  AuthGateModal,
+  AdvancedFilterModal
 } from './components/Modals';
 import { mockClubs, initialChatMessages } from './data/mockData';
 import { Compass, Calendar, LayoutDashboard, ShieldCheck, User, Building2 } from 'lucide-react';
@@ -32,6 +33,8 @@ export default function App() {
   const [isCityModalOpen, setIsCityModalOpen] = useState(false);
   const [isTableModalOpen, setIsTableModalOpen] = useState(false);
   const [isGuestlistModalOpen, setIsGuestlistModalOpen] = useState(false);
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+  const [selectedFilters, setSelectedFilters] = useState({ dates: [], locations: [], categories: [], tags: [] });
   const [targetTable, setTargetTable] = useState(null);
   const [targetClubForGuestlist, setTargetClubForGuestlist] = useState(null);
   const [toastMessage, setToastMessage] = useState(null);
@@ -171,6 +174,9 @@ export default function App() {
                 onSelectClub={handleSelectClub}
                 onOpenGuestlistModal={handleOpenGuestlistModal}
                 selectedCity={selectedCity}
+                onOpenFilterModal={() => setIsFilterModalOpen(true)}
+                selectedFilters={selectedFilters}
+                onClearFilters={() => setSelectedFilters({ dates: [], locations: [], categories: [], tags: [] })}
               />
             )}
 
@@ -271,6 +277,16 @@ export default function App() {
         onSelectLocation={(locationString) => {
           setSelectedCity(locationString);
           showNotification(`Switched active location to ${locationString}`);
+        }}
+      />
+
+      <AdvancedFilterModal 
+        isOpen={isFilterModalOpen}
+        onClose={() => setIsFilterModalOpen(false)}
+        selectedFilters={selectedFilters}
+        onApplyFilters={(filters) => {
+          setSelectedFilters(filters);
+          showNotification('Filters applied successfully!');
         }}
       />
     </div>

@@ -7,41 +7,83 @@ import {
   Sparkles, 
   Search,
   Music,
-  CheckCircle
+  CheckCircle,
+  Filter,
+  Calendar,
+  X
 } from 'lucide-react';
 
 export default function DiscoveryHub({ 
   clubs, 
   onSelectClub, 
   onOpenGuestlistModal,
-  selectedCity 
+  selectedCity,
+  onOpenFilterModal,
+  selectedFilters,
+  onClearFilters
 }) {
-  const [selectedVibe, setSelectedVibe] = useState('All Vibes');
+  const [activeDateFilter, setActiveDateFilter] = useState('All');
+  const [activeCategoryFilter, setActiveCategoryFilter] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const vibeOptions = [
-    'All Vibes', 
-    'Techno', 
-    'Underground', 
-    'House', 
-    'Lounge', 
-    'Rooftop', 
-    'Jazz', 
-    'RnB'
+  // Quick Pills from Screenshots
+  const datePills = [
+    { label: 'Today', count: 81 },
+    { label: 'Tomorrow', count: 86 },
+    { label: 'This Weekend', count: 146 }
   ];
 
-  const filteredClubs = clubs.filter((club) => {
-    const matchesVibe = 
-      selectedVibe === 'All Vibes' || 
-      club.vibe.toLowerCase() === selectedVibe.toLowerCase() || 
-      club.tag.toLowerCase() === selectedVibe.toLowerCase();
-    
-    const matchesSearch = 
-      club.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-      club.vibe.toLowerCase().includes(searchQuery.toLowerCase()) || 
-      club.description.toLowerCase().includes(searchQuery.toLowerCase());
+  const categoryPills = [
+    { label: 'Dj Night', count: 105 },
+    { label: 'Bollywood Night', count: 99 },
+    { label: 'Ladies Night', count: 51 },
+    { label: 'Offers', count: 50 },
+    { label: 'Commercial', count: 49 },
+    { label: 'Workshops & Classes', count: 45 },
+    { label: 'Bolly-Tech', count: 23 },
+    { label: 'Regional Music', count: 23 }
+  ];
 
-    return matchesVibe && matchesSearch;
+  const totalActiveFiltersCount = 
+    (selectedFilters?.dates?.length || 0) + 
+    (selectedFilters?.locations?.length || 0) + 
+    (selectedFilters?.categories?.length || 0) + 
+    (selectedFilters?.tags?.length || 0) + 
+    (activeDateFilter !== 'All' ? 1 : 0) + 
+    (activeCategoryFilter !== 'All' ? 1 : 0);
+
+  const filteredClubs = clubs.filter((club) => {
+    // Quick Category Filter
+    if (activeCategoryFilter !== 'All') {
+      const catLower = activeCategoryFilter.toLowerCase();
+      const clubVibeLower = club.vibe.toLowerCase();
+      const clubTagLower = club.tag.toLowerCase();
+      const clubDescLower = club.description.toLowerCase();
+      if (!clubVibeLower.includes(catLower) && !clubTagLower.includes(catLower) && !clubDescLower.includes(catLower)) {
+        return false;
+      }
+    }
+
+    // Modal Filters (Categories)
+    if (selectedFilters?.categories?.length > 0) {
+      const matchCat = selectedFilters.categories.some(c => 
+        club.vibe.toLowerCase().includes(c.toLowerCase()) || 
+        club.tag.toLowerCase().includes(c.toLowerCase())
+      );
+      if (!matchCat) return false;
+    }
+
+    // Search Query
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      const matchesSearch = 
+        club.name.toLowerCase().includes(q) || 
+        club.vibe.toLowerCase().includes(q) || 
+        club.description.toLowerCase().includes(q);
+      if (!matchesSearch) return false;
+    }
+
+    return true;
   });
 
   const featuredClub = clubs.find(c => c.id === 'void-room') || clubs[0];
@@ -49,7 +91,7 @@ export default function DiscoveryHub({
   return (
     <main className="pt-20 sm:pt-28 md:pt-32 px-4 sm:px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto flex flex-col gap-6 sm:gap-10 pb-28 md:pb-32">
       {/* Hero Section: Trending Tonight */}
-      <section className="relative w-full h-[460px] sm:h-[520px] md:h-[580px] rounded-2xl overflow-hidden group shadow-2xl border border-white/10">
+      <section className="relative w-full h-[460px] sm:h-[520px] md:h-[580px] rounded-3xl overflow-hidden group shadow-2xl border border-white/10">
         <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent z-10"></div>
         <div 
           className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
@@ -107,109 +149,211 @@ export default function DiscoveryHub({
         </div>
       </section>
 
-      {/* Filters & Search Toolbar */}
-      <section className="flex flex-col md:flex-row gap-3 sm:gap-4 justify-between items-center z-30">
-        {/* Vibe Selection Pills */}
-        <div className="flex gap-2 overflow-x-auto w-full md:w-auto hide-scrollbar pb-1.5 md:pb-0">
-          {vibeOptions.map((vibe) => (
+      {/* FILTER BAR SYSTEM MATCHING USER SCREENSHOTS */}
+      <section className="glass-card rounded-2xl p-4 sm:p-5 border border-white/10 flex flex-col gap-4">
+        
+        {/* Top Row: Search Input & Advanced "Filters" Modal Button */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-3">
+          <div className="relative w-full md:w-80">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant" />
+            <input
+              type="text"
+              placeholder="Search event, club, dj, genre..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full bg-surface-container-high/60 border border-white/10 focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed rounded-full pl-10 pr-4 py-2.5 text-xs text-on-surface placeholder-on-surface-variant/50 transition-colors"
+            />
+          </div>
+
+          <div className="flex items-center gap-3 w-full md:w-auto justify-between md:justify-end">
+            {totalActiveFiltersCount > 0 && (
+              <button
+                onClick={() => {
+                  setActiveDateFilter('All');
+                  setActiveCategoryFilter('All');
+                  onClearFilters();
+                }}
+                className="text-xs text-error hover:underline flex items-center gap-1 font-bold"
+              >
+                <X className="w-3.5 h-3.5" />
+                Clear Filters
+              </button>
+            )}
+
+            {/* Filter Trigger Button matching Screenshot */}
             <button
-              key={vibe}
-              onClick={() => setSelectedVibe(vibe)}
-              className={`px-4 sm:px-5 py-2.5 rounded-full font-label-md text-xs font-semibold whitespace-nowrap transition-all duration-200 ${
-                selectedVibe === vibe
-                  ? 'glass-card text-primary-fixed border-primary-fixed/50 neon-glow bg-primary-container/20 font-bold'
-                  : 'glass-panel text-on-surface-variant hover:text-white hover:bg-white/10'
-              }`}
+              onClick={onOpenFilterModal}
+              className="flex items-center gap-2 bg-surface-container-high/80 hover:bg-white/15 text-white px-5 py-2.5 rounded-full border border-white/20 font-bold text-xs shadow-lg transition-all"
             >
-              {vibe}
+              <SlidersHorizontal className="w-4 h-4 text-primary-fixed" />
+              <span>Filters</span>
+              {totalActiveFiltersCount > 0 && (
+                <span className="w-5 h-5 rounded-full bg-primary-fixed text-black text-[10px] font-bold flex items-center justify-center">
+                  {totalActiveFiltersCount}
+                </span>
+              )}
             </button>
-          ))}
+          </div>
         </div>
 
-        {/* Search Input Bar */}
-        <div className="relative w-full md:w-72">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant" />
-          <input
-            type="text"
-            placeholder="Search venue or artist..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-surface-container-low/60 backdrop-blur-md border border-white/10 focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed rounded-full pl-10 pr-4 py-2.5 text-xs text-on-surface placeholder-on-surface-variant/50 transition-colors"
-          />
+        {/* Row 1: Date Quick Filter Pills (Matches Screenshot 1) */}
+        <div className="flex items-center gap-2 overflow-x-auto hide-scrollbar pb-1">
+          <button
+            onClick={() => setActiveDateFilter('All')}
+            className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all border ${
+              activeDateFilter === 'All'
+                ? 'bg-white/15 border-white text-white font-bold'
+                : 'bg-surface-container-high/30 border-white/10 text-on-surface-variant hover:text-white'
+            }`}
+          >
+            All Dates
+          </button>
+          {datePills.map((item) => {
+            const isSelected = activeDateFilter === item.label;
+            return (
+              <button
+                key={item.label}
+                onClick={() => setActiveDateFilter(isSelected ? 'All' : item.label)}
+                className={`px-4 py-2 rounded-full text-xs font-medium border transition-all flex items-center gap-2 whitespace-nowrap ${
+                  isSelected
+                    ? 'bg-white/15 border-white text-white font-bold shadow-[0_0_10px_rgba(255,255,255,0.2)]'
+                    : 'bg-surface-container-high/40 border-white/10 text-on-surface hover:bg-white/10'
+                }`}
+              >
+                <span>{item.label}</span>
+                <span className="px-1.5 py-0.2 rounded-full bg-white/10 text-[10px] text-on-surface-variant">
+                  {item.count}
+                </span>
+              </button>
+            );
+          })}
         </div>
+
+        {/* Row 2: Category Quick Filter Pills (Matches Screenshot 1) */}
+        <div className="flex items-center gap-2 overflow-x-auto hide-scrollbar">
+          <button
+            onClick={() => setActiveCategoryFilter('All')}
+            className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all border ${
+              activeCategoryFilter === 'All'
+                ? 'bg-white/15 border-white text-white font-bold'
+                : 'bg-surface-container-high/30 border-white/10 text-on-surface-variant hover:text-white'
+            }`}
+          >
+            All Categories
+          </button>
+          {categoryPills.map((item) => {
+            const isSelected = activeCategoryFilter === item.label;
+            return (
+              <button
+                key={item.label}
+                onClick={() => setActiveCategoryFilter(isSelected ? 'All' : item.label)}
+                className={`px-4 py-2 rounded-full text-xs font-medium border transition-all flex items-center gap-2 whitespace-nowrap ${
+                  isSelected
+                    ? 'bg-white/15 border-white text-white font-bold shadow-[0_0_10px_rgba(255,255,255,0.2)]'
+                    : 'bg-surface-container-high/40 border-white/10 text-on-surface hover:bg-white/10'
+                }`}
+              >
+                <span>{item.label}</span>
+                <span className="px-1.5 py-0.2 rounded-full bg-white/10 text-[10px] text-on-surface-variant">
+                  {item.count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
       </section>
 
       {/* Grid of Clubs */}
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-        {filteredClubs.map((club) => (
-          <article 
-            key={club.id}
-            className="glass-card rounded-2xl overflow-hidden flex flex-col group cursor-pointer border border-white/10 hover:border-primary-fixed/40 transition-all duration-300 hover:-translate-y-1"
-          >
-            <div 
-              onClick={() => onSelectClub(club)}
-              className="relative h-52 sm:h-60 w-full overflow-hidden"
+        {filteredClubs.length === 0 ? (
+          <div className="col-span-full py-12 text-center glass-card rounded-2xl p-8 border border-white/10">
+            <SlidersHorizontal className="w-8 h-8 text-on-surface-variant mx-auto mb-3" />
+            <h3 className="text-white font-bold text-lg mb-1">No Venues Match Selected Filters</h3>
+            <p className="text-xs text-on-surface-variant mb-4">Try clearing some filters or searching for another keyword.</p>
+            <button
+              onClick={() => {
+                setActiveDateFilter('All');
+                setActiveCategoryFilter('All');
+                setSearchQuery('');
+                onClearFilters();
+              }}
+              className="gradient-btn px-6 py-2.5 rounded-full text-xs font-bold"
+            >
+              Reset All Filters
+            </button>
+          </div>
+        ) : (
+          filteredClubs.map((club) => (
+            <article 
+              key={club.id}
+              className="glass-card rounded-2xl overflow-hidden flex flex-col group cursor-pointer border border-white/10 hover:border-primary-fixed/40 transition-all duration-300 hover:-translate-y-1"
             >
               <div 
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                style={{ backgroundImage: `url('${club.coverImage}')` }}
-              ></div>
-              <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/30 to-transparent"></div>
-              
-              <div className="absolute top-3 right-3 glass-panel px-2.5 py-1 rounded-full font-label-sm text-[11px] text-white flex items-center gap-1.5 backdrop-blur-md border border-white/20">
-                <MapPin className="w-3.5 h-3.5 text-primary-fixed" />
-                <span>{club.distance}</span>
-              </div>
-            </div>
-
-            <div className="p-4 sm:p-6 flex flex-col gap-3 sm:gap-4 flex-grow relative -mt-8 z-10">
-              <div className="flex gap-2">
-                <span className="px-2.5 py-0.5 rounded border border-secondary/40 text-secondary font-label-sm text-[10px] font-bold uppercase tracking-wider bg-surface/80 backdrop-blur">
-                  {club.vibe}
-                </span>
-                <span className="px-2.5 py-0.5 rounded border border-white/20 text-on-surface-variant font-label-sm text-[10px] uppercase tracking-wider bg-surface/80 backdrop-blur">
-                  {club.tag}
-                </span>
+                onClick={() => onSelectClub(club)}
+                className="relative h-52 sm:h-60 w-full overflow-hidden"
+              >
+                <div 
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                  style={{ backgroundImage: `url('${club.coverImage}')` }}
+                ></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/30 to-transparent"></div>
+                
+                <div className="absolute top-3 right-3 glass-panel px-2.5 py-1 rounded-full font-label-sm text-[11px] text-white flex items-center gap-1.5 backdrop-blur-md border border-white/20">
+                  <MapPin className="w-3.5 h-3.5 text-primary-fixed" />
+                  <span>{club.distance}</span>
+                </div>
               </div>
 
-              <div>
-                <h3 
-                  onClick={() => onSelectClub(club)}
-                  className="font-headline text-xl sm:text-2xl font-semibold text-white group-hover:text-primary-fixed transition-colors mb-1"
-                >
-                  {club.name}
-                </h3>
-                <p className="font-body text-xs text-on-surface-variant line-clamp-2 leading-relaxed">
-                  {club.description}
-                </p>
-              </div>
-
-              <div className="mt-auto pt-3 flex items-center justify-between border-t border-white/10">
-                <div className="flex items-center gap-1.5">
-                  <Users className="w-4 h-4 text-on-surface-variant" />
-                  <span className="font-label-md text-xs text-on-surface font-medium">
-                    {club.attendingCount} Going
+              <div className="p-4 sm:p-6 flex flex-col gap-3 sm:gap-4 flex-grow relative -mt-8 z-10">
+                <div className="flex gap-2">
+                  <span className="px-2.5 py-0.5 rounded border border-secondary/40 text-secondary font-label-sm text-[10px] font-bold uppercase tracking-wider bg-surface/80 backdrop-blur">
+                    {club.vibe}
+                  </span>
+                  <span className="px-2.5 py-0.5 rounded border border-white/20 text-on-surface-variant font-label-sm text-[10px] uppercase tracking-wider bg-surface/80 backdrop-blur">
+                    {club.tag}
                   </span>
                 </div>
-                
-                <div className="flex gap-1.5">
-                  <button 
+
+                <div>
+                  <h3 
                     onClick={() => onSelectClub(club)}
-                    className="px-2.5 py-1.5 rounded-lg font-label-sm text-xs text-on-surface-variant hover:text-white hover:bg-white/10 transition-colors"
+                    className="font-headline text-xl sm:text-2xl font-semibold text-white group-hover:text-primary-fixed transition-colors mb-1"
                   >
-                    Details
-                  </button>
-                  <button 
-                    onClick={() => onOpenGuestlistModal(club)}
-                    className="ghost-btn px-3 py-1.5 rounded-lg font-label-sm text-xs hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors font-bold"
-                  >
-                    Join
-                  </button>
+                    {club.name}
+                  </h3>
+                  <p className="font-body text-xs text-on-surface-variant line-clamp-2 leading-relaxed">
+                    {club.description}
+                  </p>
+                </div>
+
+                <div className="mt-auto pt-3 flex items-center justify-between border-t border-white/10">
+                  <div className="flex items-center gap-1.5">
+                    <Users className="w-4 h-4 text-on-surface-variant" />
+                    <span className="font-label-md text-xs text-on-surface font-medium">
+                      {club.attendingCount} Going
+                    </span>
+                  </div>
+                  
+                  <div className="flex gap-1.5">
+                    <button 
+                      onClick={() => onSelectClub(club)}
+                      className="px-2.5 py-1.5 rounded-lg font-label-sm text-xs text-on-surface-variant hover:text-white hover:bg-white/10 transition-colors"
+                    >
+                      Details
+                    </button>
+                    <button 
+                      onClick={() => onOpenGuestlistModal(club)}
+                      className="ghost-btn px-3 py-1.5 rounded-lg font-label-sm text-xs hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors font-bold"
+                    >
+                      Join
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          ))
+        )}
       </section>
     </main>
   );
