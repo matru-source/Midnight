@@ -1,0 +1,10 @@
+{
+  "name": "midnight-root",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "npm --prefix stitch_elite_club_connect/stitch_elite_club_connect run dev",
+    "build": "npm --prefix stitch_elite_club_connect/stitch_elite_club_connect run build",
+    "preview": "npm --prefix stitch_elite_club_connect/stitch_elite_club_connect run preview"
+  }
+}

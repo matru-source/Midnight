@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Midnight Premium - Club Discovery Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#353438",
+                      "primary-fixed": "#7df4ff",
+                      "on-error": "#690005",
+                      "inverse-on-surface": "#313033",
+                      "surface-container-high": "#2a2a2d",
+                      "on-secondary-fixed": "#3a0033",
+                      "on-surface-variant": "#b9cacb",
+                      "background": "#131316",
+                      "on-secondary": "#5e0053",
+                      "tertiary": "#faf3ff",
+                      "primary-container": "#00f0ff",
+                      "surface-tint": "#00dbe9",
+                      "error": "#ffb4ab",
+                      "surface-container": "#201f22",
+                      "on-primary-fixed": "#002022",
+                      "tertiary-fixed-dim": "#d1bcff",
+                      "surface-container-highest": "#353438",
+                      "on-tertiary": "#3c0090",
+                      "inverse-primary": "#006970",
+                      "on-error-container": "#ffdad6",
+                      "primary-fixed-dim": "#00dbe9",
+                      "error-container": "#93000a",
+                      "surface-dim": "#131316",
+                      "on-primary": "#00363a",
+                      "surface-container-lowest": "#0e0e11",
+                      "on-tertiary-fixed": "#23005b",
+                      "on-secondary-container": "#520049",
+                      "secondary-fixed-dim": "#fface8",
+                      "surface": "#131316",
+                      "secondary-container": "#ff24e4",
+                      "on-primary-container": "#006970",
+                      "on-tertiary-container": "#7213ff",
+                      "on-surface": "#e5e1e5",
+                      "secondary-fixed": "#ffd7f0",
+                      "on-primary-fixed-variant": "#004f54",
+                      "on-tertiary-fixed-variant": "#5700c9",
+                      "secondary": "#fface8",
+                      "surface-bright": "#39393c",
+                      "primary": "#dbfcff",
+                      "outline-variant": "#3b494b",
+                      "inverse-surface": "#e5e1e5",
+                      "outline": "#849495",
+                      "surface-container-low": "#1c1b1e",
+                      "tertiary-fixed": "#e9ddff",
+                      "tertiary-container": "#e1d2ff",
+                      "on-secondary-fixed-variant": "#840076",
+                      "on-background": "#e5e1e5"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "container-max": "1280px",
+                      "gutter": "24px",
+                      "margin-desktop": "64px",
+                      "margin-mobile": "20px"
+              },
+              "fontFamily": {
+                      "display-lg": [
+                              "Bodoni Moda"
+                      ],
+                      "display-lg-mobile": [
+                              "Bodoni Moda"
+                      ],
+                      "label-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "label-sm": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-lg": [
+                              "Bodoni Moda"
+                      ],
+                      "headline-md": [
+                              "Bodoni Moda"
+                      ]
+              },
+              "fontSize": {
+                      "display-lg": [
+                              "64px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "40px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "0.08em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "500"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Utilities */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .neon-glow {
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+        }
+
+        .neon-text-glow {
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        .gradient-btn {
+            background: linear-gradient(135deg, theme('colors.primary-container'), theme('colors.tertiary-container'));
+            color: theme('colors.on-primary-container');
+        }
+
+        .ghost-btn {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid theme('colors.primary-fixed');
+            color: theme('colors.primary-fixed');
+        }
+
+        /* Fluid Typography and Spacing Overrides for generic tags where classes aren't explicitly mapped */
+        h1, h2, h3, h4, h5, h6 {
+            margin: 0;
+        }
+        
+        /* Custom scrollbar for horizontal lists */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="bg-surface/10 backdrop-blur-[40px] fixed top-0 w-full z-50 border-b border-white/10 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-20 w-full">
+<div class="flex items-center gap-4">
+<span class="font-display-lg text-headline-md tracking-tighter text-primary-fixed">Midnight Premium</span>
+<!-- Location Selector -->
+<div class="hidden md:flex items-center gap-2 ml-8 glass-panel px-4 py-2 rounded-full cursor-pointer hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-primary-fixed text-sm" data-icon="location_on" data-weight="fill" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<span class="font-label-md text-label-md text-on-surface">London</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<!-- Desktop Navigation (Hidden on Mobile, driven by logic) -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-primary-fixed font-bold border-b-2 border-primary-fixed pb-1" href="#">Discover</a>
+<a class="text-on-surface-variant font-medium hover:text-primary hover:bg-white/5 transition-all rounded px-2 py-1" href="#">Events</a>
+<a class="text-on-surface-variant font-medium hover:text-primary hover:bg-white/5 transition-all rounded px-2 py-1" href="#">VIP</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-primary-fixed hover:text-primary hover:bg-white/5 transition-all p-2 rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="md:hidden text-primary-fixed hover:text-primary hover:bg-white/5 transition-all p-2 rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+</button>
+<div class="h-10 w-10 rounded-full bg-surface-variant overflow-hidden border border-white/10 cursor-pointer">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A sophisticated, high-end profile portrait of a confident individual bathed in subtle neon blue and purple club lighting. The setting is dark and moody, reflecting an exclusive nightlife atmosphere. The subject wears chic, minimalist evening attire. The lighting is cinematic, casting soft highlights that contrast with the deep shadows of the background, establishing a premium, exclusive mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmCDSXEJE4iOt96ErkNxpMFoV6Qvqnb_ABlhWtum8LG0vMOJKaMxV7BBgm-q4Z3GzSKZVMqaBLd1Wdd9g3BVW3QnlaNCn7rn2xlG8tcfph-nZILbAZ-Qk3m7oLx4y_br1R-rpSb0BMDpembSvCHfGkLNJtuumLdJkIzFJn6d6-K5gzqNmsbZtD0_jSGxgD0ZlJxYj17RGARouhO2YnWXRxYFfKnDrU1_CUUIMX3pdFWeeXBCn17OLEJA"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar (Desktop Only) - Hidden as per 'Discover' top-level page logic, top nav is used instead to free up canvas -->
+<!-- Main Content Canvas -->
+<main class="pt-28 md:pt-32 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto flex flex-col gap-unit-[10]">
+<!-- Hero Section: Trending Tonight -->
+<section class="relative w-full h-[500px] md:h-[600px] rounded-2xl overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/50 to-transparent z-10"></div>
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A breathtaking, immersive wide shot of a massive, opulent underground nightclub. The space is illuminated by intersecting laser lights in vivid electric blue and magenta against a vast, pitch-black void. A massive crowd is subtly visible in silhouette, energized by a DJ booth glowing intensely in the distance. The overall aesthetic is ultra-modern, high-octane, and undeniably luxurious, perfectly capturing a 'trending tonight' vibe." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDBbn5jvtEy07pGtNZHtGhZimHhyORNO9VBnGDYyKkO46ZQpxxMpdM-o5d0K0f68EMiOizclqCAhn07r8P33l2zU34Mwe7UCDqtAW3nrD-JMD4-o55lz7TVtEr_wd6toW_i_C2xCCPZ9oqZbRI-3U9nOhXxs_ZcAIc_Yuztv_oGvSgiS15xYjx0bGhkSlZ_2Cb-GOYLWICh1YbpGZCi1Z3j2p5p3tm4MY0e1TspYZc6-V_0ltcsmPNB7A')"></div>
+<div class="absolute bottom-0 left-0 w-full p-8 z-20 flex flex-col md:flex-row justify-between items-end gap-6">
+<div class="flex flex-col gap-4 max-w-2xl">
+<div class="flex items-center gap-3">
+<span class="glass-panel px-3 py-1 rounded-full font-label-sm text-label-sm text-primary-fixed uppercase tracking-widest border-primary-fixed/50 neon-glow">Trending Tonight</span>
+<span class="glass-panel px-3 py-1 rounded-full font-label-sm text-label-sm text-secondary uppercase tracking-widest border-secondary/50">Techno</span>
+</div>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-white">The Void Room</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant line-clamp-2 md:line-clamp-none">Descend into London's most exclusive underground techno bunker. Immersive soundscapes and minimal lighting for pure audio dedication.</p>
+</div>
+<div class="flex flex-col items-end gap-4 w-full md:w-auto">
+<div class="flex -space-x-4">
+<!-- Attendee Avatars -->
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-surface-variant overflow-hidden"><img class="w-full h-full object-cover" data-alt="A close-up portrait of a chic club-goer illuminated by soft neon light, styled for an exclusive nightlife platform avatar. Deep shadows, modern aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbYqu6lq895DGop79x-FrcIjjFo_2bIbhBvclchAPcotsYJeOqKt4bXSBcgO4cHtQNAp3HOmWQn52RnNV2kfKBc5luOejsrxW9s56AwIzrR6jTOKkMikFWbVgjQ6B1UUxGGvcky8ygzMjhYkYW_f7kTYG_w9A2FJlVNtQAwhwfRFc_sGPacZWFfv3_f0qAcYvvHCsW74tbLEDONTalGwEKEqImiQL1OTaFKEkt5f8oqfLAHFuNIks-1w"/></div>
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-surface-variant overflow-hidden"><img class="w-full h-full object-cover" data-alt="A trendy individual in a dark club environment, moody lighting with electric blue rim light, high-end nightlife style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7FiTXGo44R1vTFDt4hErgtleO14zGa3ECIQni4QadmgT7DAjSLNBr-3DlHvoKhpinZTF6wKh9cFC5-337zZuhc3eGKRkSMtMpy9tOLL0-DhpuKlx9hMWFPV8tYa8dMph-iAvVcpcCRdVdCRxbFY6fi_StAnHA9u8UQh6kbGt_wLEWwprNbm9c8E21S6eKDnDWAG3hZZ60exVX25mpgH7GpoiHLgdM8zovbHvSm-TrWyzxAYwxOLBS4g"/></div>
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-surface-variant overflow-hidden"><img class="w-full h-full object-cover" data-alt="A fashionable person with glowing accents reflecting off their face, set in a premium nocturnal lounge atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCuobWXU2Vlg2z7ZBGL9FhuAblWiOe2aLNVkRbNbC6zLPoHrkcfJTs6nkHQV1kgaaVxaZLtklIoKubKLuRvy11b8W-v4bS30SNa67hcQ1I-q6SfWIOL8kAiZHAtAG5vE8jGjq9CQDLwK5-vHDTZnRMAxv2PVELXT9s6rUrt7ZcfDO-CvtwUPtRYu9z0k7dr2-r0qRPpWxRhjOna9wr6oiATqbeBLIejDl2LfPzxo3-0LEJ0v3Fpj9NSA"/></div>
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-surface-variant flex items-center justify-center font-label-sm text-label-sm text-on-surface">+2.4k</div>
+</div>
+<button class="gradient-btn px-8 py-4 rounded-xl font-label-md text-label-md w-full md:w-auto hover:opacity-90 transition-opacity active:scale-95">Join Guestlist</button>
+</div>
+</div>
+</section>
+<!-- Filters & Search -->
+<section class="flex flex-col md:flex-row gap-4 justify-between items-center z-30">
+<div class="flex gap-3 overflow-x-auto w-full md:w-auto hide-scrollbar pb-2 md:pb-0">
+<button class="glass-card px-6 py-3 rounded-full font-label-md text-label-md text-primary-fixed border-primary-fixed/50 neon-glow whitespace-nowrap">All Vibes</button>
+<button class="glass-panel px-6 py-3 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-white transition-colors whitespace-nowrap">Underground</button>
+<button class="glass-panel px-6 py-3 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-white transition-colors whitespace-nowrap">Lounge</button>
+<button class="glass-panel px-6 py-3 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-white transition-colors whitespace-nowrap">Rooftop</button>
+</div>
+<div class="flex gap-4 w-full md:w-auto">
+<button class="ghost-btn px-6 py-3 rounded-xl flex items-center gap-2 w-full md:w-auto justify-center">
+<span class="material-symbols-outlined text-[20px]" data-icon="tune">tune</span>
+<span class="font-label-md text-label-md">Filters</span>
+</button>
+</div>
+</section>
+<!-- Grid of Clubs -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Club Card 1 -->
+<article class="glass-card rounded-2xl overflow-hidden flex flex-col group cursor-pointer">
+<div class="relative h-64 w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="An atmospheric, medium shot of a sophisticated jazz lounge. The room is dimly lit with deep shadows, punctuated by warm amber and subtle neon blue accents. A vintage microphone stands prominently on stage. The aesthetic is luxurious, intimate, and exclusive, appealing to a high-end nocturnal audience seeking a refined experience." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDRTNfxVU3gct8EqDK5cZrR07taxy3lo7DeJkfu6m0dba-luSuVt4Edt1IFxVUjCq3wW3RDY3p9QII9VwmZ-ZL6uFfu7NdAm4bI7vS7GFVJ8NkxUUjdGjHuMmiiUo3rkPGnHYrR_E_ChWLEQI0SIIcUzbmvQNMNUjIY0cLn8Y3_9bzFXZyp5Z7w3Ruh_mKz7OFGKUXuZi6eLt3WOyihas5o7j9JZVgLNLWcHJr4LMBxakcNAmKoId9MNQ')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"></div>
+<div class="absolute top-4 right-4 glass-panel px-3 py-1 rounded-full font-label-sm text-label-sm text-white flex items-center gap-1 backdrop-blur-md">
+<span class="material-symbols-outlined text-[16px]" data-icon="near_me">near_me</span> 1.2 mi
+                    </div>
+</div>
+<div class="p-6 flex flex-col gap-4 flex-grow relative -mt-10 z-10">
+<div class="flex gap-2">
+<span class="px-2 py-1 rounded border border-secondary/30 text-secondary font-label-sm text-[10px] uppercase tracking-wider bg-surface/50 backdrop-blur">Jazz</span>
+<span class="px-2 py-1 rounded border border-white/20 text-on-surface-variant font-label-sm text-[10px] uppercase tracking-wider bg-surface/50 backdrop-blur">Lounge</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-white mb-1">Velvet Note</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">A hidden speakeasy featuring contemporary jazz and artisanal cocktails in an intimate setting.</p>
+</div>
+<div class="mt-auto pt-4 flex items-center justify-between border-t border-white/10">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]" data-icon="group">group</span>
+<span class="font-label-md text-label-md text-on-surface">340 Going</span>
+</div>
+<button class="ghost-btn px-4 py-2 rounded-lg font-label-sm text-label-sm hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors">Join</button>
+</div>
+</div>
+</article>
+<!-- Club Card 2 -->
+<article class="glass-card rounded-2xl overflow-hidden flex flex-col group cursor-pointer">
+<div class="relative h-64 w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="A dynamic, high-contrast shot of a bustling house music club. The scene is dominated by deep blacks and sudden bursts of vibrant cyan and magenta lights slicing through atmospheric fog. Hands are raised in the air, silhouetted against a massive LED screen displaying abstract visuals. The mood is high-energy, premium, and intensely rhythmic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBwcGtWp9ttAHYnnN7ufIJI4PP-Stz7_-v2JATHuti1QTtn-A_UhtWBu7jd4jQ2316kQPQ6QqS9EO1cbtXGPiEwPprJknPn9nugN3D3nJbaDY7AQ-nzNJy97QAmYdeNTbOuF1bJf7G7cUVGZIF_waEZ2hm3rvUWSAweRSkvP1EE5AhORfmn4fgmAz1XYwTX_jyDuUVSIhzRKvZg2a1QPyDF3pOwNHjMbvDbafktV1AIfLPhMeuDSB1ZDA')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"></div>
+<div class="absolute top-4 right-4 glass-panel px-3 py-1 rounded-full font-label-sm text-label-sm text-white flex items-center gap-1 backdrop-blur-md">
+<span class="material-symbols-outlined text-[16px]" data-icon="near_me">near_me</span> 2.5 mi
+                    </div>
+</div>
+<div class="p-6 flex flex-col gap-4 flex-grow relative -mt-10 z-10">
+<div class="flex gap-2">
+<span class="px-2 py-1 rounded border border-primary-fixed/50 text-primary-fixed font-label-sm text-[10px] uppercase tracking-wider bg-surface/50 backdrop-blur neon-glow">House</span>
+<span class="px-2 py-1 rounded border border-white/20 text-on-surface-variant font-label-sm text-[10px] uppercase tracking-wider bg-surface/50 backdrop-blur">Main Room</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-white mb-1">Aura</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Immersive visuals and state-of-the-art sound systems defining the modern house experience.</p>
+</div>
+<div class="mt-auto pt-4 flex items-center justify-between border-t border-white/10">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]" data-icon="group">group</span>
+<span class="font-label-md text-label-md text-on-surface">1.2k Going</span>
+</div>
+<button class="gradient-btn px-4 py-2 rounded-lg font-label-sm text-label-sm hover:opacity-90 transition-opacity">Join</button>
+</div>
+</div>
+</article>
+<!-- Club Card 3 -->
+<article class="glass-card rounded-2xl overflow-hidden flex flex-col group cursor-pointer">
+<div class="relative h-64 w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="A serene, upscale rooftop lounge at night. The city skyline sparkles in the background, out of focus. The foreground features sleek, minimalist glass tables reflecting soft, ambient violet and deep blue lighting. Patrons in sophisticated attire mingle softly. The aesthetic is extremely polished, exclusive, and expensive, capturing a high-end nightlife vibe." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCPNNBcMtWrVYt16nX-yYM74uOyD5zveT2kTQXAn1_PNPG429keerEGBSTeQy_fnlzl46-gUNpMrzIvxOw3VfvGJyfhBeywIm5MtRm63X5pBNqtQDYDjlgJsgVLS_U1e3EhAuchFS0w_PFHw30RQQKN9phZAX3NPszz2406SgtSS1Y2Ex2PUqkEeMc-ajG-qweZw2-_WiEvNOy6ZJNRRCptK1ZS_1t7FnhnotBOunTM_LjGndhE1uULmw')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"></div>
+<div class="absolute top-4 right-4 glass-panel px-3 py-1 rounded-full font-label-sm text-label-sm text-white flex items-center gap-1 backdrop-blur-md">
+<span class="material-symbols-outlined text-[16px]" data-icon="near_me">near_me</span> 0.8 mi
+                    </div>
+</div>
+<div class="p-6 flex flex-col gap-4 flex-grow relative -mt-10 z-10">
+<div class="flex gap-2">
+<span class="px-2 py-1 rounded border border-tertiary/50 text-tertiary font-label-sm text-[10px] uppercase tracking-wider bg-surface/50 backdrop-blur">RnB</span>
+<span class="px-2 py-1 rounded border border-white/20 text-on-surface-variant font-label-sm text-[10px] uppercase tracking-wider bg-surface/50 backdrop-blur">Rooftop</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-white mb-1">Skyline Deck</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Panoramic city views paired with premium bottle service and curated R&amp;B sets.</p>
+</div>
+<div class="mt-auto pt-4 flex items-center justify-between border-t border-white/10">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]" data-icon="group">group</span>
+<span class="font-label-md text-label-md text-on-surface">850 Going</span>
+</div>
+<button class="ghost-btn px-4 py-2 rounded-lg font-label-sm text-label-sm hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors">Join</button>
+</div>
+</div>
+</article>
+</section>
+<!-- Bottom spacing for mobile nav -->
+<div class="h-10 md:h-20 w-full"></div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden bg-surface/20 backdrop-blur-[30px] fixed bottom-0 w-full rounded-t-xl border-t border-white/10 shadow-2xl fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2">
+<a class="flex flex-col items-center justify-center bg-primary-container/20 text-primary-fixed rounded-xl p-2 shadow-[0_0_10px_rgba(0,240,255,0.15)] active:scale-90 duration-150 w-16" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="explore" data-weight="fill" style="font-variation-settings: 'FILL' 1;">explore</span>
+<span class="font-label-sm text-[10px] text-center w-full truncate">Discover</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-white/10 transition-all rounded-xl active:scale-90 duration-150 w-16" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="confirmation_number">confirmation_number</span>
+<span class="font-label-sm text-[10px] text-center w-full truncate">Events</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-white/10 transition-all rounded-xl active:scale-90 duration-150 w-16" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-label-sm text-[10px] text-center w-full truncate">VIP</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-white/10 transition-all rounded-xl active:scale-90 duration-150 w-16" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-label-sm text-[10px] text-center w-full truncate">Profile</span>
+</a>
+</nav>
+</body></html>

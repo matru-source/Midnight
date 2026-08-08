@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Owner Dashboard - Midnight Premium</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#353438",
+                      "primary-fixed": "#7df4ff",
+                      "on-error": "#690005",
+                      "inverse-on-surface": "#313033",
+                      "surface-container-high": "#2a2a2d",
+                      "on-secondary-fixed": "#3a0033",
+                      "on-surface-variant": "#b9cacb",
+                      "background": "#131316",
+                      "on-secondary": "#5e0053",
+                      "tertiary": "#faf3ff",
+                      "primary-container": "#00f0ff",
+                      "surface-tint": "#00dbe9",
+                      "error": "#ffb4ab",
+                      "surface-container": "#201f22",
+                      "on-primary-fixed": "#002022",
+                      "tertiary-fixed-dim": "#d1bcff",
+                      "surface-container-highest": "#353438",
+                      "on-tertiary": "#3c0090",
+                      "inverse-primary": "#006970",
+                      "on-error-container": "#ffdad6",
+                      "primary-fixed-dim": "#00dbe9",
+                      "error-container": "#93000a",
+                      "surface-dim": "#131316",
+                      "on-primary": "#00363a",
+                      "surface-container-lowest": "#0e0e11",
+                      "on-tertiary-fixed": "#23005b",
+                      "on-secondary-container": "#520049",
+                      "secondary-fixed-dim": "#fface8",
+                      "surface": "#131316",
+                      "secondary-container": "#ff24e4",
+                      "on-primary-container": "#006970",
+                      "on-tertiary-container": "#7213ff",
+                      "on-surface": "#e5e1e5",
+                      "secondary-fixed": "#ffd7f0",
+                      "on-primary-fixed-variant": "#004f54",
+                      "on-tertiary-fixed-variant": "#5700c9",
+                      "secondary": "#fface8",
+                      "surface-bright": "#39393c",
+                      "primary": "#dbfcff",
+                      "outline-variant": "#3b494b",
+                      "inverse-surface": "#e5e1e5",
+                      "outline": "#849495",
+                      "surface-container-low": "#1c1b1e",
+                      "tertiary-fixed": "#e9ddff",
+                      "tertiary-container": "#e1d2ff",
+                      "on-secondary-fixed-variant": "#840076",
+                      "on-background": "#e5e1e5"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "container-max": "1280px",
+                      "gutter": "24px",
+                      "margin-desktop": "64px",
+                      "margin-mobile": "20px"
+              },
+              "fontFamily": {
+                      "display-lg": [
+                              "Bodoni Moda"
+                      ],
+                      "display-lg-mobile": [
+                              "Bodoni Moda"
+                      ],
+                      "label-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "label-sm": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-lg": [
+                              "Bodoni Moda"
+                      ],
+                      "headline-md": [
+                              "Bodoni Moda"
+                      ]
+              },
+              "fontSize": {
+                      "display-lg": [
+                              "64px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "40px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "0.08em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "500"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased overflow-x-hidden">
+<!-- Top Navigation (Mobile Only) -->
+<nav class="md:hidden bg-surface/10 backdrop-blur-[40px] text-primary-fixed font-headline-md text-headline-md font-display-lg text-display-lg-mobile fixed top-0 w-full z-50 border-b border-white/10 flat no shadows flex justify-between items-center px-margin-mobile md:px-margin-desktop h-20 w-full">
+<div class="font-display-lg text-headline-md tracking-tighter text-primary-fixed">Midnight Premium</div>
+<div class="flex items-center gap-4">
+<button class="hover:text-primary hover:bg-white/5 transition-all active:scale-95 duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined text-primary-fixed">notifications</span>
+</button>
+<button class="hover:text-primary hover:bg-white/5 transition-all active:scale-95 duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined text-primary-fixed">location_on</span>
+</button>
+<img alt="User Profile" class="w-10 h-10 rounded-full border border-white/10 object-cover" data-alt="A sophisticated close-up portrait of a club owner in low-key, moody lighting. The setting is a luxurious, modern nightclub interior with subtle neon magenta and cyan reflections. High contrast, sharp focus, capturing a premium, exclusive nightlife atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaj5jFJHWup4X37H9f2EA1XcrYoThYrQ6_KY_QZzxngBSgk_tiTfOHKsw7fOxLF7Mru_2O0Wf-V-N_gebISTZEaEzDTc96dIEkWQWbl-Kc-vDSF9-d23N3el2g7P1LZUeYmSO-R6DJBMNokiy5NJ3Q7h_P1oidhoh41WEwYCImv5ojKgrnYaBG7g0NYBwyptwTJYkZi4bu3XCZakWr2s8VBjzC_pGtdiZlZWBlkCLssFwbBhjEpGJf9g"/>
+</div>
+</nav>
+<!-- Side Navigation (Desktop) -->
+<aside class="hidden md:flex bg-surface-container-lowest/30 backdrop-blur-[20px] text-primary-fixed font-label-md text-label-md h-screen w-64 fixed left-0 top-0 border-r border-white/10 flat no shadows flex-col py-8 px-4 z-40">
+<div class="mb-12 px-4">
+<img alt="Owner Avatar" class="w-12 h-12 rounded-full border border-white/20 mb-4 object-cover" data-alt="A sophisticated close-up portrait of a club owner in low-key, moody lighting. The setting is a luxurious, modern nightclub interior with subtle neon magenta and cyan reflections. High contrast, sharp focus, capturing a premium, exclusive nightlife atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZK2f3S9Uib0ELWf4YcH7YrsEI_bUgrL0IS_3B16tYaJ2dh54WDl4CN6LDQeQGz-whrg3lq81_Hwj_NPmVNYJwGETLtfe_k5vRa4PvGtYBuGsC0y1WzkeEcYkLRTyJ4LjJbgl5TRK057H_5o_9DtPwqZ6snJhAhNtx7HEDZ4WMVJ_EbOHyOv_Z8CZxxaUX_mJz-0v0CJxUjOs1XwW9UnxAoyOhiBPCtlepCtL0Yh1cbBkoJcMW6-zF7w"/>
+<h1 class="font-display-lg text-headline-md text-primary-fixed tracking-tight">Midnight Premium</h1>
+<p class="text-on-surface-variant opacity-70 mt-1">Owner Dashboard</p>
+</div>
+<nav class="flex-1 flex flex-col gap-2">
+<!-- Active Tab: Overview -->
+<a class="bg-primary-container/20 text-primary-fixed border-l-4 border-primary-fixed shadow-[0_0_15px_rgba(0,240,255,0.2)] hover:bg-white/5 hover:text-on-surface transition-colors active:translate-x-1 transition-transform flex items-center gap-3 px-4 py-3 rounded-r-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                Overview
+            </a>
+<a class="text-on-surface-variant opacity-70 hover:bg-white/5 hover:text-on-surface transition-colors active:translate-x-1 transition-transform flex items-center gap-3 px-4 py-3 rounded-lg border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined">event_note</span>
+                Posters
+            </a>
+<a class="text-on-surface-variant opacity-70 hover:bg-white/5 hover:text-on-surface transition-colors active:translate-x-1 transition-transform flex items-center gap-3 px-4 py-3 rounded-lg border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined">campaign</span>
+                Announcements
+            </a>
+<a class="text-on-surface-variant opacity-70 hover:bg-white/5 hover:text-on-surface transition-colors active:translate-x-1 transition-transform flex items-center gap-3 px-4 py-3 rounded-lg border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined">group</span>
+                Guest Lists
+            </a>
+</nav>
+<div class="mt-auto flex flex-col gap-2 border-t border-white/10 pt-4">
+<a class="text-on-surface-variant opacity-70 hover:bg-white/5 hover:text-on-surface transition-colors active:translate-x-1 transition-transform flex items-center gap-3 px-4 py-3 rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+<a class="text-on-surface-variant opacity-70 hover:bg-white/5 hover:text-on-surface transition-colors active:translate-x-1 transition-transform flex items-center gap-3 px-4 py-3 rounded-lg" href="#">
+<span class="material-symbols-outlined">help</span>
+                Support
+            </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="md:ml-64 pt-24 md:pt-12 px-margin-mobile md:px-margin-desktop pb-32 min-h-screen">
+<header class="mb-12 flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Live Overview</h2>
+<p class="text-on-surface-variant font-body-md">Real-time metrics for Tonight's Event</p>
+</div>
+<div class="hidden md:flex gap-4">
+<button class="bg-transparent border border-primary-fixed/50 text-primary-fixed px-6 py-2 rounded-full font-label-md hover:bg-primary-fixed/10 transition-colors">Generate Report</button>
+<button class="bg-gradient-to-r from-primary-container to-tertiary text-on-primary-fixed px-6 py-2 rounded-full font-label-md hover:opacity-90 transition-opacity flex items-center gap-2 shadow-[0_0_15px_rgba(0,240,255,0.3)]">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                    New Event
+                </button>
+</div>
+</header>
+<!-- Bento Grid Analytics -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+<!-- Attendance Card -->
+<div class="bg-white/[0.05] backdrop-blur-[20px] rounded-xl border border-white/10 p-6 relative overflow-hidden group">
+<div class="absolute -right-12 -top-12 w-32 h-32 bg-secondary-container/20 rounded-full blur-[40px] group-hover:bg-secondary-container/30 transition-colors"></div>
+<div class="flex justify-between items-start mb-8 relative z-10">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-fixed">groups</span>
+<h3 class="font-label-md text-on-surface-variant uppercase tracking-wider">Attendance</h3>
+</div>
+<span class="bg-secondary-container/20 text-secondary-fixed px-2 py-1 rounded text-xs font-bold border border-secondary-fixed/30 animate-pulse flex items-center gap-1">
+<span class="w-1.5 h-1.5 bg-secondary-fixed rounded-full inline-block"></span> LIVE
+                    </span>
+</div>
+<div class="relative z-10">
+<div class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-1">842</div>
+<div class="flex items-center gap-2 text-primary-fixed text-sm">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span>+12% vs last hour</span>
+</div>
+</div>
+</div>
+<!-- Revenue Card -->
+<div class="bg-white/[0.05] backdrop-blur-[20px] rounded-xl border border-white/10 p-6 relative overflow-hidden group">
+<div class="absolute -right-12 -top-12 w-32 h-32 bg-primary-container/10 rounded-full blur-[40px] group-hover:bg-primary-container/20 transition-colors"></div>
+<div class="flex justify-between items-start mb-8 relative z-10">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed">payments</span>
+<h3 class="font-label-md text-on-surface-variant uppercase tracking-wider">Revenue</h3>
+</div>
+</div>
+<div class="relative z-10">
+<div class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-1">$24.5k</div>
+<div class="flex items-center gap-2 text-primary-fixed text-sm">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span>Projected: $42k</span>
+</div>
+</div>
+</div>
+<!-- VIP Reach Card -->
+<div class="bg-white/[0.05] backdrop-blur-[20px] rounded-xl border border-white/10 p-6 relative overflow-hidden group">
+<div class="absolute -right-12 -top-12 w-32 h-32 bg-tertiary/10 rounded-full blur-[40px] group-hover:bg-tertiary/20 transition-colors"></div>
+<div class="flex justify-between items-start mb-8 relative z-10">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-fixed-dim">star</span>
+<h3 class="font-label-md text-on-surface-variant uppercase tracking-wider">VIP Check-ins</h3>
+</div>
+</div>
+<div class="relative z-10">
+<div class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-1">45/50</div>
+<div class="w-full bg-surface-variant h-2 rounded-full mt-4 overflow-hidden">
+<div class="bg-gradient-to-r from-tertiary-container to-tertiary-fixed-dim h-full rounded-full" style="width: 90%;"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Management Center Section -->
+<section>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-6 border-b border-white/10 pb-4">Management Center</h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- Poster Upload -->
+<div class="bg-surface-container-low/50 backdrop-blur-md border border-white/5 rounded-xl p-6">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-label-md text-primary-fixed uppercase tracking-widest">New Promotional Poster</h3>
+<span class="material-symbols-outlined text-on-surface-variant">collections</span>
+</div>
+<div class="border-2 border-dashed border-outline-variant hover:border-primary-fixed/50 transition-colors rounded-lg h-48 flex flex-col items-center justify-center bg-surface/50 cursor-pointer group mb-6 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-primary-container/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-4xl text-on-surface-variant group-hover:text-primary-fixed transition-colors mb-2">cloud_upload</span>
+<p class="font-label-md text-on-surface-variant group-hover:text-on-surface transition-colors">Drag &amp; Drop high-res artwork here</p>
+<p class="text-xs text-outline mt-1">JPEG, PNG or MP4 up to 50MB</p>
+</div>
+<div class="space-y-4">
+<div>
+<input class="w-full bg-surface/50 border-0 border-b border-white/20 focus:border-primary-fixed focus:ring-0 text-on-surface placeholder-on-surface-variant/50 px-0 py-2 transition-colors" placeholder="Event Title" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<input class="w-full bg-surface/50 border-0 border-b border-white/20 focus:border-primary-fixed focus:ring-0 text-on-surface placeholder-on-surface-variant/50 px-0 py-2 transition-colors [color-scheme:dark]" type="date"/>
+<input class="w-full bg-surface/50 border-0 border-b border-white/20 focus:border-primary-fixed focus:ring-0 text-on-surface placeholder-on-surface-variant/50 px-0 py-2 transition-colors [color-scheme:dark]" type="time"/>
+</div>
+<button class="w-full bg-gradient-to-r from-primary-container to-primary-fixed text-on-primary-fixed py-3 rounded-lg font-label-md hover:opacity-90 transition-opacity shadow-[0_0_20px_rgba(0,240,255,0.2)] mt-4">Publish Poster</button>
+</div>
+</div>
+<!-- Live Announcements -->
+<div class="bg-surface-container-low/50 backdrop-blur-md border border-white/5 rounded-xl p-6 flex flex-col">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-label-md text-secondary-fixed uppercase tracking-widest">Live Community Announcement</h3>
+<span class="material-symbols-outlined text-on-surface-variant">campaign</span>
+</div>
+<div class="flex-1 flex flex-col space-y-6">
+<textarea class="w-full flex-1 bg-surface/50 border border-white/10 focus:border-secondary-fixed focus:ring-0 text-on-surface placeholder-on-surface-variant/50 p-4 rounded-lg resize-none min-h-[150px] transition-colors" placeholder="Broadcast a message to all active attendees..."></textarea>
+<div class="flex flex-wrap gap-3">
+<span class="border border-secondary-fixed/50 text-secondary-fixed px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-secondary-fixed/10 transition-colors">Drink Special</span>
+<span class="border border-secondary-fixed/50 text-secondary-fixed px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-secondary-fixed/10 transition-colors">DJ Update</span>
+<span class="border border-secondary-fixed/50 text-secondary-fixed px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-secondary-fixed/10 transition-colors">VIP Notice</span>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-white/10 mt-auto">
+<div class="flex items-center gap-2">
+<input class="rounded border-white/20 bg-surface/50 text-secondary-container focus:ring-secondary-fixed focus:ring-offset-background" id="push" type="checkbox"/>
+<label class="text-sm text-on-surface-variant cursor-pointer" for="push">Send as Push Notification</label>
+</div>
+<button class="bg-transparent border border-secondary-fixed text-secondary-fixed hover:bg-secondary-fixed/10 py-2 px-6 rounded-lg font-label-md transition-colors">Post Now</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="md:hidden bg-surface/20 backdrop-blur-[30px] text-primary-fixed font-label-sm text-label-sm fixed bottom-0 w-full rounded-t-xl border-t border-white/10 shadow-2xl fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2">
+<a class="flex flex-col items-center justify-center bg-primary-container/20 text-primary-fixed rounded-xl p-2 shadow-[0_0_10px_rgba(0,240,255,0.15)] hover:bg-white/10 transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span>Overview</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-white/10 transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined mb-1">event_note</span>
+<span>Posters</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-white/10 transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined mb-1">campaign</span>
+<span>Announce</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-white/10 transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined mb-1">group</span>
+<span>Guests</span>
+</a>
+</nav>
+</body></html>

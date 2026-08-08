@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Control Panel - Midnight Premium</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600;6..96,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-tint": "#00dbe9",
+                      "primary": "#dbfcff",
+                      "inverse-surface": "#e5e1e5",
+                      "surface-dim": "#131316",
+                      "surface": "#131316",
+                      "surface-container-lowest": "#0e0e11",
+                      "inverse-on-surface": "#313033",
+                      "secondary": "#fface8",
+                      "on-background": "#e5e1e5",
+                      "tertiary-fixed-dim": "#d1bcff",
+                      "outline": "#849495",
+                      "surface-bright": "#39393c",
+                      "on-primary-fixed-variant": "#004f54",
+                      "on-primary-container": "#006970",
+                      "primary-fixed-dim": "#00dbe9",
+                      "error-container": "#93000a",
+                      "on-tertiary": "#3c0090",
+                      "on-tertiary-fixed-variant": "#5700c9",
+                      "primary-fixed": "#7df4ff",
+                      "on-secondary-fixed-variant": "#840076",
+                      "on-primary": "#00363a",
+                      "tertiary-fixed": "#e9ddff",
+                      "tertiary-container": "#e1d2ff",
+                      "primary-container": "#00f0ff",
+                      "error": "#ffb4ab",
+                      "inverse-primary": "#006970",
+                      "surface-container": "#201f22",
+                      "secondary-fixed-dim": "#fface8",
+                      "on-secondary-fixed": "#3a0033",
+                      "on-error-container": "#ffdad6",
+                      "outline-variant": "#3b494b",
+                      "on-surface": "#e5e1e5",
+                      "background": "#131316",
+                      "on-tertiary-container": "#7213ff",
+                      "surface-container-high": "#2a2a2d",
+                      "secondary-fixed": "#ffd7f0",
+                      "on-error": "#690005",
+                      "on-primary-fixed": "#002022",
+                      "surface-container-highest": "#353438",
+                      "on-tertiary-fixed": "#23005b",
+                      "on-secondary-container": "#520049",
+                      "surface-variant": "#353438",
+                      "secondary-container": "#ff24e4",
+                      "tertiary": "#faf3ff",
+                      "surface-container-low": "#1c1b1e",
+                      "on-surface-variant": "#b9cacb",
+                      "on-secondary": "#5e0053"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "64px",
+                      "unit": "8px",
+                      "margin-mobile": "20px",
+                      "gutter": "24px",
+                      "container-max": "1280px"
+              },
+              "fontFamily": {
+                      "label-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "label-sm": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-lg": [
+                              "Bodoni Moda"
+                      ],
+                      "body-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-md": [
+                              "Bodoni Moda"
+                      ],
+                      "display-lg": [
+                              "Bodoni Moda"
+                      ],
+                      "display-lg-mobile": [
+                              "Bodoni Moda"
+                      ]
+              },
+              "fontSize": {
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "0.08em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-lg": [
+                              "64px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "40px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .neon-glow {
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+        }
+        .neon-border {
+            border: 1px solid theme('colors.primary-container');
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex">
+<!-- SideNavBar (Web Only) -->
+<nav class="hidden md:flex h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest/30 backdrop-blur-[20px] border-r border-white/10 flex-col py-8 px-4 z-40">
+<div class="mb-12 px-2">
+<h1 class="font-display-lg text-headline-md text-primary-fixed mb-2">Midnight Premium</h1>
+<div class="flex items-center gap-3">
+<img alt="Owner Avatar" class="w-10 h-10 rounded-full object-cover border border-white/10" data-alt="A small circular avatar placeholder showing a sophisticated abstract neon pattern in deep blues and vivid cyan, resembling a modern digital persona for a high-end nightlife app administrator." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaDfUZkeJ9C8p5-jQLJQ8Jf7z6exjnwup1dZqy5OCdTkIN6NcxIJZt_8oKZm5xHZBTEiKPeKBhM-RjSJIHLb2g7_uSOPWtxjMZoO1hpmozhOau8-lgg_n8ptl_qiiCFhUULe6bdWYo3ZRyII3ifAbfZiwskn9hajymzEO5H_rorwtc8YOFmfgssDvlSYqB-367H7PRrf8ucjuUgKEad42RMdfh6XwIPvOHFnYRzGXGC4K4BseLrJ_FXQ"/>
+<span class="font-label-md text-label-md text-on-surface-variant">Owner Dashboard</span>
+</div>
+</div>
+<div class="flex-1 space-y-2">
+<!-- Active Tab: Overview -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary-container/20 text-primary-fixed border-l-4 border-primary-fixed shadow-[0_0_15px_rgba(0,240,255,0.2)] font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Overview
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant opacity-70 hover:bg-white/5 hover:text-on-surface transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+                Posters
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant opacity-70 hover:bg-white/5 hover:text-on-surface transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="campaign">campaign</span>
+                Announcements
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant opacity-70 hover:bg-white/5 hover:text-on-surface transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+                Guest Lists
+            </a>
+</div>
+<div class="mt-auto space-y-2 pt-8 border-t border-white/10">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant opacity-70 hover:bg-white/5 hover:text-on-surface transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant opacity-70 hover:bg-white/5 hover:text-on-surface transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                Support
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 relative min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/10 backdrop-blur-[40px] border-b border-white/10 flat no shadows flex justify-between items-center px-margin-mobile md:px-margin-desktop h-20 md:w-[calc(100%-16rem)]">
+<div class="flex items-center gap-4">
+<!-- Mobile Menu Button (Visible only on mobile) -->
+<button class="md:hidden text-primary-fixed active:scale-95 duration-200">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="font-display-lg text-headline-md tracking-tighter text-primary-fixed md:hidden">Midnight Premium</div>
+<div class="hidden md:flex gap-6">
+<a class="text-primary-fixed font-bold border-b-2 border-primary-fixed pb-1 hover:text-primary hover:bg-white/5 transition-all font-headline-md text-headline-md" href="#">Admin</a>
+<a class="text-on-surface-variant font-medium hover:text-primary hover:bg-white/5 transition-all font-headline-md text-headline-md" href="#">Reports</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-primary-fixed hover:text-primary hover:bg-white/5 transition-all active:scale-95 duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-primary-fixed hover:text-primary hover:bg-white/5 transition-all active:scale-95 duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+</button>
+<img alt="User Profile" class="w-10 h-10 rounded-full object-cover border border-white/10 hidden md:block" data-alt="User profile thumbnail for admin user, showing a sharp, dark aesthetic with subtle cyan glowing highlights around the edges, exuding authority and exclusivity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAx8Xw8Tc3fvMGzA7XyCkRmBTXLgewRkkgHMw4tL1lQbd0A7bOo-yeK7tTbJfTxJr2iX9r2fw0ITfhF8G2aThDEGtQD0s-xG1r9YVUCUICpqk6XVHspQymzM3lS1qhkddvd8ktMDf4RXVoQeaBMCW9VgPTTdLcZtVenX048l5m_r4aRk3KopvkD3ith31YUlpk0puLKOH-4qGU_UZTdCFsQJaJyjix5X4iSvwApDOw5U6ZbZA4lixlz5Q"/>
+</div>
+</header>
+<!-- Page Content -->
+<div class="pt-28 pb-32 px-margin-mobile md:px-margin-desktop flex-1 space-y-12 max-w-container-max mx-auto w-full">
+<!-- Dashboard Header & Stats -->
+<section class="space-y-6">
+<div>
+<h2 class="font-display-lg text-display-lg-mobile md:text-display-lg text-white">Platform Command</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2 max-w-2xl">Global overview of Midnight Premium operations and ecosystem health.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Stat Card 1 -->
+<div class="glass-card rounded-xl p-6 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-40 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary-container" data-weight="fill">storefront</span>
+</div>
+<p class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant mb-2">Total Active Clubs</p>
+<p class="font-headline-lg text-headline-lg text-white">342</p>
+<div class="mt-4 flex items-center gap-2 text-primary-fixed text-sm">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>+12 this month</span>
+</div>
+</div>
+<!-- Stat Card 2 -->
+<div class="glass-card rounded-xl p-6 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-40 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-secondary" data-weight="fill">group</span>
+</div>
+<p class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant mb-2">Monthly Active Users</p>
+<p class="font-headline-lg text-headline-lg text-white">124.5k</p>
+<div class="mt-4 flex items-center gap-2 text-primary-fixed text-sm">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>+8.4% vs last month</span>
+</div>
+</div>
+<!-- Stat Card 3 -->
+<div class="glass-card rounded-xl p-6 relative overflow-hidden group neon-glow">
+<div class="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-40 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary-container" data-weight="fill">payments</span>
+</div>
+<p class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant mb-2">Platform Revenue</p>
+<p class="font-headline-lg text-headline-lg text-primary-fixed">$2.4M</p>
+<div class="mt-4 flex items-center gap-2 text-primary-fixed text-sm">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>+15% QOQ</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid: Main Actions -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Club Verification Queue (Spans 2 columns) -->
+<section class="lg:col-span-2 glass-card rounded-xl p-6 flex flex-col h-[500px]">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md text-white">Club Verification Queue</h3>
+<span class="bg-error-container text-on-error-container px-3 py-1 rounded-full font-label-sm text-label-sm">5 Pending</span>
+</div>
+<div class="flex-1 overflow-y-auto pr-2 space-y-4 custom-scrollbar">
+<!-- Queue Item 1 -->
+<div class="bg-surface-container-high/50 rounded-lg p-4 border border-white/5 hover:border-white/10 transition-colors flex items-center justify-between">
+<div class="flex items-center gap-4">
+<img alt="Club Image" class="w-16 h-16 rounded-md object-cover" data-alt="A stylized placeholder image representing an exclusive underground nightclub entrance, dark with subtle purple and cyan neon lighting reflecting on polished black surfaces, signifying a pending club application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCe8Rh4RZCYCmifIOLM8lzdVzdx8IaH6L0shksTUtXGvt5xN4DntAuSnQzYBB9HxFtwi0eGlf4dfjFu0VG_O3LKBOBs4nulFo9KIAPaX3SVhbLqwqIZfmKcx8LWRFXnXXtXKuMlD6zVgRzSOm5AdeYVn4FfJpP7DaJqLt2HU1eq1dAtGSY2ALrGpGYJvii0PE1Ua61SZxt7-m-XkYEPST0ndYisGFQfkWPtNO0-xw6w4DYIiuZ05Rx8Fg"/>
+<div>
+<h4 class="font-label-md text-label-md text-white">The Obsidian Lounge</h4>
+<p class="font-body-md text-sm text-on-surface-variant">New York, NY • Capacity: 400</p>
+<p class="font-label-sm text-xs text-primary-fixed mt-1">Submitted 2 hours ago</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="p-2 rounded-md bg-white/5 hover:bg-white/10 text-white transition-colors">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="px-4 py-2 rounded-md bg-gradient-to-r from-primary-container to-on-primary-container text-on-primary font-label-md text-sm hover:opacity-90 transition-opacity">
+                                    Approve
+                                </button>
+</div>
+</div>
+<!-- Queue Item 2 -->
+<div class="bg-surface-container-high/50 rounded-lg p-4 border border-white/5 hover:border-white/10 transition-colors flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-md bg-surface-container-highest flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">image</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-white">Neon Tokyo</h4>
+<p class="font-body-md text-sm text-on-surface-variant">Los Angeles, CA • Capacity: 800</p>
+<p class="font-label-sm text-xs text-primary-fixed mt-1">Submitted 5 hours ago</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="p-2 rounded-md bg-white/5 hover:bg-white/10 text-white transition-colors">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="px-4 py-2 rounded-md bg-gradient-to-r from-primary-container to-on-primary-container text-on-primary font-label-md text-sm hover:opacity-90 transition-opacity">
+                                    Approve
+                                </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Moderation Center -->
+<section class="glass-card rounded-xl p-6 flex flex-col h-[500px]">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md text-white">Moderation</h3>
+<span class="material-symbols-outlined text-secondary">gavel</span>
+</div>
+<div class="flex-1 space-y-4">
+<div class="p-4 rounded-lg bg-error-container/20 border border-error/20">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-sm text-xs text-error uppercase tracking-wider">High Priority Report</span>
+<span class="text-xs text-on-surface-variant">10m ago</span>
+</div>
+<p class="font-body-md text-sm text-white mb-3">Multiple reports for inappropriate behavior in 'VIP Room A' chat.</p>
+<button class="w-full py-2 rounded-md neon-border text-primary-fixed font-label-md text-sm hover:bg-primary-container/10 transition-colors">
+                                Review Incident
+                            </button>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-high/30 border border-white/5">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-sm text-xs text-on-surface-variant uppercase tracking-wider">Automated Flag</span>
+<span class="text-xs text-on-surface-variant">1h ago</span>
+</div>
+<p class="font-body-md text-sm text-white mb-3">Suspicious bulk ticket purchasing detected for Event #882.</p>
+<button class="w-full py-2 rounded-md border border-white/20 text-white font-label-md text-sm hover:bg-white/5 transition-colors">
+                                Investigate
+                            </button>
+</div>
+</div>
+</section>
+</div>
+<!-- System Wide Stats / Charts Area -->
+<section class="glass-card rounded-xl p-6">
+<div class="flex justify-between items-center mb-8">
+<h3 class="font-headline-md text-headline-md text-white">Engagement Trends</h3>
+<div class="flex gap-2">
+<button class="px-3 py-1 rounded-full bg-primary-container/20 text-primary-fixed font-label-sm text-xs">7D</button>
+<button class="px-3 py-1 rounded-full text-on-surface-variant hover:text-white font-label-sm text-xs">30D</button>
+<button class="px-3 py-1 rounded-full text-on-surface-variant hover:text-white font-label-sm text-xs">YTD</button>
+</div>
+</div>
+<!-- Mock Chart Area (using CSS gradients to simulate data visualization) -->
+<div class="h-64 w-full relative border-l border-b border-white/10 flex items-end justify-between pt-4 pr-4">
+<!-- Y Axis Labels -->
+<div class="absolute -left-8 h-full flex flex-col justify-between text-xs text-on-surface-variant py-2">
+<span>10k</span>
+<span>5k</span>
+<span>0</span>
+</div>
+<!-- Chart Bars/Points -->
+<div class="w-1/12 h-[30%] bg-gradient-to-t from-primary-container/20 to-primary-container/80 rounded-t-sm mx-1 relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface p-1 rounded text-xs hidden group-hover:block border border-white/10 z-10">3.2k</div>
+</div>
+<div class="w-1/12 h-[45%] bg-gradient-to-t from-primary-container/20 to-primary-container/80 rounded-t-sm mx-1 relative group"></div>
+<div class="w-1/12 h-[40%] bg-gradient-to-t from-primary-container/20 to-primary-container/80 rounded-t-sm mx-1 relative group"></div>
+<div class="w-1/12 h-[60%] bg-gradient-to-t from-primary-container/20 to-primary-container/80 rounded-t-sm mx-1 relative group"></div>
+<div class="w-1/12 h-[75%] bg-gradient-to-t from-primary-container/20 to-primary-container/80 rounded-t-sm mx-1 relative group"></div>
+<div class="w-1/12 h-[55%] bg-gradient-to-t from-secondary/20 to-secondary/80 rounded-t-sm mx-1 relative group"></div> <!-- Highlight -->
+<div class="w-1/12 h-[80%] bg-gradient-to-t from-primary-container/20 to-primary-container/80 rounded-t-sm mx-1 relative group neon-glow"></div>
+</div>
+<!-- X Axis Labels -->
+<div class="w-full flex justify-between mt-2 pl-2 pr-4 text-xs text-on-surface-variant">
+<span>Mon</span>
+<span>Tue</span>
+<span>Wed</span>
+<span>Thu</span>
+<span>Fri</span>
+<span>Sat</span>
+<span>Sun</span>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full rounded-t-xl bg-surface/20 backdrop-blur-[30px] border-t border-white/10 shadow-2xl z-50 flex justify-around items-center px-4 pb-6 pt-2">
+<!-- Active: Maps to Overview/Dashboard intent -->
+<a class="flex flex-col items-center justify-center bg-primary-container/20 text-primary-fixed rounded-xl p-2 shadow-[0_0_10px_rgba(0,240,255,0.15)] font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span>Discover</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-white/10 transition-all active:scale-90 duration-150 font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="confirmation_number">confirmation_number</span>
+<span>Events</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-white/10 transition-all active:scale-90 duration-150 font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<span>VIP</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-white/10 transition-all active:scale-90 duration-150 font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span>Profile</span>
+</a>
+</nav>
+</body></html>
