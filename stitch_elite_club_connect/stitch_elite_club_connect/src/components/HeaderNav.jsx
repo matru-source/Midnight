@@ -82,7 +82,7 @@ export default function HeaderNav({
           )}
         </div>
 
-        {/* CUSTOMER PORTAL NAVIGATION: Events | Clubs | Talky Talki */}
+        {/* CUSTOMER PORTAL NAVIGATION: Events | Clubs | Talky Talky */}
         {activeRole === 'customer' && (
           <nav className="hidden md:flex items-center gap-2 bg-[#121316] p-1.5 rounded-full border border-white/10 shadow-inner">
             
@@ -112,17 +112,17 @@ export default function HeaderNav({
               <span>Clubs</span>
             </button>
 
-            {/* Talky Talki Tab */}
+            {/* Talky Talky Tab */}
             <button
-              onClick={() => setCurrentView('talky-talki')}
+              onClick={() => setCurrentView('talky-talky')}
               className={`inline-flex items-center gap-2 px-5 py-2 rounded-full font-label-md text-xs sm:text-sm whitespace-nowrap transition-all duration-200 ${
-                currentView === 'talky-talki'
+                currentView === 'talky-talky'
                   ? 'bg-secondary-container/30 text-secondary font-bold border border-secondary/50 shadow-[0_0_15px_rgba(255,36,228,0.25)]'
                   : 'text-on-surface-variant hover:text-white hover:bg-white/5'
               }`}
             >
               <MessageSquare className="w-4 h-4 text-secondary shrink-0" />
-              <span>Talky Talki</span>
+              <span>Talky Talky</span>
             </button>
 
           </nav>
@@ -337,17 +337,17 @@ export default function HeaderNav({
 
           <button
             onClick={() => {
-              setCurrentView('talky-talki');
+              setCurrentView('talky-talky');
               setIsMobileMenuOpen(false);
             }}
             className={`flex items-center gap-4 px-5 py-3.5 rounded-xl font-label-md text-sm transition-all ${
-              currentView === 'talky-talki'
+              currentView === 'talky-talky'
                 ? 'bg-secondary-container/20 text-secondary border border-secondary/50 font-bold'
                 : 'text-on-surface-variant hover:bg-white/5'
             }`}
           >
             <MessageSquare className="w-5 h-5" />
-            <span>Talky Talki (Live Chat)</span>
+            <span>Talky Talky (Live Chat)</span>
           </button>
 
           <div className="pt-4 border-t border-white/10 mt-auto">

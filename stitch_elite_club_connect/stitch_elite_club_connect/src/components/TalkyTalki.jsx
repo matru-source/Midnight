@@ -102,7 +102,7 @@ export default function TalkyTalki({ selectedCity, onSelectClub }) {
   return (
     <main className="pt-20 sm:pt-28 md:pt-32 px-4 sm:px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto flex flex-col gap-6 pb-32">
       
-      {/* Talky Talki Header */}
+      {/* Talky Talky Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/20 border border-secondary/40 text-secondary text-xs font-bold uppercase tracking-wider mb-2">
@@ -110,7 +110,7 @@ export default function TalkyTalki({ selectedCity, onSelectClub }) {
             Live Club Community
           </div>
           <h1 className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight">
-            Talky Talki
+            Talky Talky
           </h1>
           <p className="text-xs sm:text-sm text-on-surface-variant">
             Connect with club-wise members joining tonight in <span className="text-primary-fixed font-bold">{selectedCity || 'All India'}</span>.
