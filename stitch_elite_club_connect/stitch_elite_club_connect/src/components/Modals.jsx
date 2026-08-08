@@ -13,68 +13,122 @@ import {
   UserCheck,
   User,
   ArrowRight,
-  Lock
+  Lock,
+  Search
 } from 'lucide-react';
+import { ALL_INDIAN_CITIES } from '../data/mockData';
 
-/* Mandatory Step 1: Location Gate Modal (App cannot open without picking location) */
+/* Mandatory Step 1: Location Gate Modal with Search & Autocomplete Automation */
 export function MandatoryLocationGateModal({ isOpen, onSelectCity }) {
   if (!isOpen) return null;
 
-  const indianCities = [
-    { name: 'Mumbai', tag: 'BKC, Lower Parel & Bandra', image: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=500&auto=format&fit=crop&q=60' },
-    { name: 'Bengaluru', tag: 'Indiranagar & Koramangala', image: 'https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=500&auto=format&fit=crop&q=60' },
-    { name: 'Delhi NCR', tag: 'CyberHub & Aerocity', image: 'https://images.unsplash.com/photo-1587474260584-136574528ed5?w=500&auto=format&fit=crop&q=60' },
-    { name: 'Goa', tag: 'Vagator & Anjuna Cliffs', image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=500&auto=format&fit=crop&q=60' },
-    { name: 'Hyderabad', tag: 'Jubilee Hills & Gachibowli', image: 'https://images.unsplash.com/photo-1605379399642-870262d3d051?w=500&auto=format&fit=crop&q=60' },
-    { name: 'Pune', tag: 'Koregaon Park & Baner', image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?w=500&auto=format&fit=crop&q=60' },
-    { name: 'Kolkata', tag: 'Park Street & Salt Lake', image: 'https://images.unsplash.com/photo-1558431382-27e303142255?w=500&auto=format&fit=crop&q=60' }
-  ];
+  const [citySearchQuery, setCitySearchQuery] = useState('');
+
+  const filteredCities = ALL_INDIAN_CITIES.filter((city) => {
+    const q = citySearchQuery.toLowerCase().trim();
+    return (
+      city.name.toLowerCase().includes(q) ||
+      city.state.toLowerCase().includes(q) ||
+      city.tag.toLowerCase().includes(q)
+    );
+  });
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && filteredCities.length > 0) {
+      e.preventDefault();
+      onSelectCity(filteredCities[0].name);
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl flex items-center justify-center p-4 overflow-y-auto animate-fadeIn">
-      <div className="glass-card rounded-3xl max-w-2xl w-full p-8 border border-white/20 relative shadow-2xl my-auto">
-        <div className="text-center mb-8">
+      <div className="glass-card rounded-3xl max-w-3xl w-full p-8 border border-white/20 relative shadow-2xl my-auto">
+        <div className="text-center mb-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary-fixed/30 bg-primary-fixed/10 text-primary-fixed text-xs font-bold uppercase tracking-widest mb-3">
             <Lock className="w-3.5 h-3.5" />
             Step 1 of 2 • Mandatory Access Gate
           </div>
           
-          <h1 className="font-display text-3xl md:text-4xl font-bold text-white tracking-tight mb-2">
-            Select Your Nightlife Destination
+          <h1 className="font-display text-3xl md:text-4xl font-bold text-white tracking-tight mb-1">
+            Select Your Indian Destination
           </h1>
           <p className="text-xs text-on-surface-variant max-w-md mx-auto">
-            Please choose an Indian city location to unlock venues, events, VIP table reservations, and guestlists.
+            Choose any city across India to unlock clubs, events, VIP table reservations, and guestlists.
           </p>
         </div>
 
-        {/* City Selection Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6 max-h-[380px] overflow-y-auto custom-scrollbar pr-1">
-          {indianCities.map((city) => (
-            <div
-              key={city.name}
-              onClick={() => onSelectCity(city.name)}
-              className="glass-card rounded-2xl p-4 border border-white/10 hover:border-primary-fixed cursor-pointer transition-all duration-300 hover:scale-105 group relative overflow-hidden flex flex-col justify-end min-h-[110px]"
+        {/* Automated City Search Bar */}
+        <div className="relative mb-6 max-w-xl mx-auto">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-primary-fixed" />
+          <input
+            type="text"
+            placeholder="Type any Indian city or state (e.g. Mumbai, Goa, Jaipur, Chandigarh, Kochi)..."
+            value={citySearchQuery}
+            onChange={(e) => setCitySearchQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
+            autoFocus
+            className="w-full bg-surface-container-high/80 border border-white/20 focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed rounded-2xl pl-11 pr-10 py-3.5 text-sm text-white placeholder-on-surface-variant/60 shadow-inner transition-all"
+          />
+          {citySearchQuery && (
+            <button 
+              onClick={() => setCitySearchQuery('')}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-white p-1"
             >
-              <div 
-                className="absolute inset-0 bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity"
-                style={{ backgroundImage: `url('${city.image}')` }}
-              ></div>
-              <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/60 to-transparent"></div>
-              
-              <div className="relative z-10">
-                <div className="flex items-center gap-1.5 text-primary-fixed mb-0.5">
-                  <MapPin className="w-3.5 h-3.5" />
-                  <span className="font-headline text-lg font-bold text-white group-hover:text-primary-fixed transition-colors">{city.name}</span>
-                </div>
-                <p className="text-[10px] text-on-surface-variant line-clamp-1">{city.tag}</p>
-              </div>
+              <X className="w-4 h-4" />
+            </button>
+          )}
+        </div>
+
+        {/* Search Suggestion Automation Banner */}
+        {citySearchQuery && filteredCities.length > 0 && (
+          <div className="bg-primary-container/10 border border-primary-fixed/30 rounded-xl p-3 mb-4 max-w-xl mx-auto flex items-center justify-between text-xs text-primary-fixed font-semibold">
+            <span>Press <kbd className="bg-surface border border-white/20 px-1.5 py-0.5 rounded text-[10px]">Enter</kbd> to select <strong>{filteredCities[0].name}</strong> ({filteredCities[0].state})</span>
+            <span className="text-[10px] text-on-surface-variant">{filteredCities.length} match(es)</span>
+          </div>
+        )}
+
+        {/* City Selection Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-h-[340px] overflow-y-auto custom-scrollbar pr-1 mb-6">
+          {filteredCities.length === 0 ? (
+            <div className="col-span-full py-12 text-center text-xs text-on-surface-variant">
+              No matching Indian city found for "{citySearchQuery}". Try searching another city name or state.
             </div>
-          ))}
+          ) : (
+            filteredCities.map((city) => (
+              <div
+                key={city.name}
+                onClick={() => onSelectCity(city.name)}
+                className="glass-card rounded-2xl p-4 border border-white/10 hover:border-primary-fixed cursor-pointer transition-all duration-200 hover:scale-[1.02] group relative overflow-hidden flex flex-col justify-between min-h-[90px]"
+              >
+                {city.image && (
+                  <>
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center opacity-30 group-hover:opacity-50 transition-opacity"
+                      style={{ backgroundImage: `url('${city.image}')` }}
+                    ></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/70 to-transparent"></div>
+                  </>
+                )}
+
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-0.5">
+                    <span className="font-headline text-base font-bold text-white group-hover:text-primary-fixed transition-colors">
+                      {city.name}
+                    </span>
+                    <span className="text-[10px] text-on-surface-variant font-medium bg-surface/60 px-2 py-0.5 rounded border border-white/10">
+                      {city.state}
+                    </span>
+                  </div>
+                  <p className="text-[10px] text-on-surface-variant line-clamp-1">{city.tag}</p>
+                </div>
+              </div>
+            ))
+          )}
         </div>
 
         <div className="text-center border-t border-white/10 pt-4">
           <p className="text-[11px] text-on-surface-variant">
-            🔒 Location selection is required to proceed. You can change city anytime later.
+            🔒 Mandatory selection required. Choose a city above or type in the search bar to unlock Midnight Premium.
           </p>
         </div>
       </div>
@@ -380,14 +434,32 @@ export function GuestlistModal({ club, isOpen, onClose, onConfirm, userAuth }) {
   );
 }
 
+/* City Selector Modal with Search Bar Suggestion Automation */
 export function CitySelectorModal({ isOpen, onClose, selectedCity, onSelectCity }) {
   if (!isOpen) return null;
 
-  const cities = ['Mumbai', 'Bengaluru', 'Delhi NCR', 'Goa', 'Hyderabad', 'Pune', 'Kolkata'];
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredCities = ALL_INDIAN_CITIES.filter((city) => {
+    const q = searchQuery.toLowerCase().trim();
+    return (
+      city.name.toLowerCase().includes(q) ||
+      city.state.toLowerCase().includes(q) ||
+      city.tag.toLowerCase().includes(q)
+    );
+  });
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && filteredCities.length > 0) {
+      e.preventDefault();
+      onSelectCity(filteredCities[0].name);
+      onClose();
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn">
-      <div className="glass-card rounded-2xl max-w-sm w-full p-6 border border-white/20 relative shadow-2xl">
+      <div className="glass-card rounded-3xl max-w-md w-full p-6 border border-white/20 relative shadow-2xl">
         <button 
           onClick={onClose}
           className="absolute top-4 right-4 text-on-surface-variant hover:text-white p-1 rounded-full hover:bg-white/10"
@@ -397,27 +469,56 @@ export function CitySelectorModal({ isOpen, onClose, selectedCity, onSelectCity 
 
         <div className="flex items-center gap-2 text-primary-fixed mb-4">
           <MapPin className="w-5 h-5 text-primary-fixed" />
-          <h3 className="font-headline text-xl text-white font-bold">Select Indian City</h3>
+          <h3 className="font-headline text-xl text-white font-bold">Select Destination City</h3>
         </div>
 
-        <div className="space-y-2">
-          {cities.map((city) => (
-            <button
-              key={city}
-              onClick={() => {
-                onSelectCity(city);
-                onClose();
-              }}
-              className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
-                selectedCity === city
-                  ? 'bg-primary-container/20 text-primary-fixed border border-primary-fixed/50 font-bold'
-                  : 'bg-surface-container-high/40 text-on-surface hover:bg-white/10'
-              }`}
+        {/* Search Bar Suggestion Input */}
+        <div className="relative mb-4">
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant" />
+          <input
+            type="text"
+            placeholder="Type any Indian city (e.g. Goa, Jaipur, Pune, Chandigarh)..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
+            className="w-full bg-surface-container-high/80 border border-white/10 focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed rounded-xl pl-10 pr-8 py-2.5 text-xs text-white placeholder-on-surface-variant/50"
+          />
+          {searchQuery && (
+            <button 
+              onClick={() => setSearchQuery('')}
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-white p-1"
             >
-              <span>{city}</span>
-              {selectedCity === city && <CheckCircle className="w-4 h-4 text-primary-fixed" />}
+              <X className="w-3.5 h-3.5" />
             </button>
-          ))}
+          )}
+        </div>
+
+        {/* Suggestion Automation List */}
+        <div className="space-y-1.5 max-h-[300px] overflow-y-auto custom-scrollbar pr-1">
+          {filteredCities.length === 0 ? (
+            <div className="py-6 text-center text-xs text-on-surface-variant">No matching city found.</div>
+          ) : (
+            filteredCities.map((city) => (
+              <button
+                key={city.name}
+                onClick={() => {
+                  onSelectCity(city.name);
+                  onClose();
+                }}
+                className={`w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-semibold transition-all ${
+                  selectedCity === city.name
+                    ? 'bg-primary-container/20 text-primary-fixed border border-primary-fixed/50 font-bold'
+                    : 'bg-surface-container-high/40 text-on-surface hover:bg-white/10'
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <span>{city.name}</span>
+                  <span className="text-[10px] text-on-surface-variant">({city.state})</span>
+                </div>
+                {selectedCity === city.name && <CheckCircle className="w-4 h-4 text-primary-fixed" />}
+              </button>
+            ))
+          )}
         </div>
       </div>
     </div>

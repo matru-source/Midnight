@@ -1,3 +1,36 @@
+export const ALL_INDIAN_CITIES = [
+  { name: 'Mumbai', state: 'Maharashtra', tag: 'BKC, Lower Parel & Bandra', image: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=500&auto=format&fit=crop&q=60' },
+  { name: 'Bengaluru', state: 'Karnataka', tag: 'Indiranagar & Koramangala', image: 'https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=500&auto=format&fit=crop&q=60' },
+  { name: 'Delhi NCR', state: 'Delhi / Haryana / UP', tag: 'CyberHub, Aerocity & Connaught Place', image: 'https://images.unsplash.com/photo-1587474260584-136574528ed5?w=500&auto=format&fit=crop&q=60' },
+  { name: 'Goa', state: 'Goa', tag: 'Vagator, Anjuna & Panaji', image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=500&auto=format&fit=crop&q=60' },
+  { name: 'Hyderabad', state: 'Telangana', tag: 'Jubilee Hills & Gachibowli', image: 'https://images.unsplash.com/photo-1605379399642-870262d3d051?w=500&auto=format&fit=crop&q=60' },
+  { name: 'Pune', state: 'Maharashtra', tag: 'Koregaon Park & Baner', image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?w=500&auto=format&fit=crop&q=60' },
+  { name: 'Kolkata', state: 'West Bengal', tag: 'Park Street & Salt Lake', image: 'https://images.unsplash.com/photo-1558431382-27e303142255?w=500&auto=format&fit=crop&q=60' },
+  { name: 'Chennai', state: 'Tamil Nadu', tag: 'Nungambakkam & ECR', image: null },
+  { name: 'Jaipur', state: 'Rajasthan', tag: 'C-Scheme & Malviya Nagar', image: null },
+  { name: 'Chandigarh', state: 'Punjab / Haryana', tag: 'Sector 26 & Elante', image: null },
+  { name: 'Ahmedabad', state: 'Gujarat', tag: 'SG Highway & Sindhu Bhavan', image: null },
+  { name: 'Kochi', state: 'Kerala', tag: 'MG Road & Marine Drive', image: null },
+  { name: 'Indore', state: 'Madhya Pradesh', tag: 'Vijay Nagar & 56 Dukan', image: null },
+  { name: 'Lucknow', state: 'Uttar Pradesh', tag: 'Hazratganj & Gomti Nagar', image: null },
+  { name: 'Surat', state: 'Gujarat', tag: 'Dumas Road & Vesu', image: null },
+  { name: 'Nagpur', state: 'Maharashtra', tag: 'Civil Lines & Dharampeth', image: null },
+  { name: 'Visakhapatnam', state: 'Andhra Pradesh', tag: 'RK Beach & Siripuram', image: null },
+  { name: 'Vadodara', state: 'Gujarat', tag: 'Alkapuri & Gotri', image: null },
+  { name: 'Bhopal', state: 'Madhya Pradesh', tag: 'Arera Colony & MP Nagar', image: null },
+  { name: 'Coimbatore', state: 'Tamil Nadu', tag: 'Race Course & RS Puram', image: null },
+  { name: 'Ludhiana', state: 'Punjab', tag: 'Ferozepur Road & Sarabha Nagar', image: null },
+  { name: 'Agra', state: 'Uttar Pradesh', tag: 'Taj Ganj & Fatehabad Road', image: null },
+  { name: 'Nashik', state: 'Maharashtra', tag: 'Gangapur Road & College Road', image: null },
+  { name: 'Mysuru', state: 'Karnataka', tag: 'Gokulam & Jayalakshmipuram', image: null },
+  { name: 'Dehradun', state: 'Uttarakhand', tag: 'Rajpur Road & EC Road', image: null },
+  { name: 'Shimla', state: 'Himachal Pradesh', tag: 'Mall Road & Lakkar Bazar', image: null },
+  { name: 'Udaipur', state: 'Rajasthan', tag: 'Fateh Sagar & Sukhadia Circle', image: null },
+  { name: 'Amritsar', state: 'Punjab', tag: 'Ranjit Avenue & Mall Road', image: null },
+  { name: 'Mangaluru', state: 'Karnataka', tag: 'Kadri & Bejai', image: null },
+  { name: 'Thiruvananthapuram', state: 'Kerala', tag: 'Kowdiar & Technopark', image: null }
+];
+
 export const mockClubs = [
   {
     id: 'void-room',
