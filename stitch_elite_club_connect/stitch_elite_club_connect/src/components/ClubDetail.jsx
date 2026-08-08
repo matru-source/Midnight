@@ -25,7 +25,7 @@ export default function ClubDetail({
   chatMessages,
   onSendMessage 
 }) {
-  const [activeTab, setActiveTab] = useState('about'); // 'about' | 'terms' | 'venue'
+  const [activeTab, setActiveTab] = useState('about');
   const [userChatInput, setUserChatInput] = useState('');
 
   if (!club) return null;
@@ -38,7 +38,7 @@ export default function ClubDetail({
   };
 
   return (
-    <main className="pt-20 sm:pt-28 md:pt-32 px-4 sm:px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto flex flex-col gap-8 pb-32">
+    <main className="pt-20 sm:pt-28 md:pt-32 px-4 sm:px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto flex flex-col gap-8 pb-32 overflow-hidden">
       
       {/* Top Breadcrumb & Back Navigation */}
       <div className="flex items-center justify-between">
@@ -64,8 +64,8 @@ export default function ClubDetail({
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
         {/* Left Column: Large Poster & Thumbnails (5 Cols) */}
-        <div className="lg:col-span-5 flex flex-col gap-4">
-          <div className="relative rounded-3xl overflow-hidden aspect-[4/5] border border-white/15 shadow-2xl bg-black">
+        <div className="lg:col-span-5 flex flex-col gap-4 w-full">
+          <div className="relative rounded-3xl overflow-hidden aspect-[4/5] border border-white/15 shadow-2xl bg-black w-full">
             <img 
               src={club.coverImage || club.detailHeroImage} 
               alt={club.name}
@@ -90,11 +90,11 @@ export default function ClubDetail({
         </div>
 
         {/* Right Column: Title, Quick Info Box & Action Button (7 Cols) */}
-        <div className="lg:col-span-7 flex flex-col gap-6">
+        <div className="lg:col-span-7 flex flex-col gap-6 w-full min-w-0">
           
           {/* Header Title & Venue */}
-          <div>
-            <div className="flex items-center gap-2 mb-2">
+          <div className="min-w-0 max-w-full">
+            <div className="flex items-center gap-2 mb-3 flex-wrap">
               <span className="px-3 py-1 rounded-full bg-primary-container/20 border border-primary-fixed/40 text-primary-fixed text-xs font-bold uppercase tracking-wider">
                 {club.vibe}
               </span>
@@ -103,17 +103,17 @@ export default function ClubDetail({
               </span>
             </div>
 
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-2">
+            <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight mb-3 break-words max-w-full">
               {club.name}
             </h1>
             
-            <p className="text-sm text-on-surface-variant flex items-center gap-1.5">
-              <MapPin className="w-4 h-4 text-primary-fixed" />
-              <span>{club.address || club.location}</span>
+            <p className="text-xs sm:text-sm text-on-surface-variant flex items-center gap-1.5">
+              <MapPin className="w-4 h-4 text-primary-fixed shrink-0" />
+              <span className="truncate">{club.address || club.location}</span>
             </p>
           </div>
 
-          {/* Quick Info Box matching Screenshot 2 */}
+          {/* Quick Info Box */}
           <div className="glass-card rounded-2xl p-5 border border-white/15 space-y-4">
             <h3 className="text-xs font-bold uppercase tracking-widest text-primary-fixed">Quick Details</h3>
 
@@ -152,7 +152,7 @@ export default function ClubDetail({
             </div>
           </div>
 
-          {/* Primary Action Buttons matching Screenshot 2 */}
+          {/* Primary Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 pt-2">
             <button
               onClick={() => onOpenGuestlistModal(club)}
@@ -200,7 +200,7 @@ export default function ClubDetail({
         </div>
       </section>
 
-      {/* TERMS & CONDITIONS SECTION matching Screenshot 2 */}
+      {/* TERMS & CONDITIONS SECTION */}
       {club.termsConditions && (
         <section className="glass-card rounded-3xl p-6 sm:p-8 border border-white/10 space-y-4">
           <h2 className="font-headline text-xl font-bold text-white flex items-center gap-2">
@@ -215,7 +215,7 @@ export default function ClubDetail({
         </section>
       )}
 
-      {/* VENUE DETAILS & MAP GALLERY matching Screenshot 2 */}
+      {/* VENUE DETAILS & MAP GALLERY */}
       {club.venueDetails && (
         <section className="glass-card rounded-3xl p-6 sm:p-8 border border-white/10 space-y-4">
           <h2 className="font-headline text-2xl font-bold text-white">Venue Information</h2>
@@ -235,7 +235,7 @@ export default function ClubDetail({
         </section>
       )}
 
-      {/* ARTIST / LINEUP SECTION matching Screenshot 2 */}
+      {/* ARTIST / LINEUP SECTION */}
       {club.artist && (
         <section className="glass-card rounded-3xl p-6 sm:p-8 border border-white/10 space-y-4">
           <h2 className="font-headline text-2xl font-bold text-white">Artist Lineup</h2>

@@ -5,14 +5,11 @@ import {
   Bell, 
   Menu, 
   X, 
-  Compass, 
   Calendar, 
   ShieldCheck, 
-  LayoutDashboard, 
   Building2,
   ChevronDown,
   User,
-  LogOut,
   ExternalLink,
   RotateCcw,
   MessageSquare
@@ -38,9 +35,9 @@ export default function HeaderNav({
 
   return (
     <>
-      <header className="fixed top-0 w-full z-50 bg-surface/20 backdrop-blur-[40px] border-b border-white/10 flex justify-between items-center px-4 sm:px-margin-mobile md:px-margin-desktop h-16 sm:h-20">
+      <header className="fixed top-0 w-full z-[90] bg-[#0a0b0d]/90 backdrop-blur-2xl border-b border-white/10 flex justify-between items-center px-4 sm:px-margin-mobile md:px-margin-desktop h-16 sm:h-20 shadow-lg">
         
-        {/* Brand Logo & Context Header */}
+        {/* Brand Logo */}
         <div className="flex items-center gap-2 sm:gap-4">
           <div 
             onClick={() => {
@@ -48,7 +45,7 @@ export default function HeaderNav({
             }}
             className="cursor-pointer group flex items-center gap-1.5 sm:gap-2"
           >
-            <span className="font-display text-xl sm:text-2xl md:text-3xl font-bold tracking-tighter text-primary-fixed group-hover:text-primary transition-colors">
+            <span className="font-display text-lg sm:text-2xl md:text-3xl font-bold tracking-tighter text-primary-fixed group-hover:text-primary transition-colors">
               Midnight Premium
             </span>
 
@@ -74,55 +71,57 @@ export default function HeaderNav({
           {activeRole === 'customer' && (
             <div 
               onClick={() => setIsCityModalOpen(true)}
-              className="hidden lg:flex items-center gap-2 ml-4 glass-panel px-3.5 py-1.5 rounded-full cursor-pointer hover:bg-white/10 transition-all border border-white/15"
+              className="hidden lg:flex items-center gap-2 ml-4 bg-surface-container-high/60 px-4 py-2 rounded-full cursor-pointer hover:bg-white/15 transition-all border border-white/15"
             >
-              <MapPin className="w-3.5 h-3.5 text-primary-fixed" />
-              <span className="font-label-md text-xs sm:text-sm text-on-surface font-medium">{selectedCity || 'Select City'}</span>
-              <ChevronDown className="w-3.5 h-3.5 text-on-surface-variant" />
+              <MapPin className="w-4 h-4 text-primary-fixed shrink-0" />
+              <span className="font-label-md text-xs sm:text-sm text-on-surface font-medium truncate max-w-[180px]">
+                {selectedCity || 'Select Location'}
+              </span>
+              <ChevronDown className="w-4 h-4 text-on-surface-variant shrink-0" />
             </div>
           )}
         </div>
 
         {/* CUSTOMER PORTAL NAVIGATION: Events | Clubs | Talky Talki */}
         {activeRole === 'customer' && (
-          <nav className="hidden md:flex items-center gap-1.5 bg-surface-container-lowest/40 p-1.5 rounded-full border border-white/10">
+          <nav className="hidden md:flex items-center gap-2 bg-[#121316] p-1.5 rounded-full border border-white/10 shadow-inner">
             
             {/* Events Tab */}
             <button
               onClick={() => setCurrentView('events')}
-              className={`flex items-center gap-2 px-4.5 py-2 rounded-full font-label-md text-sm transition-all duration-200 ${
+              className={`inline-flex items-center gap-2 px-5 py-2 rounded-full font-label-md text-xs sm:text-sm whitespace-nowrap transition-all duration-200 ${
                 currentView === 'events'
-                  ? 'bg-primary-container/20 text-primary-fixed font-bold border border-primary-fixed/40 neon-glow shadow-[0_0_15px_rgba(0,240,255,0.2)]'
+                  ? 'bg-primary-container/30 text-primary-fixed font-bold border border-primary-fixed/50 shadow-[0_0_15px_rgba(0,240,255,0.25)]'
                   : 'text-on-surface-variant hover:text-white hover:bg-white/5'
               }`}
             >
-              <Calendar className="w-4 h-4 text-primary-fixed" />
+              <Calendar className="w-4 h-4 text-primary-fixed shrink-0" />
               <span>Events</span>
             </button>
 
             {/* Clubs Tab */}
             <button
               onClick={() => setCurrentView('clubs')}
-              className={`flex items-center gap-2 px-4.5 py-2 rounded-full font-label-md text-sm transition-all duration-200 ${
+              className={`inline-flex items-center gap-2 px-5 py-2 rounded-full font-label-md text-xs sm:text-sm whitespace-nowrap transition-all duration-200 ${
                 currentView === 'clubs'
-                  ? 'bg-primary-container/20 text-primary-fixed font-bold border border-primary-fixed/40 neon-glow shadow-[0_0_15px_rgba(0,240,255,0.2)]'
+                  ? 'bg-primary-container/30 text-primary-fixed font-bold border border-primary-fixed/50 shadow-[0_0_15px_rgba(0,240,255,0.25)]'
                   : 'text-on-surface-variant hover:text-white hover:bg-white/5'
               }`}
             >
-              <Building2 className="w-4 h-4 text-primary-fixed" />
+              <Building2 className="w-4 h-4 text-primary-fixed shrink-0" />
               <span>Clubs</span>
             </button>
 
             {/* Talky Talki Tab */}
             <button
               onClick={() => setCurrentView('talky-talki')}
-              className={`flex items-center gap-2 px-4.5 py-2 rounded-full font-label-md text-sm transition-all duration-200 ${
+              className={`inline-flex items-center gap-2 px-5 py-2 rounded-full font-label-md text-xs sm:text-sm whitespace-nowrap transition-all duration-200 ${
                 currentView === 'talky-talki'
-                  ? 'bg-secondary-container/20 text-secondary font-bold border border-secondary/40 shadow-[0_0_15px_rgba(255,36,228,0.2)]'
+                  ? 'bg-secondary-container/30 text-secondary font-bold border border-secondary/50 shadow-[0_0_15px_rgba(255,36,228,0.25)]'
                   : 'text-on-surface-variant hover:text-white hover:bg-white/5'
               }`}
             >
-              <MessageSquare className="w-4 h-4 text-secondary" />
+              <MessageSquare className="w-4 h-4 text-secondary shrink-0" />
               <span>Talky Talki</span>
             </button>
 
@@ -164,7 +163,7 @@ export default function HeaderNav({
         {/* Header Right Actions & Profile Badge */}
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Personalized Greeting Pill (Desktop) */}
-          <div className="hidden xl:flex items-center gap-2 glass-panel px-3 py-1.5 rounded-full border border-white/10 text-xs">
+          <div className="hidden xl:flex items-center gap-2 bg-surface-container-high/60 px-3.5 py-1.5 rounded-full border border-white/15 text-xs">
             <span className="w-2 h-2 rounded-full bg-primary-fixed animate-pulse"></span>
             <span className="text-on-surface font-semibold">
               Namaste, <span className="text-primary-fixed font-bold">{userName}</span>!
@@ -196,18 +195,22 @@ export default function HeaderNav({
           <div className="relative">
             <div 
               onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
-              className="h-9 w-9 sm:h-10 sm:w-10 rounded-full overflow-hidden border-2 border-primary-fixed/50 cursor-pointer hover:border-primary-fixed transition-colors flex items-center justify-center bg-primary-container/20 font-bold text-primary-fixed text-xs sm:text-sm shadow-[0_0_10px_rgba(0,240,255,0.2)]"
+              className="h-9 w-9 sm:h-10 sm:w-10 rounded-full overflow-hidden border-2 border-primary-fixed/60 cursor-pointer hover:border-primary-fixed transition-colors flex items-center justify-center bg-primary-container/30 font-bold text-primary-fixed text-xs sm:text-sm shadow-[0_0_15px_rgba(0,240,255,0.3)]"
             >
               {userInitials || 'VIP'}
             </div>
 
-            {/* Profile & Portal Role Switcher Dropdown */}
+            {/* Profile Dropdown Menu - Highest Z-Index (z-[100]) & Solid Backdrop */}
             {isProfileMenuOpen && (
-              <div className="absolute right-0 top-12 w-64 glass-card rounded-2xl p-4 border border-white/20 shadow-2xl z-50 animate-fadeIn text-xs space-y-3">
+              <div className="absolute right-0 top-12 w-64 bg-[#141519]/95 backdrop-blur-2xl rounded-2xl p-4 border border-white/20 shadow-2xl z-[100] animate-fadeIn text-xs space-y-3">
                 <div className="border-b border-white/10 pb-3">
                   <p className="font-bold text-white text-sm">{userName}</p>
-                  <p className="text-on-surface-variant font-medium">Location: <span className="text-primary-fixed font-bold">{selectedCity || 'Mumbai'}</span></p>
-                  <p className="text-on-surface-variant text-[11px]">Role: <span className="uppercase text-primary-fixed font-bold">{userAuth?.isGuest ? 'Guest VIP' : activeRole}</span></p>
+                  <p className="text-on-surface-variant font-medium mt-0.5">
+                    Location: <span className="text-primary-fixed font-bold">{selectedCity || 'All India'}</span>
+                  </p>
+                  <p className="text-on-surface-variant text-[11px]">
+                    Role: <span className="uppercase text-primary-fixed font-bold">{userAuth?.isGuest ? 'Guest VIP' : activeRole}</span>
+                  </p>
                 </div>
 
                 <div className="space-y-1">
@@ -219,7 +222,7 @@ export default function HeaderNav({
                       setIsProfileMenuOpen(false);
                     }}
                     className={`w-full flex items-center gap-2 px-3 py-2 rounded-xl text-left transition-colors ${
-                      activeRole === 'customer' ? 'bg-primary-container/20 text-primary-fixed font-bold' : 'hover:bg-white/5 text-on-surface'
+                      activeRole === 'customer' ? 'bg-primary-container/20 text-primary-fixed font-bold border border-primary-fixed/30' : 'hover:bg-white/5 text-on-surface'
                     }`}
                   >
                     <User className="w-4 h-4 text-primary-fixed" />
@@ -232,7 +235,7 @@ export default function HeaderNav({
                       setIsProfileMenuOpen(false);
                     }}
                     className={`w-full flex items-center gap-2 px-3 py-2 rounded-xl text-left transition-colors ${
-                      activeRole === 'owner' ? 'bg-secondary-container/20 text-secondary font-bold' : 'hover:bg-white/5 text-on-surface'
+                      activeRole === 'owner' ? 'bg-secondary-container/20 text-secondary font-bold border border-secondary/30' : 'hover:bg-white/5 text-on-surface'
                     }`}
                   >
                     <Building2 className="w-4 h-4 text-secondary" />
@@ -245,7 +248,7 @@ export default function HeaderNav({
                       setIsProfileMenuOpen(false);
                     }}
                     className={`w-full flex items-center gap-2 px-3 py-2 rounded-xl text-left transition-colors ${
-                      activeRole === 'admin' ? 'bg-error-container/30 text-error font-bold' : 'hover:bg-white/5 text-on-surface'
+                      activeRole === 'admin' ? 'bg-error-container/30 text-error font-bold border border-error/30' : 'hover:bg-white/5 text-on-surface'
                     }`}
                   >
                     <ShieldCheck className="w-4 h-4 text-error" />
@@ -262,7 +265,7 @@ export default function HeaderNav({
                     className="w-full flex items-center gap-2 px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-white/5 text-left"
                   >
                     <MapPin className="w-3.5 h-3.5 text-primary-fixed" />
-                    <span>Change City ({selectedCity || 'Mumbai'})</span>
+                    <span>Change City ({selectedCity || 'All India'})</span>
                   </button>
 
                   <button
@@ -295,7 +298,7 @@ export default function HeaderNav({
         <div className="fixed inset-0 top-16 sm:top-20 bg-surface/95 backdrop-blur-2xl z-40 md:hidden flex flex-col p-6 space-y-4 border-b border-white/10 animate-fadeIn">
           <div className="p-3 rounded-xl bg-surface-container-high border border-white/10 text-xs mb-2">
             <p className="text-on-surface-variant">Logged in as: <span className="text-primary-fixed font-bold">{userName}</span></p>
-            <p className="text-on-surface-variant">Active City: <span className="text-white font-bold">{selectedCity || 'Mumbai'}</span></p>
+            <p className="text-on-surface-variant">Active City: <span className="text-white font-bold">{selectedCity || 'All India'}</span></p>
           </div>
 
           <div className="text-xs uppercase tracking-widest text-on-surface-variant font-bold mb-1">
